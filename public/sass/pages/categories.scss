@@ -1,0 +1,17 @@
+@import "../base/variable.scss";
+
+.categories_section {
+    background-color: $primarybackground;
+  .categories_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vh; // Full height of the viewport
+    background-color: $white;
+    
+    .tags_section{
+        
+    }
+  }
+}
