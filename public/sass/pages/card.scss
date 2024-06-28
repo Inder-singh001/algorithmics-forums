@@ -1,0 +1,16 @@
+@import "../base/variable.scss";
+@import "../base/mixin.scss";
+@import "../helper/base.scss";
+@import "../helper//reset.scss";
+
+.card_container{
+    background-color: $primarybackground;
+    .inner_parent{
+        width: 428px;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+}
