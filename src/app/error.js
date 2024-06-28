@@ -1,22 +1,27 @@
 "use client";
 import { Container, Box, Typography, Grid } from "@mui/material";
 import Image from "next/image";
-import ErrorImage from "../../public/images/error.png";
+import ResultImage from "../../public/images/notFound.png";
 import "../../public/sass/pages/util.scss";
 
-const Error = () => {
+const Result = () => {
   return (
     <div className="handling_section">
       <Container>
         <Grid container>
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-            <div className="handling_area">
-              <div className="image_area error_image">
-                <Image src={ErrorImage} alt="Error Image" width={738} height={551}/>
+            <div class="handling_area">
+              <div className="image_area notfound_image">
+                <Image
+                  src={ResultImage}
+                  alt="No Result Found Image"
+                  width={643}
+                  height={558}
+                />
               </div>
               <div className="inner_content">
                 <div className="heading">
-                  <Typography variant="h4">Error</Typography>
+                  <Typography variant="h4">No Result Found</Typography>
                 </div>
                 <div className="paragraph">
                   <Typography variant="body1" className="paraText">
@@ -33,4 +38,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default Result;

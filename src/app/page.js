@@ -1,9 +1,5 @@
-import "../../public/sass/global.scss"
-import Navbar from "./(screens)/components/navbar";
+import "../../public/sass/global.scss";
+
 export default function Home() {
-  return (
-    <>
-      <Navbar />
-    </>
-  );
+  return <></>;
 }

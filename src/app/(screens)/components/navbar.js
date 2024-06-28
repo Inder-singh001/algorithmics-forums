@@ -1,12 +1,10 @@
 "use client";
 import { Container, Grid, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import Link from "next/link";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PostAddIcon from "@mui/icons-material/PostAdd";
+import Link from "next/link";;
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import "./navbar.scss";
+import "../../../../public/sass/pages/navbar.scss";
 import { useState } from "react";
 import Image from "next/image";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -66,15 +64,15 @@ export default function Navbar() {
                       <div className="profile_menu_list_item">
                       <ul>
                         <li >
-                          <DashboardIcon className="menu_icon" />
+                          
                           <Link href="/profile">Profile</Link>
                         </li>
                         <li >
-                          <PostAddIcon className="menu_icon" />
+                          
                           <Link href="/settings">Settings</Link>
                         </li>
                         <li >
-                          <AccountCircleIcon className="menu_icon" />
+                         
                           <Link href="/logout">Logout</Link>
                         </li>
                       </ul>
@@ -115,16 +113,16 @@ export default function Navbar() {
               </div>
               <ul>
               <li>
-                  <Link href="/Dashboard"><SearchIcon/>Search</Link>
+                  <Link href="/Dashboard">Search</Link>
                 </li>
                 <li>
-                  <Link href="/Dashboard"><SearchIcon/>Home</Link>
+                  <Link href="/Dashboard">Home</Link>
                 </li>
                 <li>
-                  <Link href="/Dashboard"><SearchIcon/>Make a Post</Link>
+                  <Link href="/Dashboard">Make a Post</Link>
                 </li>
                 <li>
-                  <Link href="/Dashboard"><SearchIcon/>My Profile</Link>
+                  <Link href="/Dashboard">My Profile</Link>
                 </li>
               </ul>
             </div>

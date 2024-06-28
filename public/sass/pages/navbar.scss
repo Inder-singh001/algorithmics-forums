@@ -238,7 +238,8 @@
       .profile_close {
         position: absolute;
         right: 50px;
-        top: 90px;
+        top: 50px;
+        color: #fff;
       }
     }
 
@@ -408,8 +409,10 @@
 
     .close_icon {
       position: absolute;
-      right: 50px;
-      top: 90px;
+      right: 0px;
+      top: 0px;
+      color: #fff;
+      font-size: 24px;
     }
   }
 }
@@ -469,7 +472,7 @@
         }
 
         .responsive_menu_icon {
-          display: flex;
+          display: none;
         }
       }
     }
