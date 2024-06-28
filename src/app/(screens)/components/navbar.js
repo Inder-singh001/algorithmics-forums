@@ -115,16 +115,16 @@ export default function Navbar() {
               </div>
               <ul>
               <li>
-                  <Link href="/Dashboard">Search</Link>
+                  <Link href="/Dashboard"><SearchIcon/>Search</Link>
                 </li>
                 <li>
-                  <Link href="/Dashboard">Home</Link>
+                  <Link href="/Dashboard"><SearchIcon/>Home</Link>
                 </li>
                 <li>
-                  <Link href="/Dashboard">Make a Post</Link>
+                  <Link href="/Dashboard"><SearchIcon/>Make a Post</Link>
                 </li>
                 <li>
-                  <Link href="/Dashboard">My Profile</Link>
+                  <Link href="/Dashboard"><SearchIcon/>My Profile</Link>
                 </li>
               </ul>
             </div>
