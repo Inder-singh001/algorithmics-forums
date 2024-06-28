@@ -1,4 +1,5 @@
-import "../../public/sass/global.scss"
+import "../../public/sass/global.scss";
+
 export default function Home() {
   return (
     <>

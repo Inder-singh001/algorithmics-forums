@@ -1,3 +1,16 @@
+# Contribution
+- If you have forked the repository thenclone it by using the command `git clone https://Inder-singh001/algorithmics-forums.git`.
+- open terminal, run the command where you have cloned the repository (/path) `npm i or npm install`.
+
+ ## already cloned the repository
+ - If you have made some changes in your forked repository,firstly commit those changes by using following commands
+     - `git add [filename]` or `git add .`
+     - `git commit -m "[title message]"`
+- After commiting, you can pull the updated code by using `git pull` commands.
+
+### you are all set  
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
