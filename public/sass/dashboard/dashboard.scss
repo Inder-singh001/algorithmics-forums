@@ -8,11 +8,11 @@
         width: 260px;
         padding: 30px 20px 0px 30px;
         background-color: $primarybackground;
-        border-right: 1px solid #ebebeb;
+        border-right: 1px solid $navbarBorder;
         display: flex;
         flex-direction: column;
         height: 100vh;
-
+        border-right: 1px solid #ebebeb;
         .sidebar {
           max-width: 208px;
           gap: 24px;

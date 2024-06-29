@@ -1,5 +1,5 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import "../../../../public/sass/dashboard/dashboard.scss";
+import "../../../public/sass/dashboard/dashboard.scss";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
