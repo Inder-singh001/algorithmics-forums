@@ -1,27 +1,64 @@
 @import "../base/variable.scss";
 @import "../base/mixin.scss";
 @import "../helper/base.scss";
-@import "../helper//reset.scss";
+@import "../helper/reset.scss";
 
-.card_container{
-    background-color: $primarybackground;
-    .inner_parent{
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        .carder{
-            gap: 0px;
-            position: relative;
-            .head{
-                font-weight: 600;
-                color:$secondarytext;
+.inner_parent {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    .carder {
+        border: 1px solid #DEE0E1;
+        box-shadow: 0px 1px 1px 0px #0000000A;
+        width: 420px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        .head {
+            font-weight: 600;
+            color: $secondarytext;
+            border-bottom: 0.3px solid $navbarBorder ;
+            padding: 8px 16px 0px 16px;
+            display: flex;
+            .text {
+                float: left;
+                width: 200px;
             }
-            :hover{
-                box-shadow: 0px 1px 1px 0px #0000000A;
+            .icon {
+                float: right;
+                width: calc(100% - 200px);
+                text-align: right;
+                .MuiSvgIcon-root {
+                    width: 18px;
+                    height: 18px;
+                }
             }
-
         }
-
+        .description {
+            padding: 8px 16px 8px 16px;
+            display: flex;
+            .des_left {
+                float: left;
+                width: 350px;
+                .des_top {
+                    display: flex;
+                    align-items: center;
+                    color: $secondarytext;
+                    font-weight: 600;
+                }
+                .des_bottom {
+                    color: $primarySubtext;
+                    font-size: smaller;
+                    font-weight: 600;
+                }
+            }
+            .des_right {
+                float: right;
+                text-align: right;
+                width: calc(100% - 350px);
+            }
+        }
+        &:hover{
+            box-shadow: 1px 1px 1px 1px #0000000A ;
+        }
     }
-
 }
