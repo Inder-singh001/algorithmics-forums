@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Container, Grid, Typography, TextField } from "@mui/material";
 import Image from "next/image";
-import "../../../../../public/sass/pages/reset_password.scss"
+import "../../../../../public/sass/pages/auth.scss"
 import Logo from "../../../../../public//images/logo.png"
 import Graphic from "../../../../../public/graphic.svg"
 import Button from '@mui/material/Button';
@@ -24,20 +24,20 @@ const ResetPassword = () => {
     };
 
     return (
-        <div className="repass_section">
+        <div className="auth_section">
             <Container>
                 <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                        <div className="repass_area">
+                        <div className="auth_area">
                             <div className="logo_section">
                                 <Image src={Logo} alt="Logo" />
                             </div>
-                            <div className="left_Form">
-                                <div className="form_text">
+                            <div className="left_Form leftpass_form">
+                                <div className="form_text changepass_text">
                                     <Typography variant="h4">Reset Password</Typography>
                                     <Typography variant="h6">Please enter the email address you use when creating your account, We'll send you the instructions to reset your password.</Typography>
                                 </div>
-                                <div className="form_btn">
+                                <div className="form_area changepass_area">
                                     <TextField
                                         id="input-with-icon-textfield"
                                         label="New Password"
@@ -82,13 +82,13 @@ const ResetPassword = () => {
                                         variant="standard"
                                     />
                                 </div>
-                                <div className="btn_area">
+                                <div className="btn_area passbtn_area">
                                     <Button variant="contained">Reset Password</Button>
                                 </div>
                             </div>
                             <div className="right_Frame">
                                 <div className="graphic_area">
-                                    <Image src={Graphic} width={647} height={647} alt="Graphic"></Image>
+                                    <Image src={Graphic} priority={true} alt="Graphic"></Image>
                                 </div>
                             </div>
                         </div>

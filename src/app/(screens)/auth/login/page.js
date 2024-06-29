@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Container, Grid, Typography, TextField } from "@mui/material";
 import InputAdornment from '@mui/material/InputAdornment';
 import Image from "next/image";
-import "../../../../../public/sass/pages/login.scss"
+import "../../../../../public/sass/pages/auth.scss"
 import Logo from "../../../../../public//images/logo.png"
 import Graphic from "../../../../../public/graphic.svg"
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -26,11 +26,11 @@ const Login = () => {
     };
 
     return (
-        <div className="login_section">
+        <div className="auth_section">
             <Container>
                 <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                        <div className="login_area">
+                        <div className="auth_area">
                             <div className="logo_section">
                                 <Image src={Logo} alt="Logo" />
                             </div>
@@ -41,7 +41,7 @@ const Login = () => {
                                         <Link href="#">Register here !</Link>
                                     </Typography>
                                 </div>
-                                <div className="form_btn">
+                                <div className="form_area">
                                     <TextField
                                         id="input-with-icon-textfield"
                                         label="Email"
@@ -56,7 +56,7 @@ const Login = () => {
                                         variant="standard"
                                     />
                                 </div>
-                                <div className="form_btn">
+                                <div className="form_area">
                                     <TextField
                                         id="input-with-icon-textfield"
                                         label="Password"
@@ -95,7 +95,7 @@ const Login = () => {
 
                             <div className="right_Frame">
                                 <div className="graphic_area">
-                                    <Image src={Graphic} width={647} height={647} alt="Graphic"></Image>
+                                    <Image src={Graphic}  priority={true} alt="Graphic"></Image>
                                 </div>
                             </div>
                         </div>
