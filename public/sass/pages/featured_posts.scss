@@ -1,17 +1,17 @@
+@import '../global.scss';
+
 .featured_posts {
   width: 271px;
-  height: 569px;
-  border: 1px solid grey;
+  border: 1px solid $navbarBorder;
 
   .post_header {
-    border-bottom: 1px solid grey;
-    position: relative;
+    border-bottom: 1px solid $navbarBorder;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
     .header_icon {
       width: 15.66px;
       height: 20px;
-      position: absolute;
-      top: 0;
-      left: 0;
     }
     .header_title {
       .css-2ulfj5-MuiTypography-root {
@@ -21,30 +21,83 @@
         line-height: 18px;
         letter-spacing: -0.01em;
         text-align: left;
-        position: absolute;
-        top: 0;
-        left: 20px;
+        padding-left: 8px;
       }
     }
   }
-  //   .post_content {
-  //     .post_icon {
-  //       width: 40px;
-  //       height: 40px;
-  //     }
-  //     .post_title {
-  //       font-family: Roboto;
-  //       font-size: 12px;
-  //       font-weight: 700;
-  //       line-height: 20px;
-  //       text-align: left;
-  //     }
-  //     .post_body {
-  //       font-family: Roboto;
-  //       font-size: 12px;
-  //       font-weight: 500;
-  //       line-height: 20px;
-  //       text-align: left;
-  //     }
-  //   }
+  .post_content {
+    display: flex;
+    padding: 8px;
+    border-bottom: 1px solid $navbarBorder;
+    .post_icon {
+      width: 40px;
+      height: 40px;
+      padding-left: 6px;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .content {
+      padding-left: 8px;
+      flex-shrink: 50;
+      .post_title {
+        .css-2ulfj5-MuiTypography-root {
+          font-family: Roboto;
+          font-size: 12px;
+          font-weight: 700;
+          line-height: 20px;
+          text-align: left;
+        }
+      }
+      .post_inner_content {
+        display: flex;
+        align-items: center;
+        .post_followers {
+          .css-e784if-MuiTypography-root {
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 20px;
+            text-align: left;
+          }
+          position: relative;
+          padding-right: 6px;
+          &::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: $black;
+            border-radius: 50%;
+            bottom: 20px;
+            right: 10px;
+          }
+        }
+        .post_months {
+          .css-e784if-MuiTypography-root {
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 20px;
+            text-align: left;
+          }
+          margin-left: 4px;
+        }
+      }
+      .post_body {
+        .css-e784if-MuiTypography-root {
+          font-family: Roboto;
+          font-size: 12px;
+          font-weight: 500;
+          line-height: 20px;
+          text-align: left;
+        }
+      }
+    }
+    .post_delete {
+      padding-right: 15.05px;
+    }
+  }
 }
