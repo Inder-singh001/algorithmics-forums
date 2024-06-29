@@ -1,0 +1,50 @@
+.featured_posts {
+  width: 271px;
+  height: 569px;
+  border: 1px solid grey;
+
+  .post_header {
+    border-bottom: 1px solid grey;
+    position: relative;
+    .header_icon {
+      width: 15.66px;
+      height: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .header_title {
+      .css-2ulfj5-MuiTypography-root {
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 18px;
+        letter-spacing: -0.01em;
+        text-align: left;
+        position: absolute;
+        top: 0;
+        left: 20px;
+      }
+    }
+  }
+  //   .post_content {
+  //     .post_icon {
+  //       width: 40px;
+  //       height: 40px;
+  //     }
+  //     .post_title {
+  //       font-family: Roboto;
+  //       font-size: 12px;
+  //       font-weight: 700;
+  //       line-height: 20px;
+  //       text-align: left;
+  //     }
+  //     .post_body {
+  //       font-family: Roboto;
+  //       font-size: 12px;
+  //       font-weight: 500;
+  //       line-height: 20px;
+  //       text-align: left;
+  //     }
+  //   }
+}
