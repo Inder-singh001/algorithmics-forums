@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Container, Grid, Typography, TextField } from "@mui/material";
 import InputAdornment from '@mui/material/InputAdornment';
 import Image from "next/image";
-import "../../../../../public/sass/pages/signup.scss"
+import "../../../../../public/sass/pages/auth.scss"
 import Logo from "../../../../../public/images/logo.png"
 import User from "../../../../../public/images/user.png"
 import Graphic from "../../../../../public/graphic.svg"
@@ -27,16 +27,16 @@ const SignUp = () => {
     };
 
     return (
-        <div className="signup_section">
+        <div className="auth_section">
             <Container>
                 <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                        <div className="signup_area">
+                        <div className="auth_area">
                             <div className="logo_section">
                                 <Image src={Logo} alt="Logo" />
                             </div>
                             <div className="left_Form">
-                                <div className="form_text">
+                                <div className="form_text signup_form_text">
                                     <Typography variant="h4">Sign-Up</Typography>
                                     <Typography variant="h6">If you already have an account register. You can
                                         <Link href="#">Login here !</Link>
@@ -75,7 +75,7 @@ const SignUp = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="form_area">
+                                <div className="form_area signup_formarea">
                                     <TextField
                                         id="input-with-icon-textfield"
                                         label="Email"
@@ -90,7 +90,7 @@ const SignUp = () => {
                                         variant="standard"
                                     />
                                 </div>
-                                <div className="form_area">
+                                <div className="form_area signup_formarea">
                                     <TextField
                                         id="input-with-icon-textfield"
                                         label="Password"
@@ -118,7 +118,7 @@ const SignUp = () => {
                                         variant="standard"
                                     />
                                 </div>
-                                <div className="form_area">
+                                <div className="form_area signup_formarea">
                                     <TextField
                                         id="input-with-icon-textfield"
                                         label="Confirm Password"
@@ -153,7 +153,7 @@ const SignUp = () => {
 
                             <div className="right_Frame">
                                 <div className="graphic_area">
-                                    <Image src={Graphic} width={647} height={647} alt="Graphic"></Image>
+                                    <Image src={Graphic} priority={true} alt="Graphic"></Image>
                                 </div>
                             </div>
                         </div>
