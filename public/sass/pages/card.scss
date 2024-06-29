@@ -6,10 +6,21 @@
 .card_container{
     background-color: $primarybackground;
     .inner_parent{
-        width: 428px;
         gap: 10px;
         display: flex;
         flex-direction: column;
+        .carder{
+            gap: 0px;
+            position: relative;
+            .head{
+                font-weight: 600;
+                color:$secondarytext;
+            }
+            :hover{
+                box-shadow: 0px 1px 1px 0px #0000000A;
+            }
+
+        }
 
     }
 
