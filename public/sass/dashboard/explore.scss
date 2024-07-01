@@ -1,0 +1,91 @@
+@import "../base/variable.scss";
+
+.dashboard_section {
+  &.explore_section {
+    .inner_section {
+      .right_section {
+        display: flex;
+        // width: calc(100% - 260px);
+        margin-top: 26px;
+        padding: 0 24px;
+        gap:16px;
+        max-width: 100%;
+      }
+    }
+  }
+}
+/* Extra Huge large desktops */
+@media (min-width: 1920px) {
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1680px) and (max-width: 1919px) {
+  // .dashboard_section {
+  //     &.explore_section {
+  //       .inner_section {
+  //         .right_section {
+  //           width: calc(100% - 260px);
+  //           margin-top: 26px;
+  //           padding: 0 26px;
+  //           .css-1oqqzyl-MuiContainer-root{
+  //               margin-left: 0px;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1600px) and (max-width: 1679px) {
+  // .dashboard_section {
+  //     &.explore_section {
+  //       .inner_section {
+  //         .right_section {
+  //           width: calc(100% - 414px);
+  //           margin-top: 26px;
+  //           padding: 0 26px;
+  //           .css-1oqqzyl-MuiContainer-root{
+  //               margin-left: 0px;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+}
+
+/* Extra large desktops and mac laptops*/
+@media (min-width: 1400px) and (max-width: 1599px) {
+}
+
+/* Extra large desktops and mac laptops*/
+@media (min-width: 1300px) and (max-width: 1399px) {
+}
+
+/* Extra large desktops and mac laptops*/
+@media (min-width: 1200px) and (max-width: 1299px) {
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Landscape tablets and ipad */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 576px) and (max-width: 767px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 361px) and (max-width: 575px) {
+}
+
+/* Smaller phones */
+@media (max-width: 360px) {
+}
+
+/* Smaller phones */
+@media (max-width: 320px) {
+}
