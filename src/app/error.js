@@ -1,5 +1,5 @@
 "use client";
-import { Container, Box, Typography, Grid } from "@mui/material";
+import { Container, Typography, Grid } from "@mui/material";
 import Image from "next/image";
 import ResultImage from "../../public/images/notFound.png";
 import "../../public/sass/pages/util.scss";

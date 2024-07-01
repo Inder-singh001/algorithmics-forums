@@ -15,7 +15,7 @@ const Dashboard = () => {
         <div className="right_section">
 
           <div className="explore_area">
-            <Posts />
+            <ProfileEdit />
           </div>
           <div className="suggestion_area">
             <RightCard />
@@ -23,7 +23,7 @@ const Dashboard = () => {
         </div>
 
       </div>
-    </div >
+    </div>
   );
 };
 export default Dashboard;

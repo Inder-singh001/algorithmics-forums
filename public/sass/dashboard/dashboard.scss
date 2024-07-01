@@ -9,8 +9,16 @@
         max-width: 100%;
         padding: 20px;
         background-color: $primarybackground;
+<<<<<<< HEAD
         border-right: 1px solid $navbarBorder;
         height: 100vh;
+=======
+        border-right: 1px solid #ebebeb;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+
+>>>>>>> 7537c5a37ad7a4ac115fbbcb93a809ba1207d080
         .sidebar {
           .sidebar_text {
             margin-bottom: 30px;
