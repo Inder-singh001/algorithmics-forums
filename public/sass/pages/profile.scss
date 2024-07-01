@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    .outer_container {
+        .upper_area {
+            position: relative;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+            .save_changes {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+
+                a {
+                    color: #007bff;
+                    font-size: 16px;
+                    font-weight: 600;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                        transition: all 0.5s ease;
+                    }
+                }
+            }
+
+            .profile_picture {
+                width: 161.5px;
+                height: 161.5px;
+                border-radius: 50%;
+                position: relative;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+
+                    &:hover {
+                        opacity: 0.7;
+                        transition: all 0.4s ease;
+                    }
+                }
+
+                .profile_picture_edit {
+                    position: absolute;
+                    top: 40%;
+                    left: 45%;
+                    cursor: pointer;
+
+                    a {
+                        color: #fff;
+
+                        .css-i4bv87-MuiSvgIcon-root {
+                            font-size: 30px;
+
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        .lower_area {
+            padding: 15px;
+
+            .name_box {
+                width: 100%;
+                background-color: #fff;
+                color: #c3cad9;
+                cursor: text;
+                border-bottom: 1px solid #c3cad9;
+                margin-bottom: 18px;
+
+                .css-9npbnl-MuiFormLabel-root-MuiInputLabel-root {
+                    color: #000;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                .css-1le28he-MuiInputBase-root {
+                    width: 100%;
+
+                    &:active {
+                        border-bottom: 1.5px solid #007bff;
+                    }
+                }
+            }
+
+            .description_box {
+                width: 100%;
+                background-color: #fff;
+                color: #c3cad9;
+                cursor: text;
+                border-bottom: 1px solid #c3cad9;
+                margin-bottom: 18px;
+
+                .css-9npbnl-MuiFormLabel-root-MuiInputLabel-root {
+                    color: #000;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+                    width: 100%;
+                }
+            }
+
+            .email_box {
+                width: 100%;
+                background-color: #fff;
+                color: #c3cad9;
+                cursor: text;
+                margin-bottom: 18px;
+
+                .css-9npbnl-MuiFormLabel-root-MuiInputLabel-root {
+                    color: #000;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                .css-1le28he-MuiInputBase-root {
+                    width: 100%;
+                    border-bottom: 1px solid #c3cad9;
+
+                    &:active {
+                        border-bottom: 1.5px solid #007bff;
+                    }
+
+                }
+            }
+
+            .Password_box {
+                width: 100%;
+                background-color: #fff;
+                color: #c3cad9;
+                cursor: text;
+                // border-bottom:1px solid #c3cad9;
+                position: relative;
+                margin-bottom: 18px;
+
+                .css-9npbnl-MuiFormLabel-root-MuiInputLabel-root {
+                    color: #000;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                .css-1le28he-MuiInputBase-root {
+                    width: 100%;
+                    border-bottom: 1px solid #c3cad9;
+
+                    &:active {
+                        border-bottom: 1.5px solid #007bff;
+                    }
+                }
+
+                .show_password_button {
+                    position: absolute;
+                    cursor: pointer;
+
+                    a {
+                        color: #007bff;
+                        font-size: 16px;
+                        font-weight: 600;
+                        text-decoration: none;
+    
+                        &:hover {
+                            text-decoration: underline;
+                            transition: all 0.5s ease;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1920px) {}
+
+/* Extra Huge large desktops */
+@media (min-width: 1680px) and (max-width: 1919px) {}
+
+/* Extra Huge large desktops */
+@media (min-width: 1600px) and (max-width: 1679px) {}
+
+/* Extra large desktops and mac laptops*/
+@media (min-width: 1400px) and (max-width: 1599px) {}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 991.5px) and (max-width: 1199px) {}
+
+/* Landscape tablets and ipad */
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 576px) and (max-width: 767px) {}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 361px) and (max-width: 575px) {}
+
+/* Smaller phones */
+@media (max-width: 360px) {}
+
+/* Smaller phones */
+@media (max-width: 320px) {}
