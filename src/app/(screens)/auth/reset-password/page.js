@@ -12,7 +12,10 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 
+
 const ResetPassword = () => {
+
+    
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -23,6 +26,7 @@ const ResetPassword = () => {
         event.preventDefault();
     };
 
+    
     return (
         <div className="auth_section">
             <Container>

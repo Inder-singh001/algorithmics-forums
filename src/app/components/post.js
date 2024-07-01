@@ -1,5 +1,5 @@
 'use client'
-import * as React from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -10,22 +10,25 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-// import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AvatarImg from "../../../public/images/avatar.png"
 import Badge from '@mui/material/Badge';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import "../../../public/sass/dashboard/post.scss";
+import Image, { } from "next/image";
+import SyncOutlinedIcon from '@mui/icons-material/SyncOutlined';
+import NotVoted from "../../../public/images/unselect.png"
+import Voted from "../../../public/images/select.png"
+import Comment from "../../../public/images/comments.png"
+import Share from "../../../public/images/share.png"
+import Options from "../../../public/images/threedots.png"
+
+
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
+    // marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
         duration: theme.transitions.duration.shortest,
     }),
@@ -34,7 +37,40 @@ const ExpandMore = styled((props) => {
 
 
 export const Posts = () => {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const [upvoteCount, setUpvoteCount] = useState('');
+    const [downvoteCount, setDownvoteCount] = useState('');
+    const [commentCount, setCommentCount] = useState('');
+    const [upvoted, setUpvoted] = useState(false);
+    const [downvoted, setDownvoted] = useState(false);
+
+    const handleUpvote = () => {
+        if (upvoted) {
+            setUpvoteCount(upvoteCount - 1);
+            setUpvoted(false);
+        } else {
+            setUpvoteCount(upvoteCount + 1);
+            setUpvoted(true);
+            if (downvoted) {
+                setDownvoteCount(downvoteCount - 1);
+                setDownvoted(false);
+            }
+        }
+    };
+
+    const handleDownvote = () => {
+        if (downvoted) {
+            setDownvoteCount(downvoteCount - 1);
+            setDownvoted(false);
+        } else {
+            setDownvoteCount(downvoteCount + 1);
+            setDownvoted(true);
+            if (upvoted) {
+                setUpvoteCount(upvoteCount - 1);
+                setUpvoted(false);
+            }
+        }
+    };
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -114,8 +150,8 @@ export const Posts = () => {
                 <CardMedia
                     component="img"
                     height="194"
-                    image="/static/images/cards/paella.jpg"
-                    alt="Paella dish"
+                    image="/images/notFound.png"
+                    alt="Paella "
                 />
 
                 <CardActions disableSpacing>
@@ -136,23 +172,53 @@ export const Posts = () => {
                             <Typography>2h ago</Typography>
                         </div>
                     </div>
-                    <div footer_area>
-                        {/* <IconButton aria-label="add to favorites">
-                            <FavoriteIcon />
-                        </IconButton>
-                        <IconButton aria-label="share">
-                            <ShareIcon />
-                        </IconButton>
-                        <ExpandMore
-                            expand={expanded}
-                            onClick={handleExpandClick}
-                            aria-expanded={expanded}
-                            aria-label="show more"
-                        >
-                            <ExpandMoreIcon />
-                        </ExpandMore> */}
-                    </div>
+                    <div className="footer_area">
+                        <div className="left_side_icon">
+                            <div className='vote_icons'>
+                                <div className='upvote_area'>
+                                    <div className={`upvote_icon ${!upvoted ? "unselected" : ""}`} onClick={handleUpvote}>
+                                        <Image src={upvoted ? Voted : NotVoted} alt='upvote' />
 
+                                    </div>
+                                    <div className='upvote_num'>
+                                        <Typography>{upvoteCount}</Typography>
+                                    </div>
+                                </div>
+                                <div className='downvote_area'>
+
+                                    <div className={`downvote_icon ${downvoted ? "selected" : ""}`} onClick={handleDownvote}>
+                                        <Image src={downvoted ? Voted : NotVoted} alt='upvote' />
+                                    </div>
+                                    <div className='downvote_num'>
+                                        <Typography>{downvoteCount}</Typography>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='inApp_share_icon'>
+                                <SyncOutlinedIcon />
+                            </div>
+                            <div className='comment_icon'>
+                                <ExpandMore
+                                    expand={expanded}
+                                    onClick={handleExpandClick}
+                                    aria-expanded={expanded}
+                                    aria-label="show more"
+                                >
+                                    <Image src={Comment} alt='comment icon' />
+                                    <Typography>{commentCount}</Typography>
+                                </ExpandMore>
+                            </div>
+
+                        </div>
+                        <div className="right_side_icon">
+                            <div className='external_share_icon'>
+                                <Image src={Share} alt='share icon' />
+                            </div>
+                            <div className='dots_icon'>
+                                <Image src={Options} alt='more options' />
+                            </div>
+                        </div>
+                    </div>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
