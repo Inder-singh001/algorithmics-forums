@@ -1,11 +1,11 @@
 import { IconButton, Typography } from "@mui/material";
 import Image from "next/image";
-import CellIcon from "../../../../public/images/cell_icon.png";
-import OptBadge from "../../../../public/images/opt_badge.png";
-import ReplaceIcon from "../../../../public/images/replace_icon.png";
-import TribeImage from "../../../../public/images/tribe_image.png";
+import CellIcon from "../../../public/images/cell_icon.png";
+import OptBadge from "../../../public/images/opt_badge.png";
+import ReplaceIcon from "../../../public/images/replace_icon.png";
+import TribeImage from "../../../public/images/tribe_image.png";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../../../public/sass/pages/featured_posts.scss";
+import "../../../public/sass/pages/featured_posts.scss";
 
 const FeatuerdPosts = () => {
   return (
