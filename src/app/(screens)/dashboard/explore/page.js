@@ -4,6 +4,7 @@ import "../../../../../public/sass/dashboard/explore.scss";
 import { Container, Grid } from "@mui/material";
 import { Posts } from "@/app/components/post";
 import ProfileEdit from "@/app/components/profileEdit";
+import MakeAPost from "@/app/components/makepost";
 
 const Dashboard = () => {
   return (
@@ -16,7 +17,8 @@ const Dashboard = () => {
         </div>
         <div className="right_section">
           <div className="explore_area">
-            <ProfileEdit />
+            {/* <ProfileEdit /> */}
+            <MakeAPost />
           </div>
           <div className="suggestion_area">{/* <Posts /> */}</div>
         </div>
