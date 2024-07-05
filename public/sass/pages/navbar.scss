@@ -387,6 +387,381 @@
 
       }
 
+<<<<<<< HEAD
+      .navbar_burger_menu_toggle {
+        background-color: #fff;
+        color: #c3cad9;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #c3cad9;
+          color: #fff;
+        }
+
+        &:active,
+        &.active {
+          transform: scale(0.9);
+          background-color: #c3cad9;
+          color: #fff;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .navbar_burger_menu_list {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 10px;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        transition: opacity 0.3s ease;
+
+        &.open {
+          display: block;
+          opacity: 1;
+        }
+
+        ul {
+          list-style: none;
+          padding: 10px;
+
+          .navbar_burger_menu_links {
+            margin: 10px 0;
+
+            .navbar_burger_menu_link_item {
+              display: flex;
+              align-items: center;
+
+              a {
+                margin-left: 10px;
+                text-decoration: none;
+                color: #000;
+                transition: color 0.3s ease;
+
+                &:hover {
+                  text-decoration: underline;
+                  color: #007bff;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .search_bar_container {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border-radius: 30px;
+      padding: 5px 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+      width: 430px;
+
+      &:hover {
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .search_bar_icon {
+        color: grey;
+        margin-right: 10px;
+      }
+
+      .search_bar_input {
+        .search_input {
+          border: none;
+          outline: none;
+          color: grey;
+          background-color: white;
+          font-size: 16px;
+          padding: 5px;
+          width: auto;
+        }
+      }
+    }
+
+    .navbar_right_container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .utilities_notification_icon {
+        background-color: #fff;
+        color: $icons;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        .css-i4bv87-MuiSvgIcon-root {
+          font-size: 20px;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: $primaryBlue_color;
+          color: $white;
+        }
+        &.active {
+          transform: scale(0.9);
+          background-color: #0056b3;
+          color: #fff;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+      .utilities_profile_icon {
+        .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+          min-width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: $white;
+          padding: 0px;
+          .css-i4bv87-MuiSvgIcon-root {
+            font-size: 20px;
+            background-color: $white;
+            color: $icons;
+          }
+          &:hover {
+            cursor: pointer;
+            background-color: $primaryBlue_color;
+            .css-i4bv87-MuiSvgIcon-root {
+              font-size: 20px;
+              background-color: $primaryBlue_color;
+              color: $white;
+            }
+          }
+          &.active {
+            transform: scale(0.9);
+            background-color: #0056b3;
+            color: #fff;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .profile_menu_list {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 99999;
+        height: 100%;
+        width: 100%;
+        background-color: #007bff;
+        padding: 50px;
+
+        .profile_menu_list_item {
+          li {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            list-style: none;
+            margin-bottom: 16px;
+
+            a {
+              color: #fff;
+            }
+
+            .menu_icon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 16px;
+              height: 16px;
+              background-color: #fff;
+              color: #c3cad9;
+              margin-right: 10px;
+              border-radius: 50%;
+
+              svg {
+                width: 20px;
+                height: 20px;
+              }
+
+              &:hover {
+                cursor: pointer;
+                background-color: #c3cad9;
+                color: #fff;
+              }
+            }
+
+            &:hover {
+              color: #c3cad9;
+              transition: all 0.3s ease;
+            }
+          }
+        }
+
+        .profile_close {
+          position: absolute;
+          right: 50px;
+          top: 50px;
+          color: #fff;
+        }
+      }
+
+      .utilities_login_button {
+        height: 48px;
+        min-width: 133px;
+        .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+          // font-family: Roboto;
+          background-color: $primaryBlue_color;
+          color: white;
+          border-radius: 14px;
+          height: 100%;
+          min-width: 100%;
+          font-size: 18px;
+          font-weight: 900;
+          line-height: 25px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: $tertiaryBlue_color;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .responsive_menu_icon {
+        display: none;
+        background-color: $white;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: $icons;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $primaryBlue_color;
+        }
+        .css-i4bv87-MuiSvgIcon-root {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  // .responsive_toggle_bar {
+  //   display: none;
+  //   background-color: white;
+  //   border: 1px solid #ccc;
+  //   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  //   border-radius: 8px;
+  //   transition: opacity 0.3s ease;
+
+  //   &.open {
+  //     display: block;
+  //     opacity: 1;
+  //   }
+
+  //   ul {
+  //     list-style: none;
+  //     padding: 10px;
+
+  //     .responsive_toggle_bar_menu_links {
+  //       margin: 10px 0;
+
+  //       .responsive_toggle_bar_menu_link_item {
+  //         display: flex;
+  //         align-items: center;
+
+  //         a {
+  //           margin-left: 10px;
+  //           text-decoration: none;
+  //           color: #000;
+  //           transition: color 0.3s ease;
+
+  //           &:hover {
+  //             text-decoration: underline;
+  //             color: #007bff;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  .responsive_header {
+    .css-1u2w381-MuiModal-root-MuiDrawer-root {
+      .css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root {
+        &:hover {
+          background-color: $secondaryBlue_color;
+        }
+      }
+    }
+    // .hello {
+    //   position: relative;
+
+    //   .hello_contents {
+    //     .navbar_logo_resposive {
+    //       width: 180px;
+    //       height: 48px;
+    //       margin-bottom: 50px;
+
+    //       img {
+    //         width: 100%;
+    //         height: 100%;
+    //         object-fit: contain;
+    //       }
+    //     }
+
+    //     li {
+    //       font-size: 16px;
+    //       font-weight: 700;
+    //       color: #fff;
+    //       margin-bottom: 16px;
+
+    //       a {
+    //         color: #fff;
+    //       }
+
+    //       &:hover {
+    //         transform: scale(1.1);
+    //         color: #c3cad9;
+    //         transform: translate(5px);
+    //         transition: all 0.3s ease;
+    //       }
+    //     }
+    //   }
+
+    //   .close_icon {
+    //     position: absolute;
+    //     right: 0px;
+    //     top: 0px;
+    //     color: #fff;
+    //     font-size: 24px;
+    //   }
+    // }
+=======
       li {
         font-size: 16px;
         font-weight: 700;
@@ -414,6 +789,7 @@
       color: #fff;
       font-size: 24px;
     }
+>>>>>>> 7537c5a37ad7a4ac115fbbcb93a809ba1207d080
   }
 }
 
@@ -431,12 +807,6 @@
         .navbar_logo {
           width: 100px;
           height: 25px;
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
         }
       }
 
@@ -465,10 +835,15 @@
       .navbar_right_container {
         gap: 15px;
 
-        .utilities_notification_icon,
-        .utilities_profile_icon {
+        .utilities_notification_icon {
           width: 40px;
           height: 40px;
+        }
+        .utilities_profile_icon {
+          .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+            min-width: 40px;
+            height: 40px;
+          }
         }
 
         .responsive_menu_icon {
@@ -489,12 +864,6 @@
         .navbar_logo {
           width: 100px;
           height: 25px;
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
         }
       }
 
@@ -505,21 +874,26 @@
       .navbar_right_container {
         gap: 15px;
 
-        .utilities_notification_icon,
-        .utilities_profile_icon {
+        .utilities_notification_icon {
           width: 40px;
           height: 40px;
         }
-
+        .utilities_profile_icon {
+          .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+            min-width: 40px;
+            height: 40px;
+          }
+        }
+        .utilities_login_button {
+          height: 48px;
+          min-width: 100px;
+          .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+            font-size: 16px;
+            font-weight: 700;
+          }
+        }
         .responsive_menu_icon {
           display: flex;
-        }
-
-        .login_button {
-          height: 48px;
-          width: 113px;
-          font-size: 16px;
-          font-weight: 700;
         }
 
         .responsive_toggle_bar_button {
@@ -546,6 +920,8 @@
         .navbar_logo {
           width: 100px;
           height: 25px;
+<<<<<<< HEAD
+=======
 
           img {
             width: 100%;
@@ -553,6 +929,7 @@
             object-fit: contain;
 
           }
+>>>>>>> 7537c5a37ad7a4ac115fbbcb93a809ba1207d080
         }
       }
 
@@ -563,10 +940,29 @@
       .navbar_right_container {
         gap: 10px;
 
-        .utilities_notification_icon,
-        .utilities_profile_icon {
+        .utilities_notification_icon {
           width: 30px;
           height: 30px;
+          .css-i4bv87-MuiSvgIcon-root {
+            font-size: 16px;
+          }
+        }
+        .utilities_profile_icon {
+          .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+            min-width: 30px;
+            height: 30px;
+            .css-i4bv87-MuiSvgIcon-root {
+              font-size: 16px;
+            }
+          }
+        }
+        .utilities_login_button {
+          height: 38px;
+          min-width: 78px;
+          .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+            font-size: 14px;
+            font-weight: 700;
+          }
         }
 
         .responsive_menu_icon {
@@ -625,10 +1021,26 @@
       .navbar_right_container {
         gap: 5px;
 
-        .utilities_notification_icon,
-        .utilities_profile_icon {
+        .utilities_notification_icon {
           width: 30px;
           height: 30px;
+        }
+        .utilities_profile_icon {
+          .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+            min-width: 30px;
+            height: 30px;
+            .css-i4bv87-MuiSvgIcon-root {
+              font-size: 16px;
+            }
+          }
+        }
+        .utilities_login_button {
+          height: 38px;
+          min-width: 78px;
+          .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+            font-size: 14px;
+            font-weight: 700;
+          }
         }
 
         .responsive_menu_icon {

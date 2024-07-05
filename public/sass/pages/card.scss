@@ -4,29 +4,30 @@
 @import "../helper/reset.scss";
 
 .inner_parent {
-  gap: 10px;
-  display: flex;
-  flex-direction: column;
   .carder {
-    border: 1px solid #dee0e1;
+    border: 1px solid $tagsBorder;
     box-shadow: 0px 1px 1px 0px #0000000a;
-    width: 420px;
-    border-radius: 5px;
-    background-color: #ffffff;
+    max-width: 100%;
+    width: 400px;
+    border-radius: 6px;
+    background-color: $white;
+    margin-bottom: 10px;
     .head {
-      font-weight: 600;
-      color: $secondarytext;
       border-bottom: 0.3px solid $navbarBorder;
-      padding: 8px 16px 0px 16px;
       display: flex;
-      .text {
+      align-items: center;
+      padding: 8px 16px;
+      .MuiTypography-root {
+        // font-family: Roboto;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        width: calc(100% - 20px);
         float: left;
-        width: 200px;
       }
       .icon {
         float: right;
-        width: calc(100% - 200px);
-        text-align: right;
+        width: 20px;
         .MuiSvgIcon-root {
           width: 18px;
           height: 18px;
@@ -38,23 +39,34 @@
       display: flex;
       .des_left {
         float: left;
-        width: 350px;
+        width: calc(100% - 28px);
         .des_top {
           display: flex;
           align-items: center;
-          color: $secondarytext;
-          font-weight: 600;
+          .icon_area{
+            padding-right: 6px;
+          }
+          .MuiTypography-root {
+            color: $secondarytext;
+            // font-family: Roboto;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+          }
         }
         .des_bottom {
-          color: $primarySubtext;
-          font-size: smaller;
-          font-weight: 600;
+          .MuiTypography-root {
+            color: $primarySubtext;
+            // font-family: Roboto;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 22px;
+          }
         }
       }
       .des_right {
         float: right;
-        text-align: right;
-        width: calc(100% - 350px);
+        width: 28px;
       }
     }
     &:hover {

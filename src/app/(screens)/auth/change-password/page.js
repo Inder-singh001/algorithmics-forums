@@ -5,10 +5,13 @@ import "../../../../../public/sass/pages/auth.scss"
 import Logo from "../../../../../public//images/logo.png"
 import Graphic from "../../../../../public/graphic.svg"
 import Button from '@mui/material/Button';
-
+import { useRouter } from "next/navigation";
 
 const ChangePassword = () => {
-
+    const router = useRouter(); 
+    const handleChangePassword =()=> {
+        router.push('/auth/reset-password');
+    }
     return (
         <div className="auth_section">
             <Container>
@@ -32,7 +35,7 @@ const ChangePassword = () => {
                                     />
                                 </div>
                                 <div className="btn_area passbtn_area">
-                                    <Button variant="contained">Submit</Button>
+                                    <Button variant="contained" onClick={handleChangePassword}>Submit</Button>
                                 </div>
                             </div>
                             <div className="right_Frame">

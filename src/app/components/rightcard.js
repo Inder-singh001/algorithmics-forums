@@ -6,153 +6,57 @@ import { KeyboardArrowRight, Pages } from '@mui/icons-material';
 
 
 const RightCard = () => {
+
+    const cardContent = [
+        {
+            title: "Lorem ipsum dolor sit amet",
+            icon: <Pages />,
+            content: "Your answers and postsYour answers and posts",
+            description: "Lorem ipsum dolor sit amet consectetur. Turpis tortor"
+        },
+        {
+            title: "Lorem ipsum dolor sit amet",
+            icon: <Pages />,
+            content: "Your answers and posts",
+            description: "Lorem ipsum dolor sit amet consectetur. Turpis tortor"
+        },
+    ]
+
     return (
-        <Container>
-            <Grid container>
-                <Grid item>
-                    <div className="inner_parent">
-                        <div className=' carder'>
-                            <div className='head'>
-                                <div className='text'>
-                                    Lorem ipsum dollor sit amet
-                                </div>
-                                <div className='icon'>
-                                    <Close />
-                                </div>
-                            </div>
-                            <div className='description'>
-                                <div className='des_left'>
-                                    <div className='des_top'>
-                                        <Pages />Your answers and posts
-                                    </div>
-                                    <div className='des_bottom'>
-                                        Lorem ipsum dolor sit amet consectetur. Turpis tortor
-                                    </div>
-                                </div>
-                                <div className='des_right'>
-                                    <KeyboardArrowRight />
-                                </div>
-                            </div>
-                        </div>
-                        <div className=' carder'>
-                            <div className='head'>
-                                <div className='text'>
-                                    Spaces you're earning from
-                                </div>
-                                <div className='icon'>
-                                    <Close />
-                                </div>
-                            </div>
-                            <div className='description'>
-                                <div className='des_left'>
-                                    <div className='des_top'>
-                                        <Pages />iOS Devs
-                                    </div>
-                                    <div className='des_bottom'>
-                                        Lorem ipsum dolor sit amet consectetur. Turpis tortor
-                                    </div>
-                                </div>
-                                <div className='des_right'>
-                                    <KeyboardArrowRight />
-                                </div>
-                            </div>
-                        </div>
-                        <div className=' carder'>
-                            <div className='head'>
-                                <div className='text'>
-                                    Lorem ipsum dollor sit amet
-                                </div>
-                                <div className='icon'>
-                                    <Close />
-                                </div>
-                            </div>
-                            <div className='description'>
-                                <div className='des_left'>
-                                    <div className='des_top'>
-                                        <Pages />Your answers and posts
-                                    </div>
-                                    <div className='des_bottom'>
-                                        Lorem ipsum dolor sit amet consectetur. Turpis tortor
-                                    </div>
-                                </div>
-                                <div className='des_right'>
-                                    <KeyboardArrowRight />
-                                </div>
-                            </div>
-                        </div>
-                        <div className=' carder'>
-                            <div className='head'>
-                                <div className='text'>
-                                    Lorem ipsum dollor sit amet
-                                </div>
-                                <div className='icon'>
-                                    <Close />
-                                </div>
-                            </div>
-                            <div className='description'>
-                                <div className='des_left'>
-                                    <div className='des_top'>
-                                        <Pages />iOS Devs
-                                    </div>
-                                    <div className='des_bottom'>
-                                        Lorem ipsum dolor sit amet consectetur. Turpis tortor
-                                    </div>
-                                </div>
-                                <div className='des_right'>
-                                    <KeyboardArrowRight />
-                                </div>
-                            </div>
-                        </div>
-                        <div className=' carder'>
-                            <div className='head'>
-                                <div className='text'>
-                                    Lorem ipsum dollor sit amet
-                                </div>
-                                <div className='icon'>
-                                    <Close />
-                                </div>
-                            </div>
-                            <div className='description'>
-                                <div className='des_left'>
-                                    <div className='des_top'>
-                                        <Pages />Your answers and posts
-                                    </div>
-                                    <div className='des_bottom'>
-                                        Lorem ipsum dolor sit amet consectetur. Turpis tortor
-                                    </div>
-                                </div>
-                                <div className='des_right'>
-                                    <KeyboardArrowRight />
-                                </div>
-                            </div>
-                        </div>
-                        <div className=' carder'>
-                            <div className='head'>
-                                <div className='text'>
-                                    Lorem ipsum dollor sit amet
-                                </div>
-                                <div className='icon'>
-                                    <Close />
-                                </div>
-                            </div>
-                            <div className='description'>
-                                <div className='des_left'>
-                                    <div className='des_top'>
-                                        <Pages />iOS Devs
-                                    </div>
-                                    <div className='des_bottom'>
-                                        Lorem ipsum dolor sit amet consectetur. Turpis tortor
-                                    </div>
-                                </div>
-                                <div className='des_right'>
-                                    <KeyboardArrowRight />
-                                </div>
-                            </div>
+
+        <div className="inner_parent">
+            {cardContent.map((text, index) => (
+                <div className='carder'>
+                    <div className='head'>
+                        <Typography>
+                            {text.title}
+                        </Typography>
+                        <div className='icon'>
+                            <Close />
                         </div>
                     </div>
-                </Grid>
-            </Grid>
-        </Container>
+                    <div className='description'>
+                        <div className='des_left'>
+                            <div className='des_top'>
+                                <div className="icon_area">
+                                    {text.icon}
+                                </div>
+                                <Typography>{text.content}
+                                </Typography>
+                            </div>
+                            <div className='des_bottom'>
+                                <Typography>
+                                    {text.description}
+                                </Typography>
+                            </div>
+                        </div>
+                        <div className='des_right'>
+                            <KeyboardArrowRight />
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
     )
 }
 export default RightCard;

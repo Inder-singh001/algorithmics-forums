@@ -39,7 +39,7 @@ const SignUp = () => {
                                 <div className="form_text signup_form_text">
                                     <Typography variant="h4">Sign-Up</Typography>
                                     <Typography variant="h6">If you already have an account register. You can
-                                        <Link href="#">Login here !</Link>
+                                        <Link href="/auth/login">Login here !</Link>
                                     </Typography>
                                 </div>
 

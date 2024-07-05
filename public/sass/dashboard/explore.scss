@@ -1,15 +1,33 @@
 @import "../base/variable.scss";
 
 .dashboard_section {
+  .inner_section {
+    .left_section {
+      width: 300px;
+      float: left;
+    }
+  }
   &.explore_section {
     .inner_section {
       .right_section {
         display: flex;
-        // width: calc(100% - 260px);
+        width: calc(100% - 300px);
         margin-top: 26px;
         padding: 0 24px;
-        gap:16px;
+        gap: 16px;
         max-width: 100%;
+        float: right;
+        
+          .explore.area {
+            width: calc(100% - 400px);
+            float: left;
+          }
+          .suggestion_area {
+            // width: 400px;
+            max-width: 100%;
+            float: right;
+          }
+        
       }
     }
   }

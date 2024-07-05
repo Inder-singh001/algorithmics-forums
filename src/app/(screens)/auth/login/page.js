@@ -16,7 +16,10 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Link from "next/link";
 
+
 const Login = () => {
+   
+
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -24,6 +27,7 @@ const Login = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
 
     return (
         <div className="auth_section">
@@ -38,7 +42,7 @@ const Login = () => {
                                 <div className="form_text">
                                     <Typography variant="h4">Login</Typography>
                                     <Typography variant="h6">If you don't have a registered account. You can
-                                        <Link href="#">Register here !</Link>
+                                        <Link href="/auth/sign-up">Register here !</Link>
                                     </Typography>
                                 </div>
                                 <div className="form_area">
@@ -86,7 +90,7 @@ const Login = () => {
                                 </div>
                                 <div className="forget_passSection">
                                     <FormControlLabel control={<Checkbox />} label="Remember me" />
-                                    <Link href="#">Forget password ?</Link>
+                                    <Link href="/auth/change-password" >Forget password ?</Link>
                                 </div>
                                 <div className="btn_area">
                                     <Button variant="contained">Login</Button>
@@ -95,7 +99,7 @@ const Login = () => {
 
                             <div className="right_Frame">
                                 <div className="graphic_area">
-                                    <Image src={Graphic}  priority={true} alt="Graphic"></Image>
+                                    <Image src={Graphic} priority={true} alt="Graphic"></Image>
                                 </div>
                             </div>
                         </div>
