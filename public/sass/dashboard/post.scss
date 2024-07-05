@@ -5,7 +5,6 @@
   font-size: 13px;
   font-weight: 700;
   line-height: 18.2px;
-  letter-spacing: -0.005em;
 }
 %username-subtext {
   // font-family: SF Pro Text;
@@ -16,6 +15,7 @@
 }
 
 .post_section {
+  margin-bottom: 12px;
   .cardHeader {
     display: flex;
     padding: 16px;
@@ -100,6 +100,12 @@
       color: $postDescriptionText;
     }
   }
+  .media_content {
+    height: 314px;
+    img {
+      object-fit: contain;
+    }
+  }
   .css-1rwjz6-MuiCardActions-root {
     display: flow-root;
     flex-direction: column;
@@ -162,13 +168,23 @@
           .upvote_area {
             display: flex;
             align-items: center;
+            position: relative;
 
+            &::after {
+              content: "";
+              position: absolute;
+              right: 0px;
+              top: 0px;
+              width: 1px;
+              height: 20px;
+              background-color: $icons;
+            }
             .upvote_icon {
-              width: 18px;
-              height: 16px;
-              margin-right: 9px;
+              width: 22px;
+              height: 20px;
+              // margin-right: 9px;
               &.unselected {
-                transform: rotate(180deg);
+                transform: rotateX(180deg);
               }
             }
             .upvote_num {
@@ -186,39 +202,32 @@
             align-items: center;
 
             .downvote_icon {
-              position: relative;
-              width: 18px;
-              height: 16px;
-              padding-left: 9px;
-              margin-right: 9px;
-
-              &::before {
-                content: "";
-                position: absolute;
-                left: 0px;
-                top: 0px;
-                width: 1px;
-                height: 20px;
-                background-color: $icons;
+              width: 20px;
+              height: 20px;
+              margin-left: 10px;
+              img {
+                object-fit: contain;
               }
+
               &.selected {
-                transform: rotate(180deg);
+                transform: rotateX(180deg);
+                align-items: center;
               }
             }
             .downvote_num {
-              padding-left: 16px;
               .MuiTypography-root {
                 // font-family: Roboto;
                 font-size: 12px;
                 font-weight: 700;
                 line-height: 20px;
+                padding-left: 10px;
               }
             }
           }
         }
         .inApp_share_icon {
           margin-right: 20px;
-          text-align: center;
+          align-self: flex-end;
           .css-i4bv87-MuiSvgIcon-root {
             color: $icons;
             transform: rotate(90deg);
@@ -226,6 +235,8 @@
         }
         .comment_icon {
           .css-9zmlxc-MuiButtonBase-root-MuiIconButton-root {
+            width: 16px;
+            height: 16px;
             padding: 0px;
             .MuiTypography-root {
               // font-family: Roboto;
@@ -244,7 +255,7 @@
         display: flex;
         align-items: center;
         .external_share_icon {
-          width: 16px;
+          width: 20px;
           height: 18px;
           margin-right: 30px;
         }
@@ -252,7 +263,7 @@
           position: relative;
           width: 18px;
           height: 4px;
-          img{
+          img {
             position: absolute;
           }
         }

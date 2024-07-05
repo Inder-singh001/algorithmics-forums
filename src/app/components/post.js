@@ -2,8 +2,7 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
+
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
@@ -14,7 +13,8 @@ import AvatarImg from "../../../public/images/avatar.png"
 import Badge from '@mui/material/Badge';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import "../../../public/sass/dashboard/post.scss";
-import Image, { } from "next/image";
+import Image from "next/image";
+import PostImage from "../../../public/images/Image.png"
 import SyncOutlinedIcon from '@mui/icons-material/SyncOutlined';
 import NotVoted from "../../../public/images/unselect.png"
 import Voted from "../../../public/images/select.png"
@@ -28,7 +28,6 @@ const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-    // marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
         duration: theme.transitions.duration.shortest,
     }),
@@ -38,8 +37,8 @@ const ExpandMore = styled((props) => {
 
 export const Posts = () => {
     const [expanded, setExpanded] = useState(false);
-    const [upvoteCount, setUpvoteCount] = useState('');
-    const [downvoteCount, setDownvoteCount] = useState('');
+    const [upvoteCount, setUpvoteCount] = useState(0);
+    const [downvoteCount, setDownvoteCount] = useState(0);
     const [commentCount, setCommentCount] = useState('');
     const [upvoted, setUpvoted] = useState(false);
     const [downvoted, setDownvoted] = useState(false);
@@ -147,13 +146,9 @@ export const Posts = () => {
                         </Typography>
                     </div>
                 </CardContent>
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image="/images/notFound.png"
-                    alt="Paella "
-                />
-
+                <div className='media_content'>
+                    <Image src={PostImage} alt="ques image" />
+                </div>
                 <CardActions disableSpacing>
                     <div className='reaction_section'>
                         <div className='avatars_area'>
@@ -180,7 +175,8 @@ export const Posts = () => {
                                         <Image src={upvoted ? Voted : NotVoted} alt='upvote' />
 
                                     </div>
-                                    <div className='upvote_num'>
+                                    <div className={`${upvoted ? 'upvote_num' : ""}`} >
+
                                         <Typography>{upvoteCount}</Typography>
                                     </div>
                                 </div>
@@ -189,7 +185,7 @@ export const Posts = () => {
                                     <div className={`downvote_icon ${downvoted ? "selected" : ""}`} onClick={handleDownvote}>
                                         <Image src={downvoted ? Voted : NotVoted} alt='upvote' />
                                     </div>
-                                    <div className='downvote_num'>
+                                    <div className='downvote_num' >
                                         <Typography>{downvoteCount}</Typography>
                                     </div>
                                 </div>

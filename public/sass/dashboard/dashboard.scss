@@ -4,21 +4,13 @@
 .dashboard_section {
   .inner_section {
     display: flex;
+    background-color: $primarybackground;
     .left_section {
       .inner_parent {
         max-width: 100%;
         padding: 20px;
-        background-color: $primarybackground;
-<<<<<<< HEAD
         border-right: 1px solid $navbarBorder;
-        height: 100vh;
-=======
-        border-right: 1px solid #ebebeb;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-
->>>>>>> 7537c5a37ad7a4ac115fbbcb93a809ba1207d080
+        height: 100%;
         .sidebar {
           .sidebar_text {
             margin-bottom: 30px;
@@ -37,6 +29,21 @@
               display: flex;
               gap: 20px;
               border-radius: 14px;
+              &.active {
+                transform: scale(1.1);
+                background-color: $white;
+                color: $tagSelected;
+                box-shadow: 0px 2px 5px 0px #26334d08;
+
+                .icon_area {
+                  color: $primaryBlue_color;
+                }
+                .text_area {
+                  .MuiTypography-root {
+                    color: $primaryBlue_color;
+                  }
+                }
+              }
               .icon_area {
                 color: $icons;
                 width: 20px;
@@ -68,6 +75,33 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1400px) and (max-width: 1599px) {
+}
+
+/* 1300 desktop only */
+@media (min-width: 1300px) and (max-width: 1399px) {
+}
+
+/* 1200 desktop only */
+@media (min-width: 1200px) and (max-width: 1299px) {
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Landscape tablets and ipad */
+@media (min-width: 768px) and (max-width: 991px) {
+  .dashboard_section {
+    .inner_section {
+      .left_section {
+        .inner_parent {
+          padding: 14px;
         }
       }
     }

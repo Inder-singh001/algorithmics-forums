@@ -71,6 +71,9 @@ body {
     font-size: 18px;
     font-weight: 900;
     line-height: 25px;
+    &:hover {
+      background-color: $tertiaryBlue_color;
+    }
   }
 }
 

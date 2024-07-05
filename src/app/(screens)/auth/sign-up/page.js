@@ -14,8 +14,26 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
+    //Modal Props
+    const router = useRouter();
+    const [preferences, setPreferences] = useState({});
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setPreferences({
+            ...preferences,
+            [name]: value
+        });
+    };
+
+    const handleRegister = () => {
+        localStorage.setItem('preferences', JSON.stringify(preferences));
+        router.push('/dashboard/explore');
+    };
+
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -57,6 +75,7 @@ const SignUp = () => {
                                                 ),
                                             }}
                                             variant="standard"
+                                            onChange={handleChange}
                                         />
                                     </div>
                                     <div className="right_name">
@@ -147,7 +166,7 @@ const SignUp = () => {
                                     />
                                 </div>
                                 <div className="btn_area">
-                                    <Button variant="contained">Register</Button>
+                                    <Button variant="contained" onClick={handleRegister}>Register</Button>
                                 </div>
                             </div>
 

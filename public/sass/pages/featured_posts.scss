@@ -1,8 +1,9 @@
-@import './../base/variable.scss';
+@import "./../base/variable.scss";
 
 .featured_posts {
-  width: 271px;
+  width: 430px;
   border: 1px solid $navbarBorder;
+  background-color: $white;
 
   .post_header {
     border-bottom: 1px solid $navbarBorder;
@@ -14,41 +15,33 @@
       height: 20px;
     }
     .header_title {
+      padding-left: 8px;
       .css-2ulfj5-MuiTypography-root {
-        font-family: Roboto;
+        // font-family: Roboto;
         font-size: 12px;
         font-weight: 700;
         line-height: 18px;
-        letter-spacing: -0.01em;
-      
-        padding-left: 8px;
       }
     }
   }
   .post_content {
     display: flex;
-    padding: 8px;
+    padding: 12px;
     border-bottom: 1px solid $navbarBorder;
     .post_icon {
       width: 40px;
       height: 40px;
-      padding-left: 6px;
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-      }
     }
     .content {
       padding-left: 8px;
       flex-shrink: 50;
       .post_title {
-        .css-2ulfj5-MuiTypography-root {
-          font-family: Roboto;
+        .MuiTypography-root {
+          // font-family: Roboto;
           font-size: 12px;
           font-weight: 700;
           line-height: 20px;
-        
+          color: $primaryText;
         }
       }
       .post_inner_content {
@@ -56,48 +49,86 @@
         align-items: center;
         .post_followers {
           .css-e784if-MuiTypography-root {
-            font-family: Roboto;
+            // font-family: Roboto;
             font-size: 12px;
             font-weight: 500;
             line-height: 20px;
-          
-          }
-          position: relative;
-          padding-right: 6px;
-          &::after {
-            content: "";
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: $black;
-            border-radius: 50%;
-            bottom: 20px;
-            right: 10px;
+            color: $primarySubtext;
           }
         }
         .post_months {
           .css-e784if-MuiTypography-root {
-            font-family: Roboto;
+            // font-family: Roboto;
             font-size: 12px;
             font-weight: 500;
             line-height: 20px;
-          
+            color: $primarySubtext;
           }
           margin-left: 4px;
         }
       }
       .post_body {
         .css-e784if-MuiTypography-root {
-          font-family: Roboto;
+          // font-family: Roboto;
           font-size: 12px;
           font-weight: 500;
           line-height: 20px;
-        
+          color: $primarySubtext;
         }
       }
     }
     .post_delete {
-      padding-right: 15.05px;
+      .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root {
+        color: $icons;
+      }
     }
+  }
+}
+
+/* 1680 desktop */
+@media (min-width: 1680px) and (max-width: 1919px) {
+}
+
+/* 1600 desktop */
+@media (min-width: 1600px) and (max-width: 1679px) {
+}
+
+/* Above 1400 and Below 1599 Desktop*/
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .featured_posts {
+    width: 270px;
+  }
+}
+
+/* 1300 desktop only */
+@media (min-width: 1300px) and (max-width: 1399px) {
+  .featured_posts {
+    width: 270px;
+  }
+}
+
+/* 1200 desktop only */
+@media (min-width: 1200px) and (max-width: 1299px) {
+  .featured_posts {
+    width: 270px;
+  }
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .featured_posts {
+    width: 270px;
+  }
+}
+
+/* Landscape tablets and ipad */
+@media (min-width: 768px) and (max-width: 991px) {
+  .featured_posts {
+    width: 210px;
+  }
+}
+@media (max-width: 768px) {
+  .featured_posts{
+    display: none;
   }
 }
