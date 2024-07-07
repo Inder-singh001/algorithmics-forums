@@ -14,7 +14,7 @@
   line-height: 20px;
 }
 
-.post_section {
+.postshow_section {
   margin-bottom: 12px;
   .cardHeader {
     display: flex;
@@ -84,6 +84,7 @@
     }
   }
   .post_content {
+    margin-bottom: 12px;
     .MuiTypography-h4 {
       //   font-family: Roboto;
       font-size: 18px;
@@ -102,6 +103,7 @@
   }
   .media_content {
     height: 314px;
+    margin-bottom: 12px;
     img {
       object-fit: contain;
     }
@@ -109,7 +111,7 @@
   .css-1rwjz6-MuiCardActions-root {
     display: flow-root;
     flex-direction: column;
-    padding: 16px;
+    padding: 0px 16px 12px 16px;
     .reaction_section {
       margin-bottom: 8px;
       display: flex;
@@ -162,65 +164,51 @@
           background-color: $tertiaryBackground;
           min-width: 76px;
           padding: 7px 14px;
-          gap: 6px;
+          gap: 8px;
           border-radius: 100px;
           margin-right: 20px;
-          .upvote_area {
+          .vote_area {
             display: flex;
             align-items: center;
             position: relative;
-
-            &::after {
-              content: "";
-              position: absolute;
-              right: 0px;
-              top: 0px;
-              width: 1px;
-              height: 20px;
-              background-color: $icons;
-            }
-            .upvote_icon {
-              width: 22px;
-              height: 20px;
-              // margin-right: 9px;
-              &.unselected {
-                transform: rotateX(180deg);
+            &.dashed {
+              padding-right: 8px;
+              &::after {
+                content: "";
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                width: 1px;
+                height: 20px;
+                background-color: $icons;
               }
             }
-            .upvote_num {
-              padding: 0 6px;
-              .MuiTypography-root {
-                // font-family: Roboto;
-                font-size: 12px;
-                font-weight: 700;
-                line-height: 20px;
-              }
-            }
-          }
-          .downvote_area {
-            display: flex;
-            align-items: center;
-
-            .downvote_icon {
+            .vote_icon {
               width: 20px;
               height: 20px;
-              margin-left: 10px;
               img {
                 object-fit: contain;
               }
-
+              &.unselected {
+                transform: rotateX(180deg);
+              }
               &.selected {
                 transform: rotateX(180deg);
                 align-items: center;
               }
             }
-            .downvote_num {
+            .vote_num {
               .MuiTypography-root {
                 // font-family: Roboto;
                 font-size: 12px;
                 font-weight: 700;
                 line-height: 20px;
                 padding-left: 10px;
+              }
+              &.selected {
+                .MuiTypography-root {
+                  color: $secondaryBlue_color;
+                }
               }
             }
           }
@@ -249,7 +237,6 @@
           }
         }
       }
-
       .right_side_icon {
         float: right;
         display: flex;

@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
@@ -21,6 +20,7 @@ import Voted from "../../../public/images/select.png"
 import Comment from "../../../public/images/comments.png"
 import Share from "../../../public/images/share.png"
 import Options from "../../../public/images/threedots.png"
+import Comments from './comments';
 
 
 
@@ -42,6 +42,14 @@ export const Posts = () => {
     const [commentCount, setCommentCount] = useState('');
     const [upvoted, setUpvoted] = useState(false);
     const [downvoted, setDownvoted] = useState(false);
+    const [follow, setFollow] = useState(false);
+
+    const handleFollowing = () => {
+        if (follow) {
+            setFollow(false)
+        }
+        else setFollow(true)
+    }
 
     const handleUpvote = () => {
         if (upvoted) {
@@ -60,7 +68,7 @@ export const Posts = () => {
     const handleDownvote = () => {
         if (downvoted) {
             setDownvoteCount(downvoteCount - 1);
-            setDownvoted(false);
+            setDownvoted(false); //true for continuous voting
         } else {
             setDownvoteCount(downvoteCount + 1);
             setDownvoted(true);
@@ -105,7 +113,7 @@ export const Posts = () => {
     }));
 
     return (
-        <div className="post_section">
+        <div className="postshow_section">
             <Card>
                 <div className='cardHeader'>
                     <div className='avatar_area'>
@@ -123,8 +131,10 @@ export const Posts = () => {
                             <div className='title_text'>
                                 <Typography>Pablo Graces</Typography>
                             </div>
-                            <div className='btn_text'>
-                                <Typography>Follow</Typography>
+                            <div className='btn_text' >
+                                <Typography onClick={handleFollowing} >
+                                    {follow ? "Following" : "Follow"}
+                                </Typography>
                             </div>
                         </div>
                         <div className='subtext_area'>
@@ -170,22 +180,19 @@ export const Posts = () => {
                     <div className="footer_area">
                         <div className="left_side_icon">
                             <div className='vote_icons'>
-                                <div className='upvote_area'>
-                                    <div className={`upvote_icon ${!upvoted ? "unselected" : ""}`} onClick={handleUpvote}>
+                                <div className='vote_area dashed'>
+                                    <div className={`vote_icon ${!upvoted ? "unselected" : ""}`} onClick={handleUpvote}>
                                         <Image src={upvoted ? Voted : NotVoted} alt='upvote' />
-
                                     </div>
-                                    <div className={`${upvoted ? 'upvote_num' : ""}`} >
-
+                                    <div className={`vote_num ${upvoted ? "selected" : ""}`} >
                                         <Typography>{upvoteCount}</Typography>
                                     </div>
                                 </div>
-                                <div className='downvote_area'>
-
-                                    <div className={`downvote_icon ${downvoted ? "selected" : ""}`} onClick={handleDownvote}>
+                                <div className='vote_area'>
+                                    <div className={`vote_icon ${downvoted ? "selected" : ""}`} onClick={handleDownvote}>
                                         <Image src={downvoted ? Voted : NotVoted} alt='upvote' />
                                     </div>
-                                    <div className='downvote_num' >
+                                    <div className={`vote_num ${downvoted ? "selected" : ""}`}>
                                         <Typography>{downvoteCount}</Typography>
                                     </div>
                                 </div>
@@ -215,40 +222,14 @@ export const Posts = () => {
                             </div>
                         </div>
                     </div>
-                </CardActions>
+                </CardActions >
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>Method:</Typography>
-                        <Typography paragraph>
-                            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-                            aside for 10 minutes.
-                        </Typography>
-                        <Typography paragraph>
-                            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-                            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-                            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-                            large plate and set aside, leaving chicken and chorizo in the pan. Add
-                            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-                            stirring often until thickened and fragrant, about 10 minutes. Add
-                            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-                        </Typography>
-                        <Typography paragraph>
-                            Add rice and stir very gently to distribute. Top with artichokes and
-                            peppers, and cook without stirring, until most of the liquid is absorbed,
-                            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-                            mussels, tucking them down into the rice, and cook again without
-                            stirring, until mussels have opened and rice is just tender, 5 to 7
-                            minutes more. (Discard any mussels that don&apos;t open.)
-                        </Typography>
-                        <Typography>
-                            Set aside off of the heat to let rest for 10 minutes, and then serve.
-                        </Typography>
+                        <Comments />
                     </CardContent>
                 </Collapse>
             </Card >
-        </div >
-
-
-
+        </div>
     )
 }
+

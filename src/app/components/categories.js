@@ -28,14 +28,10 @@ const Categories = ({ open, handleClose, preferences }) => {
         handleClose();
     };
 
-    // const [open, setOpen] = useState(true);
-    // const handleOpen = () => setOpen(true);
-    // const handleClose = () => setOpen(false);
-
-    const router = useRouter()
-    const handleModal = () => {
-        router.push('/dashboard/explore')
-    }
+    // const router = useRouter()
+    // const handleModal = () => {
+    //     router.push('/dashboard/explore')
+    // }
 
     const [selectedTags, setSelectedTags] = useState([]);
 
@@ -46,10 +42,9 @@ const Categories = ({ open, handleClose, preferences }) => {
                 : [...prevSelectedTags, tag]
         );
     };
-    const tags = ["Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics"];
+    const tags = ["Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics", "Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics", "Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics", "Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics"];
 
     return (
-        // <div className="categories_section">
         <Modal
             open={open}
             onClose={handleClose}
@@ -76,9 +71,8 @@ const Categories = ({ open, handleClose, preferences }) => {
                     </div>
                 </div>
             </div>
-
         </Modal >
-        // </div>
+
     )
 }
 export default Categories

@@ -9,7 +9,7 @@ import Diversity3Icon from '@mui/icons-material/Diversity3';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 
 const DropSelect = () => {
- 
+
 
   const [selectedOption, setSelectedOption] = useState("Public");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -60,9 +60,9 @@ export default function MakeAPost() {
         </div>
         <DropSelect />
       </div>
-      <div className="makepost_detail">
-        <div className="makepost_title">
-          <TextField
+
+      <div className="ques_section">
+        {/* <TextField
             required
             id="standard-required"
             label="Title"
@@ -73,8 +73,23 @@ export default function MakeAPost() {
             required
             id="standard-required"
             label="Description"
-            placeholder="Start your question with “What”, “How”, “Why”, etc."
             variant="standard"
+            multiline
+          /> */}
+        <div className="ques_area">
+          <InputLabel htmlFor="standard-description" required>Title</InputLabel>
+          <Input
+            id="standard-multiline-flexible"
+            placeholder="Start your question with “What”, “How”, “Why”, etc."
+          />
+        </div>
+        <div className="ques_area">
+          <InputLabel htmlFor="standard-description" required>Description</InputLabel>
+          <Input
+            id="standard-multiline-flexible"
+            placeholder="Start your question with “What”, “How”, “Why”, etc."
+            // rows={6}
+            multiline
           />
         </div>
       </div>

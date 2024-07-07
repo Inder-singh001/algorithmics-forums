@@ -1,10 +1,10 @@
 import Navbar from "../../../components/navbar";
 import Sidebar from "../../../components/sidebar";
 import "../../../../../public/sass/dashboard/explore.scss";
-import { Posts } from "@/app/components/post";
+import ProfileEdit from "@/app/components/profileEdit";
 import RightCard from "@/app/components/rightcard";
-import MakeAPost from "@/app/components/makepost";
-const Dashboard = () => {
+
+const Profile = () => {
     return (
         <div className="dashboard_section explore_section">
             <Navbar fixed="top" />
@@ -13,12 +13,17 @@ const Dashboard = () => {
                 <div className="left_section">
                     <Sidebar />
                 </div>
-                <div className="right_section post_section">
-                    <MakeAPost />
+                <div className="right_section">
+                    <div className="explore_area">
+                        <ProfileEdit />
+                    </div>
+                    <div className="suggestion_area">
+                        <RightCard />
+                    </div>
                 </div>
 
             </div>
         </div>
     );
 };
-export default Dashboard;
+export default Profile;

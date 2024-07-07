@@ -17,8 +17,11 @@
         float: right;
 
         .explore_area {
-          height: 100vh;
-          overflow-y: scroll;
+          width: 100%;
+          // &.scrollable {
+          //   height: 100vh;
+          //   overflow-y: scroll;
+          // }
         }
         .suggestion_area {
           float: right;
@@ -172,6 +175,10 @@
           width: 100%;
           padding: 20px 18px 0px 18px;
           gap: 0px;
+          
+          &.post_section{
+            padding: 14px 12px 0px 12px;    
+          }
         }
       }
     }

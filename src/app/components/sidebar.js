@@ -4,36 +4,37 @@ import "../../../public/sass/dashboard/dashboard.scss";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 
 const Sidebar = () => {
-
+  const pathname = usePathname();
   const router = useRouter();
-  const [activeState, setActiveState] = useState(null)
+  const [activeState, setActiveState] = useState(0)
 
 
   const SideList = [
     {
       icon: <DashboardIcon />,
       title: "Dashboard",
-      route: "/dashboard/explore",
-      },
-      {
+      href: "/dashboard/explore",
+    },
+    {
       icon: <AddCircleIcon />,
       title: "Make a Post",
-      route: "/dashboard/add-a-post",
+      href: "/add-a-post",
     },
     {
       icon: <AccountCircleIcon />,
       title: "Profile",
-      route: "/dashboard/profile",
+      href: "/profile",
     },
   ]
 
-  const handleNavigation = (index, route) => {
+  const handleNavigation = (index, href) => {
     setActiveState(index)
-    router.push(route)
+    router.push(href)
   }
 
   return (
@@ -44,14 +45,16 @@ const Sidebar = () => {
         </div>
         <ul className="options">
           {SideList.map((item, index) => (
-            <li key={index} onClick={() => handleNavigation(index, item.route)}
-              className={activeState === index ? "active" : ""} >
-              <div className="icon_area">
-                {item.icon}
-              </div>
-              <div className="text_area">
-                <Typography>{item.title}</Typography>
-              </div>
+            <li key={index}
+              className={pathname === `${item.href}` ? "active" : ""} >
+              <Link href={item.href}>
+                <div className="icon_area">
+                  {item.icon}
+                </div>
+                <div className="text_area">
+                  <Typography>{item.title}</Typography>
+                </div>
+              </Link>
             </li>
           ))}
         </ul>

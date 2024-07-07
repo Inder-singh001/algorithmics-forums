@@ -10,7 +10,7 @@
         max-width: 100%;
         padding: 20px;
         border-right: 1px solid $navbarBorder;
-        height: 100%;
+        height: 100vh;
         .sidebar {
           .sidebar_text {
             margin-bottom: 30px;
@@ -26,15 +26,15 @@
             li {
               width: 100%;
               padding: 15px;
-              display: flex;
-              gap: 20px;
               border-radius: 14px;
+              a {
+                gap: 20px;
+                display: flex;
+              }
               &.active {
                 transform: scale(1.1);
                 background-color: $white;
-                color: $tagSelected;
                 box-shadow: 0px 2px 5px 0px #26334d08;
-
                 .icon_area {
                   color: $primaryBlue_color;
                 }
@@ -58,21 +58,21 @@
                   color: $primarySubtext;
                 }
               }
-              &:hover {
-                transform: scale(1.1);
-                background-color: $white;
-                color: $tagSelected;
-                box-shadow: 0px 2px 5px 0px #26334d08;
+              // &:hover {
+              //   transform: scale(1.1);
+              //   background-color: $white;
+              //   color: $secondaryBlue_color;
+              //   box-shadow: 0px 2px 5px 0px #26334d08;
 
-                .icon_area {
-                  color: $primaryBlue_color;
-                }
-                .text_area {
-                  .MuiTypography-root {
-                    color: $primaryBlue_color;
-                  }
-                }
-              }
+              //   .icon_area {
+              //     color: $primaryBlue_color;
+              //   }
+              //   .text_area {
+              //     .MuiTypography-root {
+              //       color: $primaryBlue_color;
+              //     }
+              //   }
+              // }
             }
           }
         }
@@ -108,7 +108,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .dashboard_section {
     .left_section {
       display: none;

@@ -107,31 +107,32 @@
     }
   }
 
-  .makepost_detail {
-    .makepost_title {
-      margin-bottom: 13px;
-      .MuiFormControl-root {
-        width: 100%;
-        margin-bottom: 12px;
-      }
-      .Mui-focused {
-        color: $primarySubtext;
-      }
-      .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
+  .ques_section {
+    margin-bottom: 21px;
+    .ques_area {
+      margin-bottom: 12px;
+      .MuiFormLabel-root {
         // font-family: Roboto;
         font-size: 12px;
         font-weight: 700;
         line-height: 20px;
+        color: $secondarytext;
       }
-      .css-1x51dt5-MuiInputBase-input-MuiInput-input {
+      .MuiInputBase-root {
+        width: 100%;
+        &::before {
+          border-bottom: 1px solid $icons;
+        }
+        &::after {
+          border-bottom: 2px solid $secondarytext;
+        }
+      }
+      .MuiInputBase-input {
+        color: $descriptionText;
         // font-family: Roboto;
         font-size: 13px;
         font-weight: 600;
         line-height: 25px;
-        height: 33px;
-        &::after {
-          border-bottom: 2px solid $primarySubtext;
-        }
       }
     }
   }
@@ -220,9 +221,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin-bottom: 60px;
-
     .css-sghohy-MuiButtonBase-root-MuiButton-root {
       background-color: $primaryBlue_color;
       padding: 14px 0px;
@@ -236,6 +235,30 @@
       &:hover {
         background-color: $tertiaryBlue_color;
         transition: all 0.3s ease;
+      }
+    }
+  }
+}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 361px) and (max-width: 575px) {
+  .outer_container {
+    padding: 12px;
+    .submit_button {
+      .css-sghohy-MuiButtonBase-root-MuiButton-root {
+        min-width: 300px;
+      }
+    }
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 360px) {
+  .outer_container {
+    padding: 12px;
+    .submit_button {
+      .css-sghohy-MuiButtonBase-root-MuiButton-root {
+        min-width: 300px;
       }
     }
   }

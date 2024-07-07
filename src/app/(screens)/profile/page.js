@@ -1,9 +1,11 @@
-import Navbar from "../../../components/navbar";
-import Sidebar from "../../../components/sidebar";
-import "../../../../../public/sass/dashboard/explore.scss";
+import Navbar from "../../components/navbar";
+import Sidebar from "../../components/sidebar";
+import "../../../../public/sass/dashboard/explore.scss";
 import ProfileEdit from "@/app/components/profileEdit";
 import RightCard from "@/app/components/rightcard";
-const Dashboard = () => {
+import { ProfileView } from "@/app/components/profile";
+
+const Profile = () => {
     return (
         <div className="dashboard_section explore_section">
             <Navbar fixed="top" />
@@ -14,7 +16,7 @@ const Dashboard = () => {
                 </div>
                 <div className="right_section">
                     <div className="explore_area">
-                        <ProfileEdit />
+                        <ProfileView />
                     </div>
                     <div className="suggestion_area">
                         <RightCard />
@@ -25,4 +27,4 @@ const Dashboard = () => {
         </div>
     );
 };
-export default Dashboard;
+export default Profile;

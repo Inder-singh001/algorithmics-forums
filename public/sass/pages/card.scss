@@ -7,7 +7,6 @@
   .carder {
     border: 1px solid $tagsBorder;
     box-shadow: 0px 1px 1px 0px #0000000a;
-    max-width: 100%;
     width: 400px;
     border-radius: 6px;
     background-color: $white;
@@ -43,7 +42,7 @@
         .des_top {
           display: flex;
           align-items: center;
-          .icon_area{
+          .icon_area {
             padding-right: 6px;
           }
           .MuiTypography-root {
@@ -73,4 +72,63 @@
       box-shadow: 1px 1px 1px 1px #0000000a;
     }
   }
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1920px) {
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1680px) and (max-width: 1919px) {
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1600px) and (max-width: 1679px) {
+}
+
+/* Extra large desktops and mac laptops*/
+@media (min-width: 1400px) and (max-width: 1599px) {
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 991.5px) and (max-width: 1199px) {
+  .inner_parent{
+    .carder{
+      width: 350px;
+    }
+  }
+}
+
+/* Landscape tablets and ipad */
+@media (min-width: 768px) and (max-width: 991px) {
+  .inner_parent{
+    .carder{
+      max-width: 220px;
+    }
+  }
+}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 576px) and (max-width: 767px) {
+  .inner_parent {
+    display: none;
+  }
+}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 361px) and (max-width: 575px) {
+  .inner_parent {
+    display: none;
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 360px) {
+  .inner_parent {
+    display: none;
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 320px) {
 }

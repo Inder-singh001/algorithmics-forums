@@ -129,7 +129,7 @@ const SignUp = () => {
                                                         onMouseDown={handleMouseDownPassword}
                                                         edge="end"
                                                     >
-                                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        {!showPassword ? <VisibilityOff /> : <Visibility />}
                                                     </IconButton>
                                                 </InputAdornment>
                                             )
@@ -157,7 +157,7 @@ const SignUp = () => {
                                                         onMouseDown={handleMouseDownPassword}
                                                         edge="end"
                                                     >
-                                                        {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                                        {!showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                                                     </IconButton>
                                                 </InputAdornment>
                                             )
