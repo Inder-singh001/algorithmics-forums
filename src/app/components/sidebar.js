@@ -4,15 +4,11 @@ import "../../../public/sass/dashboard/dashboard.scss";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Typography } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname} from "next/navigation";
 import Link from "next/link";
 
 const Sidebar = () => {
   const pathname = usePathname();
-  const router = useRouter();
-  const [activeState, setActiveState] = useState(0)
-
 
   const SideList = [
     {
@@ -31,11 +27,6 @@ const Sidebar = () => {
       href: "/profile",
     },
   ]
-
-  const handleNavigation = (index, href) => {
-    setActiveState(index)
-    router.push(href)
-  }
 
   return (
     <div className="inner_parent">

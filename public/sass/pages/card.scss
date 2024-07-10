@@ -92,17 +92,17 @@
 
 /* Landscape tablets and medium desktops */
 @media (min-width: 991.5px) and (max-width: 1199px) {
-  .inner_parent{
-    .carder{
-      width: 350px;
+  .inner_parent {
+    .carder {
+      width: 250px;
     }
   }
 }
 
 /* Landscape tablets and ipad */
 @media (min-width: 768px) and (max-width: 991px) {
-  .inner_parent{
-    .carder{
+  .inner_parent {
+    .carder {
       max-width: 220px;
     }
   }

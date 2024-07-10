@@ -9,18 +9,11 @@
     margin-bottom: 22px;
 
     .details_section {
+      gap: 26px;
       margin-bottom: 20px;
       display: flex;
-      .MuiGrid-root {
-        // gap: 26px;
-        .css-lovfmn-MuiGrid-root {
-          max-width: 178px;
-        }
-        .MuiGrid-grid-xl-1 {
-          max-width: 24px;
-          padding-left: 0px;
-        }
-      }
+      width: calc(100% - 24px);
+      float: left;
       .image_section {
         width: 162px;
         height: 162px;
@@ -29,6 +22,7 @@
         }
       }
       .name_section {
+        padding-top: 4px;
         .name_area {
           margin-bottom: 16px;
           .MuiTypography-root {
@@ -97,18 +91,20 @@
           }
         }
       }
-      .edit_btn {
-        text-align: end;
-        .MuiTypography-root {
-          // font-family: Roboto;
-          font-size: 13px;
-          font-weight: 900;
-          line-height: 25px;
-          color: $primaryBlue_color;
-          @extend %bottom-Line_animation;
-          &::after {
-            bottom: 2px;
-          }
+    }
+    .edit_btn {
+      width: 24px;
+      float: right;
+      text-align: end;
+      .MuiTypography-root {
+        // font-family: Roboto;
+        font-size: 13px;
+        font-weight: 900;
+        line-height: 25px;
+        color: $primaryBlue_color;
+        @extend %bottom-Line_animation;
+        &::after {
+          bottom: 2px;
         }
       }
     }
@@ -134,15 +130,21 @@
   .userview_section {
     .tab_section {
       margin-bottom: 24px;
+      max-width: 100%;
       .MuiButtonBase-root {
-        margin-right: 24px;
+        // margin-right: 24px;
         // font-family: Roboto;
         font-size: 13px;
         font-weight: 900;
         line-height: 25px;
         color: $primarySubtext;
-        padding: 0px;
+        // padding: 0px;
       }
+
+      // .css-145v6pe-MuiButtonBase-root-MuiTabScrollButton-root {
+      //   opacity: 0;
+      //   width: 0px;
+      // }
       .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
         color: $secondaryBlue_color;
       }
@@ -154,4 +156,105 @@
       }
     }
   }
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1920px) {
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1680px) and (max-width: 1919px) {
+}
+
+/* Extra Huge large desktops */
+@media (min-width: 1600px) and (max-width: 1679px) {
+}
+
+/* Extra large desktops and mac laptops*/
+@media (min-width: 1400px) and (max-width: 1599px) {
+}
+
+/* Extra large desktops and mac laptops*/
+@media (min-width: 1300px) and (max-width: 1399px) {
+}
+
+/* Extra large desktops and mac laptops*/
+@media (min-width: 1200px) and (max-width: 1299px) {
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .profileview_section {
+    .userview_section {
+      .tab_section {
+        .MuiTabs-scroller {
+          max-width: 500px;
+        }
+      }
+    }
+  }
+}
+
+/* Landscape tablets and ipad */
+@media (min-width: 768px) and (max-width: 991px) {
+  .profileview_section {
+    .profile_header {
+      .details_section {
+        display: block;
+        .image_section {
+          margin-bottom: 12px;
+        }
+      }
+    }
+    .userview_section {
+      .tab_section {
+        min-width: 470px;
+        .MuiTabs-root {
+        }
+      }
+    }
+  }
+}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 576px) and (max-width: 767px) {
+  .profileview_section {
+    .userview_section {
+      .tab_section {
+        // max-width: 536px;
+      }
+    }
+  }
+}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 361px) and (max-width: 575px) {
+  .profileview_section {
+    .profile_header {
+      .details_section {
+        display: block;
+        .image_section {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 360px) {
+  .profileview_section {
+    .profile_header {
+      .details_section {
+        display: block;
+        .image_section {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 320px) {
 }
