@@ -11,27 +11,24 @@ const FeatuerdPosts = () => {
   return (
     <div className="featured_posts">
       <div className="post_header">
-        <div className="header-icon">
+        <div className="header_icon">
           <Image src={OptBadge} alt="user_icon" />
         </div>
         <div className="header_title">
           <Typography variant="h6">Our Featuerd Posts</Typography>
         </div>
       </div>
-      <div className="post_content">
+       <div className="post_content">
         <div className="post_icon">
           <Image src={CellIcon} alt="user_icon" />
         </div>
         <div className="content">
           <div className="post_title">
-            <Typography variant="h6">Explore Blog</Typography>
+            <Typography>Explore Blog</Typography>
           </div>
           <div className="post_inner_content">
             <div className="post_followers">
-              <Typography variant="body2">54.4K followers</Typography>
-            </div>
-            <div className="post_months">
-              <Typography variant="body2">3 posts in the last month</Typography>
+              <Typography variant="body2">54.4K followers . 3 posts in the last month</Typography>
             </div>
           </div>
           <div className="post_body">
@@ -47,7 +44,7 @@ const FeatuerdPosts = () => {
           </IconButton>
         </div>
       </div>
-      <div className="post_content">
+     <div className="post_content">
         <div className="post_icon">
           <Image src={ReplaceIcon} alt="user_icon" />
         </div>
@@ -67,7 +64,7 @@ const FeatuerdPosts = () => {
           </IconButton>
         </div>
       </div>
-      <div className="post_content">
+      {/* <div className="post_content">
         <div className="post_icon">
           <Image src={ReplaceIcon} alt="user_icon" />
         </div>
@@ -126,7 +123,7 @@ const FeatuerdPosts = () => {
             <CloseIcon />
           </IconButton>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

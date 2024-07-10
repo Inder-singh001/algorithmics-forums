@@ -1,69 +1,94 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import EditIcon from "@mui/icons-material/Edit";
-import { Avatar, InputBase, InputLabel, TextField } from "@mui/material";
-import "../../../public/sass/pages/profile.scss";
+import { InputLabel, Input, InputAdornment, IconButton, Typography } from "@mui/material";
+import "../../../public/sass/pages/profileEdit.scss";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import AvatarPic from "../../../public/images/profile_pic.png"
 
 export default function ProfileEdit() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
+  const handleSaveChanges = () => {
+    router.push('/profile')
+  }
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   return (
-    <div className="outer_container">
-      <div className="upper_area">
-        <div className="save_changes">
-          <Link href="Javascript:;">Save Changes</Link>
+    <div className="edit_section">
+      <div className="head_section">
+        <div className="avatar_section">
+          <Image src={AvatarPic} alt="Remy Sharp" />
+          <EditIcon />
         </div>
-        <div className="profile_picture">
-          <Avatar
-            alt="Remy Sharp"
-            src="/images/profile.jpg"
-            sx={{ width: 162, height: 162 }}
-          />
-
-          <div className="profile_picture_edit">
-            <Link href="Javascript:;">
-              <EditIcon />
-            </Link>
-          </div>
+        <div className="btn_section" onClick={handleSaveChanges}>
+          <Typography>Save Changes</Typography>
         </div>
       </div>
-      <div className="lower_area">
-        <div className="name_box">
-          <InputLabel>Name</InputLabel>
-          <InputBase placeholder="Name" type="text" />
+      <div className="body_section">
+        <div className="text_section">
+          <InputLabel htmlFor="standard-name">Name</InputLabel>
+          <Input
+            id="standard-basic"
+            placeholder="Name"
+          />
         </div>
-        <div className="description_box">
-          <InputLabel>Description</InputLabel>
-          <TextField
-            placeholder="Lorem ipsum dolor sit amet consectetur. Aenean ornare facilisis potenti amet consectetur nibh. Venenatis ut sed faucibus vitae sed cras faucibus risus habitasse. Diam facilisi porttitor et congue. Id hendrerit massa nascetur vivamus orci dignissim amet odio"
-            type="text"
-            fullWidth
+        <div className="text_section">
+          <InputLabel htmlFor="standard-description">About</InputLabel>
+          <Input
+            id="standard-multiline-flexible"
+            placeholder="Write something about yourself!"
+            // rows={6}
             multiline
           />
         </div>
-        <div className="email_box">
-          <InputLabel>Email</InputLabel>
-          <InputBase placeholder="E-mail" />
+        <div className="text_section">
+          <InputLabel htmlFor="standard-email">Email</InputLabel>
+          <Input
+            id="standard-basic"
+            placeholder="Email"
+          />
         </div>
-        <div className="Password_box">
-          <InputLabel>Password</InputLabel>
-          {showPassword ? <InputBase placeholder="Password" /> : null}
-          <div className="show_password_button">
-            <Link
-              href="Javascript:;"
-              className="show_password"
-              onClick={toggleShowPassword}
-            >
-              Show Password
-            </Link>
+        <div className="text_section">
+          <div className="label_section">
+            <div className="pass_area">
+              <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+            </div><div className="change_pass_area">
+              <Link href="/auth/change-password">Change Password </Link>
+            </div>
           </div>
+          <Input
+            id="standard-adornment-password"
+            placeholder="Password"
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {!showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          // inputProps={{
+          //   'aria-label': 'weight',
+          // }}
+          />
         </div>
       </div>
     </div>
+
   );
 }

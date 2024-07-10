@@ -11,7 +11,7 @@ const RightCard = () => {
         {
             title: "Lorem ipsum dolor sit amet",
             icon: <Pages />,
-            content: "Your answers and postsYour answers and posts",
+            content: "Your answers and posts",
             description: "Lorem ipsum dolor sit amet consectetur. Turpis tortor"
         },
         {

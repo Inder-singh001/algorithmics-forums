@@ -1,14 +1,12 @@
 "use client";
 import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import Link from "next/link";;
 import PersonIcon from '@mui/icons-material/Person';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import "../../../public/sass/pages/navbar.scss";
 import { useState } from "react";
 import Image from "next/image";
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,7 +14,6 @@ import Logo from "../../../public/images/logo.png"
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -24,8 +21,16 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+
+  const router = useRouter();
+
+  const handleLogin = () => {
+    router.push('/auth/login');
+  }
+
   const [show, setShow] = useState(false);
 
 
@@ -69,7 +74,7 @@ export default function Navbar() {
     >
       <List>
         {NavList.map((text, index) => (
-          <ListItem key={index}  disablePadding>
+          <ListItem key={index} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 {text.icon}
@@ -145,7 +150,7 @@ export default function Navbar() {
 
 
             <div className="utilities_login_button">
-              <Button>Login</Button>
+              <Button onClick={handleLogin}>Login</Button>
             </div>
             <div
               className="responsive_menu_icon"

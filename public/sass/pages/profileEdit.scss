@@ -1,0 +1,166 @@
+@import "../base/variable.scss";
+@import "../helper/base.scss";
+// * {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+
+// }
+.edit_section {
+  margin: 16px 0px 0px 10px;
+  .head_section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 26px;
+    .avatar_section {
+      width: 162px;
+      height: 162px;
+      display: inline-block;
+      position: relative;
+      img {
+        border-radius: 50%;
+      }
+      .css-i4bv87-MuiSvgIcon-root {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 50%;
+        color: $white;
+        z-index: 1;
+      }
+      &:hover {
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #00000066;
+          border-radius: 50%;
+          z-index: 0;
+        }
+        .css-i4bv87-MuiSvgIcon-root {
+          opacity: 1;
+        }
+      }
+    }
+    .btn_section {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      .MuiTypography-root {
+        color: $primaryBlue_color;
+        // font-family: Roboto;
+        font-size: 13px;
+        font-weight: 900;
+        line-height: 25px;
+        @extend %bottom-Line_animation;
+        &::after {
+          bottom: 2px;
+        }
+      }
+    }
+  }
+  .body_section {
+    .text_section {
+      margin-bottom: 24px;
+      .MuiFormLabel-root {
+        // font-family: Roboto;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        color: $secondarytext;
+      }
+      .MuiInputBase-root {
+        width: 100%;
+        &::before {
+          border-bottom: 1px solid $icons;
+        }
+        &::after {
+          border-bottom: 2px solid $secondarytext;
+        }
+      }
+      .MuiInputBase-input {
+        color: $descriptionText;
+        // font-family: Roboto;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 22px;
+      }
+      .label_section {
+        display: flex;
+        .pass_area {
+          width: calc(100% - 50%);
+          .MuiInputBase-input {
+            float: left;
+          }
+        }
+        .change_pass_area {
+          width: 50%;
+          a {
+            float: right;
+            // font-family: Roboto;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 25px;
+            color: $primaryBlue_color;
+            @extend %bottom-Line_animation;
+            &::after {
+              bottom: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// /* Extra Huge large desktops */
+// @media (min-width: 1920px) {
+// }
+
+// /* Extra Huge large desktops */
+// @media (min-width: 1680px) and (max-width: 1919px) {
+// }
+
+// /* Extra Huge large desktops */
+// @media (min-width: 1600px) and (max-width: 1679px) {
+// }
+
+// /* Extra large desktops and mac laptops*/
+// @media (min-width: 1400px) and (max-width: 1599px) {
+// }
+
+// /* Landscape tablets and medium desktops */
+// @media (min-width: 991.5px) and (max-width: 1199px) {
+// }
+
+/* Landscape tablets and ipad */
+@media (min-width: 768px) and (max-width: 991px) {
+.edit_section{
+  margin: 4px 0px 0px 0px;
+}
+}
+
+
+// /* Landscape phones and portrait tablets */
+// @media (min-width: 576px) and (max-width: 767px) {
+// }
+
+// /* Landscape phones and portrait tablets */
+// @media (min-width: 361px) and (max-width: 575px) {
+// }
+
+// /* Smaller phones */
+// @media (max-width: 360px) {
+// }
+
+// /* Smaller phones */
+// @media (max-width: 320px) {
+// }

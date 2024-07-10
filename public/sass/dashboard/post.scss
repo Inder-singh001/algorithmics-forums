@@ -5,7 +5,6 @@
   font-size: 13px;
   font-weight: 700;
   line-height: 18.2px;
-  letter-spacing: -0.005em;
 }
 %username-subtext {
   // font-family: SF Pro Text;
@@ -15,7 +14,8 @@
   line-height: 20px;
 }
 
-.post_section {
+.postshow_section {
+  margin-bottom: 12px;
   .cardHeader {
     display: flex;
     padding: 16px;
@@ -84,6 +84,7 @@
     }
   }
   .post_content {
+    margin-bottom: 12px;
     .MuiTypography-h4 {
       //   font-family: Roboto;
       font-size: 18px;
@@ -100,10 +101,17 @@
       color: $postDescriptionText;
     }
   }
+  .media_content {
+    height: 314px;
+    margin-bottom: 12px;
+    img {
+      object-fit: contain;
+    }
+  }
   .css-1rwjz6-MuiCardActions-root {
     display: flow-root;
     flex-direction: column;
-    padding: 16px;
+    padding: 0px 16px 12px 16px;
     .reaction_section {
       margin-bottom: 8px;
       display: flex;
@@ -156,69 +164,58 @@
           background-color: $tertiaryBackground;
           min-width: 76px;
           padding: 7px 14px;
-          gap: 6px;
+          gap: 8px;
           border-radius: 100px;
           margin-right: 20px;
-          .upvote_area {
+          .vote_area {
             display: flex;
             align-items: center;
-
-            .upvote_icon {
-              width: 18px;
-              height: 16px;
-              margin-right: 9px;
-              &.unselected {
-                transform: rotate(180deg);
-              }
-            }
-            .upvote_num {
-              padding: 0 6px;
-              .MuiTypography-root {
-                // font-family: Roboto;
-                font-size: 12px;
-                font-weight: 700;
-                line-height: 20px;
-              }
-            }
-          }
-          .downvote_area {
-            display: flex;
-            align-items: center;
-
-            .downvote_icon {
-              position: relative;
-              width: 18px;
-              height: 16px;
-              padding-left: 9px;
-              margin-right: 9px;
-
-              &::before {
+            position: relative;
+            &.dashed {
+              padding-right: 8px;
+              &::after {
                 content: "";
                 position: absolute;
-                left: 0px;
+                right: 0px;
                 top: 0px;
                 width: 1px;
                 height: 20px;
                 background-color: $icons;
               }
+            }
+            .vote_icon {
+              width: 20px;
+              height: 20px;
+              img {
+                object-fit: contain;
+              }
+              &.unselected {
+                transform: rotateX(180deg);
+              }
               &.selected {
-                transform: rotate(180deg);
+                transform: rotateX(180deg);
+                align-items: center;
               }
             }
-            .downvote_num {
-              padding-left: 16px;
+            .vote_num {
               .MuiTypography-root {
                 // font-family: Roboto;
                 font-size: 12px;
                 font-weight: 700;
                 line-height: 20px;
+                padding-left: 10px;
+              }
+              &.selected {
+                .MuiTypography-root {
+                  color: $secondaryBlue_color;
+                }
               }
             }
           }
         }
         .inApp_share_icon {
           margin-right: 20px;
-          text-align: center;
+          align-self: flex-end;
           .css-i4bv87-MuiSvgIcon-root {
             color: $icons;
             transform: rotate(90deg);
@@ -226,6 +223,8 @@
         }
         .comment_icon {
           .css-9zmlxc-MuiButtonBase-root-MuiIconButton-root {
+            width: 16px;
+            height: 16px;
             padding: 0px;
             .MuiTypography-root {
               // font-family: Roboto;
@@ -238,13 +237,12 @@
           }
         }
       }
-
       .right_side_icon {
         float: right;
         display: flex;
         align-items: center;
         .external_share_icon {
-          width: 16px;
+          width: 20px;
           height: 18px;
           margin-right: 30px;
         }
@@ -252,7 +250,7 @@
           position: relative;
           width: 18px;
           height: 4px;
-          img{
+          img {
             position: absolute;
           }
         }
