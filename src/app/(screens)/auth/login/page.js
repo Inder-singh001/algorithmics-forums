@@ -18,7 +18,7 @@ import Link from "next/link";
 
 
 const Login = () => {
-   
+
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -35,68 +35,69 @@ const Login = () => {
                 <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                         <div className="auth_area">
-                            <div className="logo_section">
-                                <Image src={Logo} alt="Logo" />
+                            <div className="left_section">
+                                <div className="logo_section">
+                                    <Image src={Logo} alt="Logo" />
+                                </div>
+                                <div className="left_Form">
+                                    <div className="form_text">
+                                        <Typography variant="h4">Login</Typography>
+                                        <Typography variant="h6">If you don't have a registered account. You can
+                                            <Link href="/auth/sign-up">Register here !</Link>
+                                        </Typography>
+                                    </div>
+                                    <div className="form_area">
+                                        <TextField
+                                            id="input-with-icon-textfield"
+                                            label="Email"
+                                            placeholder="Enter your email address"
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <EmailOutlinedIcon />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                            variant="standard"
+                                        />
+                                    </div>
+                                    <div className="form_area">
+                                        <TextField
+                                            id="input-with-icon-textfield"
+                                            label="Password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            placeholder="Enter your Password"
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <LockOutlinedIcon />
+                                                    </InputAdornment>
+                                                ),
+                                                endAdornment: (
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {!showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            variant="standard"
+                                        />
+                                    </div>
+                                    <div className="forget_passSection">
+                                        <FormControlLabel control={<Checkbox />} label="Remember me" />
+                                        <Link href="/auth/change-password" >Forget password ?</Link>
+                                    </div>
+                                    <div className="btn_area">
+                                        <Button variant="contained">Login</Button>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="left_Form">
-                                <div className="form_text">
-                                    <Typography variant="h4">Login</Typography>
-                                    <Typography variant="h6">If you don't have a registered account. You can
-                                        <Link href="/auth/sign-up">Register here !</Link>
-                                    </Typography>
-                                </div>
-                                <div className="form_area">
-                                    <TextField
-                                        id="input-with-icon-textfield"
-                                        label="Email"
-                                        placeholder="Enter your email address"
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <EmailOutlinedIcon />
-                                                </InputAdornment>
-                                            ),
-                                        }}
-                                        variant="standard"
-                                    />
-                                </div>
-                                <div className="form_area">
-                                    <TextField
-                                        id="input-with-icon-textfield"
-                                        label="Password"
-                                        type={showPassword ? 'text' : 'password'}
-                                        placeholder="Enter your Password"
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <LockOutlinedIcon />
-                                                </InputAdornment>
-                                            ),
-                                            endAdornment: (
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowPassword}
-                                                        onMouseDown={handleMouseDownPassword}
-                                                        edge="end"
-                                                    >
-                                                        {!showPassword ? <VisibilityOff /> : <Visibility />}
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        variant="standard"
-                                    />
-                                </div>
-                                <div className="forget_passSection">
-                                    <FormControlLabel control={<Checkbox />} label="Remember me" />
-                                    <Link href="/auth/change-password" >Forget password ?</Link>
-                                </div>
-                                <div className="btn_area">
-                                    <Button variant="contained">Login</Button>
-                                </div>
-                            </div>
-
                             <div className="right_Frame">
                                 <div className="graphic_area">
                                     <Image src={Graphic} priority={true} alt="Graphic"></Image>
