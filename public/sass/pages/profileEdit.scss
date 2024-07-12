@@ -54,15 +54,31 @@
       position: absolute;
       top: 0px;
       right: 0px;
-      .MuiTypography-root {
+      // .MuiTypography-root {
+      //   color: $primaryBlue_color;
+      //   // font-family: Roboto;
+      //   font-size: 13px;
+      //   font-weight: 900;
+      //   line-height: 25px;
+      //   @extend %bottom-Line_animation;
+      //   &::after {
+      //     bottom: 2px;
+      //   }
+      // }
+      .MuiButtonBase-root  {
         color: $primaryBlue_color;
         // font-family: Roboto;
         font-size: 13px;
         font-weight: 900;
         line-height: 25px;
+        text-transform: none;
+        
         @extend %bottom-Line_animation;
         &::after {
           bottom: 2px;
+        } 
+        .MuiTouchRipple-root{
+          display: none;
         }
       }
     }
