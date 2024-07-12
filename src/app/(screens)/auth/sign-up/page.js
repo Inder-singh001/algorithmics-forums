@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Grid, Typography, TextField } from "@mui/material";
 import InputAdornment from '@mui/material/InputAdornment';
 import Image from "next/image";
@@ -17,6 +17,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { validatorMake, foreach, postApi } from '../../../../helpers/General'
 import { toast } from "react-toastify";
+import { setToken, tokenName } from "@/dataCenter/LocalStorage";
+
 
 
 const SignUp = () => {
@@ -79,15 +81,12 @@ const SignUp = () => {
 
 
         if (!validationRules.fails()) {
-            console.log(formData, "formData")
             let resp = await postApi('/user/sign-up', formData)
-
             if (resp.status) {
-                let set = localStorage.setItem('userEmail', formData.email); //save to localStorgae
                 toast.success(resp.message)
                 setFormData(defaultValue);
+                setToken(tokenName.OTP_TOKEN, resp.data.token)
                 router.push('/auth/otp-verification')
-                console.log(set)
             }
             else {
                 if (typeof resp.message == 'object') {
@@ -97,7 +96,6 @@ const SignUp = () => {
                     toast.error(resp.message)
                 }
             }
-            console.log(resp, "resp")
         }
         else {
             handleErrors(validationRules.errors.errors)

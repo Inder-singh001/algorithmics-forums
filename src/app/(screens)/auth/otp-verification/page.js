@@ -10,50 +10,35 @@ import { useRouter } from "next/navigation";
 import OtpInput from 'react-otp-input';
 import { validatorMake, postApi, getData, getmail } from '../../../../helpers/General'
 import { toast } from "react-toastify";
-
+import { getToken, tokenName, setToken } from "@/dataCenter/LocalStorage";
 
 
 const OTPverify = () => {
-    useEffect(() => {
-        const getToken = async () => {
-            let token = await getData(getmail);
-            console.log(token.token)
-            if (token) {
-                setToken(token.token)
-            }
-        }
-        getToken()
-    }, [])
 
     const router = useRouter();
     const [otp, setOtp] = useState('');
-    const [token, setToken] = useState('');
-    let [errors, setErrors] = useState({ otp, token })
-
-    const getToken = async () => {
-        let token = await getData(getmail);
-        console.log(token.token)
-        if (token) {
-            setToken(token.token)
-        }
-    }
+    let [errors, setErrors] = useState({ otp, token: "" })
 
     const handleOTPRequest = async (e) => {
         e.preventDefault()
-        let validationRules = await validatorMake(otp, {
-            "token": "reqired",
-            "otp": "reqired",
+        let token = getToken(tokenName.OTP_TOKEN)
 
+        let formData = {
+            otp,
+            token
+        }
+        console.log(formData, "formData")
+        let validationRules = await validatorMake(formData, {
+            "token": "required",
+            "otp": "required",
         })
 
         if (!validationRules.fails()) {
-            console.log({ otp, token }, "otp")
-            let resp = await postApi('/user/verify-otp', { otp, token })
-
+            let resp = await postApi('/user/verify-otp', formData)
             if (resp.status) {
                 toast.success(resp.message)
-                setOtp(otp);
-                setToken(token)
+                setOtp("");
+                setToken(tokenName.OTP_TOKEN, null)
                 router.push('/auth/login')
             }
             else {
@@ -74,7 +59,6 @@ const OTPverify = () => {
 
     const handleOTPChange = (otp) => {
         setOtp(otp)
-
         setErrors((prevData) => {
             return {
                 ...prevData,
