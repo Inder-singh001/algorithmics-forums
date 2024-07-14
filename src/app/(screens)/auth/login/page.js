@@ -1,102 +1,112 @@
-"use client";
-import { useState } from "react";
-import { Container, Grid, Typography, TextField } from "@mui/material";
-import InputAdornment from "@mui/material/InputAdornment";
-import Image from "next/image";
-import "../../../../../public/sass/pages/auth.scss";
-import Logo from "../../../../../public//images/logo.png";
+"use client"; // Ensures this component runs on the client side
+
+import { useState } from "react"; // Importing useState hook from React
+import { Container, Grid, Typography, TextField } from "@mui/material"; // Importing Material UI components
+import InputAdornment from "@mui/material/InputAdornment"; // For adornments in input fields
+import Image from "next/image"; // Next.js Image component for optimized images
+import "../../../../../public/sass/pages/auth.scss"; // Importing custom styles
+import Logo from "../../../../../public/images/logo.png"; // Importing images
 import Graphic from "../../../../../public/graphic.svg";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined"; // Importing Material UI icons
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import FormControlLabel from "@mui/material/FormControlLabel"; // For form control labels
+import Checkbox from "@mui/material/Checkbox"; // For checkboxes
+import Button from "@mui/material/Button"; // For buttons
+import IconButton from "@mui/material/IconButton"; // For icon buttons
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { validatorMake, foreach, postApi } from '../../../../helpers/General'
-import { toast } from "react-toastify";
-import { setToken, tokenName } from "@/dataCenter/LocalStorage";
+import Link from "next/link"; // Next.js Link component for client-side navigation
+import { useRouter } from "next/navigation"; // Next.js hook for navigation
+import { validatorMake, foreach, postApi } from "../../../../helpers/General"; // Importing custom helper functions
+import { toast } from "react-toastify"; // For toast notifications
+import { setToken, tokenName } from "@/dataCenter/LocalStorage"; // Importing functions for local storage operations
 
 const Login = () => {
-  const router = useRouter();
+  const router = useRouter(); // Initializing the router
+
+  // Default form values
   let defaultValue = {
-    
     email: "",
     password: "",
   };
 
-  let [formData, setFormData] = useState(defaultValue);
-  let [errors, setErrors] = useState(defaultValue);
+  let [formData, setFormData] = useState(defaultValue); // State for form data
+  let [errors, setErrors] = useState(defaultValue); // State for form errors
 
+  // Handle input change event
   let handleInputChange = (e) => {
     let { name, value } = e.target;
-    // setPreferences({
-    //     ...preferences,
-    //     [name]: value
-    // });
-    setFormData((prevData) => {
-      return {
-        ...prevData,
-        [name]: value,
-      };
-    });
-
-    setErrors((prevData) => {
-      return {
-        ...prevData,
-        [name]: null,
-      };
-    });
+    // Update formData state
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    // Clear errors for the current field
+    setErrors((prevData) => ({
+      ...prevData,
+      [name]: null,
+    }));
   };
 
+  // Handle errors and update state
   let handleErrors = (errors) => {
     foreach(errors, (index, item) => {
-      setErrors((prevData) => {
-        return {
-          ...prevData,
-          [index]: item[0],
-        };
-      });
+      setErrors((prevData) => ({
+        ...prevData,
+        [index]: item[0],
+      }));
     });
   };
 
+  // Handle form submit event
   let handleSubmit = async (e) => {
     e.preventDefault();
+    // Validate form data
     let validationRules = await validatorMake(formData, {
       email: "required|email",
       password: "required",
     });
 
     if (!validationRules.fails()) {
-      let resp = await postApi("/user/login", formData);
-    if (resp.status) {
-      toast.success(resp.message);
-      setFormData(defaultValue);
-      setToken(tokenName.OTP_TOKEN, resp.data.token);
-      if (resp.data.user_verified) {
-        router.push("/dashboard/explore");
-      } else {
-        router.push("/auth/otp-verification");
+      try {
+        // Submit form data to the server
+        let resp = await postApi("/user/login", formData);
+        if (resp.status) {
+          toast.success(resp.message); // Show success message
+          setFormData(defaultValue); // Reset form data
+          setToken(tokenName.LOGIN_TOKEN, resp.data._token); // Save token to local storage
+          if (resp.data.email_verified !=null) {
+            router.push("/dashboard/explore"); // Redirect to dashboard if email is verified
+          } else {
+            router.push("/auth/otp-verification"); // Redirect to verify email page if email is not verified
+          }
+        } else {
+          handleApiErrors(resp);
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("An unexpected error occurred. Please try again later.");
       }
     } else {
-      if (typeof resp.message == "object") {
-        handleErrors(resp.message.errors);
-      } else {
-        toast.error(resp.message);
-      }
-    }
-    } else {
-      handleErrors(validationRules.errors.errors);
+      handleErrors(validationRules.errors.errors); // Handle validation errors
       console.log(validationRules.errors.errors);
     }
   };
-  const [showPassword, setShowPassword] = useState(false);
 
+  const handleApiErrors = (resp) => {
+    if (typeof resp.message === "object") {
+      handleErrors(resp.message.errors); // Handle validation errors from the server
+    } else {
+      toast.error(resp.message); // Show error message
+    }
+  };
+
+  const [showPassword, setShowPassword] = useState(false); // State for showing/hiding password
+
+  // Toggle password visibility
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  // Prevent default mouse down behavior
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -109,14 +119,16 @@ const Login = () => {
             <div className="auth_area">
               <div className="left_section">
                 <div className="logo_section">
-                  <Image src={Logo} alt="Logo" />
+                  <Image src={Logo} alt="Logo" /> {/* Logo */}
                 </div>
                 <div className="left_Form">
                   <div className="form_text">
-                    <Typography variant="h4">Login</Typography>
+                    <Typography variant="h4">Login</Typography>{" "}
+                    {/* Login title */}
                     <Typography variant="h6">
-                      If you don't have a registered account. You can
-                      <Link href="/auth/sign-up">Register here !</Link>
+                      If you don't have a registered account, you can{" "}
+                      <Link href="/auth/sign-up">Register here!</Link>{" "}
+                      {/* Link to sign-up page */}
                     </Typography>
                   </div>
                   <form onSubmit={handleSubmit}>
@@ -127,12 +139,12 @@ const Login = () => {
                         placeholder="Enter your email address"
                         name="email"
                         value={formData.email}
-                        onChange={handleInputChange}
                         helperText={errors.email ? errors.email : ""}
+                        onChange={handleInputChange}
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
-                              <EmailOutlinedIcon />
+                              <EmailOutlinedIcon /> {/* Email icon */}
                             </InputAdornment>
                           ),
                         }}
@@ -143,16 +155,16 @@ const Login = () => {
                       <TextField
                         id="input-with-icon-textfield"
                         label="Password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        helperText={errors.password ? errors.password : ""}
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your Password"
+                        name="password"
+                        value={formData.password}
+                        helperText={errors.password ? errors.password : ""}
+                        onChange={handleInputChange}
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
-                              <LockOutlinedIcon />
+                              <LockOutlinedIcon /> {/* Password icon */}
                             </InputAdornment>
                           ),
                           endAdornment: (
@@ -164,9 +176,9 @@ const Login = () => {
                                 edge="end"
                               >
                                 {!showPassword ? (
-                                  <VisibilityOff />
+                                  <VisibilityOff /> /* Icon to show password */
                                 ) : (
-                                  <Visibility />
+                                  <Visibility /> /* Icon to hide password */
                                 )}
                               </IconButton>
                             </InputAdornment>
@@ -178,21 +190,24 @@ const Login = () => {
                     <div className="forget_passSection">
                       <FormControlLabel
                         control={<Checkbox />}
-                        label="Remember me"
+                        label="Remember me" // Remember me checkbox
                       />
                       <Link href="/auth/change-password">
-                        Forget password ?
+                        Forget password? {/* Link to forget password page */}
                       </Link>
                     </div>
                     <div className="btn_area">
-                      <Button variant="contained" type="submit">Login</Button>
+                      <Button variant="contained" type="submit">
+                        Login {/* Submit button */}
+                      </Button>
                     </div>
                   </form>
                 </div>
               </div>
               <div className="right_Frame">
                 <div className="graphic_area">
-                  <Image src={Graphic} priority={true} alt="Graphic"></Image>
+                  <Image src={Graphic} priority={true} alt="Graphic" />{" "}
+                  {/* Graphic */}
                 </div>
               </div>
             </div>
@@ -202,4 +217,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;
