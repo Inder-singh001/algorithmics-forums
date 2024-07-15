@@ -6,10 +6,23 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Typography } from "@mui/material";
 import { usePathname} from "next/navigation";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getToken, tokenName } from "@/dataCenter/LocalStorage";
 
 const Sidebar = () => {
   const pathname = usePathname();
-
+  
+  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    if(getToken(tokenName.LOGIN_TOKEN))
+    {
+      setIsLogin(true);
+    }
+    else
+    {
+      setIsLogin(false);
+    }
+  })
   const SideList = [
     {
       icon: <DashboardIcon />,
@@ -19,12 +32,12 @@ const Sidebar = () => {
     {
       icon: <AddCircleIcon />,
       title: "Make a Post",
-      href: "/add-a-post",
+      href: isLogin ? "/add-a-post" : '/auth/login',
     },
     {
       icon: <AccountCircleIcon />,
       title: "Profile",
-      href: "/profile",
+      href: isLogin ?  "/profile" : '/auth/login',
     },
   ]
 
