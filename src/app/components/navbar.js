@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from '@mui/icons-material/Person';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import "../../../public/sass/pages/navbar.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from '@mui/material/Button';
@@ -22,6 +22,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRouter } from "next/navigation";
+import { getToken, tokenName } from "@/dataCenter/LocalStorage";
 
 export default function Navbar() {
 
@@ -32,6 +33,7 @@ export default function Navbar() {
   }
 
   const [show, setShow] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -87,6 +89,16 @@ export default function Navbar() {
     </Box>
   );
 
+  useEffect(() => {
+    if(getToken(tokenName.LOGIN_TOKEN))
+    {
+      setIsLogin(true);
+    }
+    else
+    {
+      setIsLogin(false);
+    }
+  })
 
   return (
     <>
@@ -113,45 +125,45 @@ export default function Navbar() {
               />
             </div>
           </div>
+
           <div className="navbar_right_container">
-            <div className="utilities_notification_icon">
-              <NotificationsIcon />
-            </div>
+              {
+                !isLogin ? 
+                  <div className="utilities_login_button">
+                    <Button onClick={handleLogin}>Login</Button>
+                  </div>
+                  :
+                  <>
+                    <div className="utilities_notification_icon">
+                      <NotificationsIcon />
+                    </div>
 
-            <div
-
-              className="utilities_profile_icon"
-            >
-
-              <Button
-                id="basic-button"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-              >
-                <PersonIcon />
-
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
-            </div>
-
-
-            <div className="utilities_login_button">
-              <Button onClick={handleLogin}>Login</Button>
-            </div>
+                    <div className="utilities_profile_icon" >
+                      <Button
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                      >
+                        <PersonIcon />
+                      </Button>
+                      <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                          'aria-labelledby': 'basic-button',
+                        }}
+                      >
+                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                      </Menu>
+                    </div>
+                  </>
+              }
             <div
               className="responsive_menu_icon"
               onClick={() => setShow(true)}

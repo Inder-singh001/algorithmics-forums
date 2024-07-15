@@ -10,6 +10,9 @@ import FollowerIcon from "../../../public/images/FollowIcon.png";
 import "../../../public/sass/pages/profile.scss";
 import { Posts } from "./post";
 import { useRouter } from "next/navigation";
+import { validatorMake, foreach, getApi, getHash } from '../../helpers/General'
+import { toast } from "react-toastify";
+import { setToken, setValue, tokenName } from "@/dataCenter/LocalStorage";
 
 
 function CustomTabPanel(props) {
@@ -42,6 +45,29 @@ function a11yProps(index) {
 }
 
 export const ProfileView = () => {
+    useEffect(() => {
+        handleProfile();
+    }, []);
+
+    const handleProfile = async () => {
+        try {
+            const response = await getApi('/user/profile');
+            console.log(response, "response");
+            // Map the response data to the frontend
+            // Example:
+            const { name, email, followers, following, about } = response;
+            // Update the state or variables with the mapped data
+            // Example:
+            setName(name);
+            setEmail(email);
+            setAbout(about);
+        } catch (error) {
+            console.error(error);
+            // Handle error
+            toast.error("Failed to fetch profile data");
+        }
+    };
+
     const [value, setValue] = useState(0);
     const router = useRouter();
 
@@ -64,7 +90,7 @@ export const ProfileView = () => {
                     </div>
                     <div className="name_section">
                         <div className="name_area">
-                            <Typography>David Winton</Typography>
+                            <Typography>{}</Typography>
                         </div>
                         <div className="email_area">
                             <Typography>davidwinton234@gmail.com</Typography>
