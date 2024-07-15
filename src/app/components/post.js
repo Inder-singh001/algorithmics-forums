@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -21,6 +21,7 @@ import Comment from "../../../public/images/comments.png"
 import Share from "../../../public/images/share.png"
 import Options from "../../../public/images/threedots.png"
 import Comments from './comments';
+import {getApi } from '../../helpers/General'
 
 
 
@@ -33,9 +34,19 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
+const getPostData = async() =>{
+    let res = await getApi('/post/index')
+    console.log(res)
+}
+
+
 
 
 export const Posts = () => {
+useEffect(()=>{
+     getPostData()
+},[])
+
     const [expanded, setExpanded] = useState(false);
     const [upvoteCount, setUpvoteCount] = useState(0);
     const [downvoteCount, setDownvoteCount] = useState(0);

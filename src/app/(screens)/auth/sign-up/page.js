@@ -15,9 +15,10 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { validatorMake, foreach, postApi } from '../../../../helpers/General'
+import { validatorMake, foreach, postApi, getHash } from '../../../../helpers/General'
 import { toast } from "react-toastify";
-import { setToken, tokenName } from "@/dataCenter/LocalStorage";
+import { setToken, setValue, tokenName } from "@/dataCenter/LocalStorage";
+
 
 
 
@@ -37,10 +38,6 @@ const SignUp = () => {
     let handleInputChange = (e) => {
 
         let { name, value } = e.target
-        // setPreferences({
-        //     ...preferences,
-        //     [name]: value
-        // });
         setFormData((prevData) => {
             return {
                 ...prevData,
@@ -86,6 +83,7 @@ const SignUp = () => {
                 toast.success(resp.message)
                 setFormData(defaultValue);
                 setToken(tokenName.OTP_TOKEN, resp.data.token)
+                setValue("preference", getHash(64))
                 router.push('/auth/otp-verification')
             }
             else {
@@ -102,22 +100,6 @@ const SignUp = () => {
             console.log(validationRules.errors.errors)
         }
     }
-    //Modal Props
-    // const router = useRouter();
-    // const [preferences, setPreferences] = useState({});
-
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setPreferences({
-    //         ...preferences,
-    //         [name]: value
-    //     });
-    // };
-
-    // const handleRegister = () => {
-    //     localStorage.setItem('preferences', JSON.stringify(preferences));
-    //     // router.push('/dashboard/explore');
-    // };
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);

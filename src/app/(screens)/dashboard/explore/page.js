@@ -6,19 +6,20 @@ import "../../../../../public/sass/dashboard/explore.scss";
 import { Posts } from "@/app/components/post";
 import FeatuerdPosts from "@/app/components/featured_posts";
 import Categories from "@/app/components/categories";
+import { getValue } from "@/dataCenter/LocalStorage";
 
 const Dashboard = () => {
 
   //Modal Props
-  const [preferences, setPreferences] = useState({});
+  const [preferences, setPreferences] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const storedPreferences = JSON.parse(localStorage.getItem('preferences'));
+    const storedPreferences = getValue("preference")
+
     if (storedPreferences) {
-      setPreferences(storedPreferences);
+      setPreferences(JSON.stringify(storedPreferences));
       setShowModal(true);
-      localStorage.removeItem('preferences'); // Remove preferences from storage after use
     }
   }, []);
 
@@ -46,8 +47,9 @@ const Dashboard = () => {
             <FeatuerdPosts />
           </div>
         </div>
-        <Categories open={showModal} handleClose={handleCloseModal} preferences={preferences} />
-
+        {preferences && (
+          <Categories open={showModal} handleClose={handleCloseModal} preferences={preferences} />
+        )}
       </div>
     </div>
   );
