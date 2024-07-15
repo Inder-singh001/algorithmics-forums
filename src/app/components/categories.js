@@ -1,40 +1,61 @@
 'use client'
-import { Container, Grid, Modal, Typography } from "@mui/material"
+import { Modal, Typography } from "@mui/material"
 import "../../../public/sass/pages/categories.scss"
 import Button from '@mui/material/Button';
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation";
+import { tags } from "@/helpers/catgory";
 
 
 
 const Categories = ({ open, handleClose, preferences }) => {
     //Modal Props
     const [localPreferences, setLocalPreferences] = useState(preferences);
-
     useEffect(() => {
         setLocalPreferences(preferences);
     }, [preferences]);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setLocalPreferences({
-            ...localPreferences,
-            [name]: value
-        });
-    };
+    //Validations 
+    const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
 
-    const handleSubmit = () => {
-        // Update preferences here if needed
-        handleClose();
-    };
+    let handleSubmit = async (e) => {
+        let formData
+        e.preventDefault()
+        let validationRules = await validatorMake(formData, {
+            "user_id": "required",
+            "cat_id": "required",
+        })
 
-    // const router = useRouter()
-    // const handleModal = () => {
-    //     router.push('/dashboard/explore')
-    // }
 
+        if (!validationRules.fails()) {
+            let resp = await postApi('/user-category/add', formData)
+            if (resp.status) {
+                toast.success(resp.message)
+                setFormData(defaultValue);
+                handleClose();
+                // setToken(tokenName.OTP_TOKEN, resp.data.token)
+                // setValue("preference", getHash(64))
+                // router.push('/auth/otp-verification')
+            }
+            else {
+                if (typeof resp.message == 'object') {
+                    handleErrors(resp.message.errors)
+                }
+                else {
+                    toast.error(resp.message)
+                }
+            }
+        }
+        else {
+            handleErrors(validationRules.errors.errors)
+            console.log(validationRules.errors.errors)
+        }
+    }
+
+
+
+
+    //tags mapped
     const [selectedTags, setSelectedTags] = useState([]);
-
     const handleSelectTag = (tag) => {
         setSelectedTags((prevSelectedTags) =>
             prevSelectedTags.includes(tag)
@@ -42,7 +63,6 @@ const Categories = ({ open, handleClose, preferences }) => {
                 : [...prevSelectedTags, tag]
         );
     };
-    const tags = ["Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics", "Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics", "Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics", "Technology", "Science", "Design", "Books", "Travel", "Health", "Career", "Food", "Cricket", "Engineering", "Movies", "Vacation", "Sports", "Mathematics"];
 
     return (
         <Modal
@@ -57,12 +77,10 @@ const Categories = ({ open, handleClose, preferences }) => {
                             <div
                                 key={tag}
                                 className={`tags ${selectedTags.includes(tag) ? "selected" : ""}`}
-
                                 onClick={() => handleSelectTag(tag)}
-                                onChange={handleChange}
-                                value={localPreferences.preference || ''}
+
                             >
-                                <Typography variant="subtitle1">{tag}</Typography>
+                                <Typography variant="subtitle1">{tag.title}</Typography>
                             </div>
                         ))}
                     </div>

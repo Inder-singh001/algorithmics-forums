@@ -8,6 +8,7 @@ import Graphic from "../../../../../public/graphic.svg"
 import Button from '@mui/material/Button';
 import { useRouter } from "next/navigation";
 import OtpInput from 'react-otp-input';
+import Link from "next/link";
 import { validatorMake, postApi, getData, getmail } from '../../../../helpers/General'
 import { toast } from "react-toastify";
 import { getToken, tokenName, setToken } from "@/dataCenter/LocalStorage";
@@ -18,6 +19,8 @@ const OTPverify = () => {
     const router = useRouter();
     const [otp, setOtp] = useState('');
     let [errors, setErrors] = useState({ otp, token: "" })
+    const [resendCount, setResendCount] = useState(0);
+    const MAX_RESEND_ATTEMPTS = 5;
 
     const handleOTPRequest = async (e) => {
         e.preventDefault()
@@ -70,6 +73,37 @@ const OTPverify = () => {
     let handleErrors = (errors) => {
         setErrors(errors)
     }
+
+    const handleResendOTP = async (e) => {
+        console.log("clicked")
+        e.preventDefault()
+
+        if (resendCount < MAX_RESEND_ATTEMPTS) {
+            let token = getToken(tokenName.OTP_TOKEN)
+            let formData = {
+                token
+            }
+            let validationRules = await validatorMake(formData, {
+                "token": "required",
+            })
+
+            if (!validationRules.fails()) {
+                let res = await postApi('/user/resend-otp', formData)
+                if (res.status) {
+                    setResendCount(resendCount + 1)
+                    toast.success("OTP has been sent to your email.")
+                }
+                else {
+                    toast.success("Failed to send OTP.")
+                }
+            }
+        }
+        else {
+            toast.error("Maximum OTP resend attempts reached. Please check your registered email.");
+        }
+    }
+
+
     return (
         <div className="auth_section">
             <Container>
@@ -94,10 +128,15 @@ const OTPverify = () => {
                                                 renderInput={(props) => <input {...props} />}
                                             />
                                         </div>
-                                        <div className="btn_area passbtn_area">
+                                        <div className="btn_area passbtn_area otp_btn">
                                             <Button type="Submit" variant="contained">Submit</Button>
                                         </div>
                                     </form>
+                                    <div className="resend_otp_section">
+                                        <Typography variant="h6">Didn't get an OTP?
+                                            <span onClick={handleResendOTP} >Resend OTP</span>
+                                        </Typography>
+                                    </div>
                                 </div>
                             </div>
                             <div className="right_Frame">

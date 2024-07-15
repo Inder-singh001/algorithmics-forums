@@ -72,12 +72,14 @@ const Login = () => {
         // Submit form data to the server
         let resp = await postApi("/user/login", formData);
         if (resp.status) {
-          toast.success(resp.message); // Show success message
           setFormData(defaultValue); // Reset form data
-          setToken(tokenName.LOGIN_TOKEN, resp.data._token); // Save token to local storage
+          setToken(tokenName.LOGIN_TOKEN, resp.data.login_token); // Save token to local storage
           if (resp.data.email_verified !=null) {
+            toast.success(resp.message); // Show success message
             router.push("/dashboard/explore"); // Redirect to dashboard if email is verified
           } else {
+            
+            toast.error(resp.message); // Show success message
             router.push("/auth/otp-verification"); // Redirect to verify email page if email is not verified
           }
         } else {
@@ -85,7 +87,7 @@ const Login = () => {
         }
       } catch (error) {
         console.error(error);
-        toast.error("An unexpected error occurred. Please try again later.");
+        toast.error("Check Your credentials and try again.");
       }
     } else {
       handleErrors(validationRules.errors.errors); // Handle validation errors

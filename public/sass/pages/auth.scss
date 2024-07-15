@@ -212,6 +212,28 @@
           text-decoration: none;
           @extend %bottom-Line_animation;
         }
+        .btn_area {
+          &.otp_btn {
+            margin-bottom: 12px;
+          }
+        }
+        .resend_otp_section {
+          text-align: center;
+          .MuiTypography-h6 {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 20px;
+            color: $primarySubtext;
+          }
+          span {
+            text-indent: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 20px;
+            color: $primaryBlue_color;
+            @extend %bottom-Line_animation;
+          }
+        }
       }
     }
     .right_Frame {
@@ -274,7 +296,7 @@
   .auth_section {
     .auth_area {
       .left_section {
-        .logo_section{
+        .logo_section {
           margin-bottom: 20px;
         }
         .left_Form {
@@ -288,7 +310,7 @@
             }
             &.signup_form_text {
               margin-bottom: 24px;
-              .MuiTypography-h4{
+              .MuiTypography-h4 {
                 margin-bottom: 20px;
               }
             }
@@ -619,6 +641,14 @@
               line-height: 22px;
             }
           }
+          .resend_otp_section {
+            .MuiTypography-h6 {
+              font-size: 14px;
+            }
+            span {
+              font-size: 14px;
+            }
+          }
         }
       }
       .right_Frame {
@@ -712,6 +742,14 @@
               height: 45px;
               font-size: 16px;
               line-height: 22px;
+            }
+          }
+          .resend_otp_section {
+            .MuiTypography-h6 {
+              font-size: 14px;
+            }
+            span {
+              font-size: 14px;
             }
           }
         }

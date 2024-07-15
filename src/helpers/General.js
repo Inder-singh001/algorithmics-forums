@@ -17,9 +17,9 @@ const foreach = (obj, callback) => {
 
 let postApi = async (url, formData) => {
     let apiUrl = process.env.NEXT_PUBLIC_HOST
-    let resp = await axios.post(`${apiUrl}${url}`, formData,{
-        headers:{
-            Authorization:"Bearer " + getToken(tokenName.LOGIN_TOKEN)
+    let resp = await axios.post(`${apiUrl}${url}`, formData, {
+        headers: {
+            Authorization: "Bearer " + getToken(tokenName.LOGIN_TOKEN)
         }
     })
     let { data } = resp
@@ -29,13 +29,26 @@ let postApi = async (url, formData) => {
 let getApi = async (url) => {
     let apiUrl = process.env.NEXT_PUBLIC_HOST
     let resp = await axios.get(`${apiUrl}${url}`,
-    {
-        headers:{
-            Authorization:"Bearer " + getToken(tokenName.LOGIN_TOKEN)
-        }
-    })
+        {
+            headers: {
+                Authorization: "Bearer " + getToken(tokenName.LOGIN_TOKEN)
+            }
+        })
     let { data } = resp
     return data
+}
+
+const getHash = (length = 32) => {
+    var result = "";
+    var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+            Math.floor(Math.random() * charactersLength )
+        );
+    }
+    return result;
 }
 
 module.exports = {
@@ -43,4 +56,5 @@ module.exports = {
     foreach,
     postApi,
     getApi,
+    getHash
 }
