@@ -12,6 +12,7 @@ import AvatarPic from "../../../public/images/profile_pic.png";
 import { validatorMake, foreach, postApi,getApi } from '../../helpers/General';
 import { toast } from 'react-toastify';
 import { useEffect } from "react";
+import { tokenName, getToken } from "@/dataCenter/LocalStorage";
 
 export default function ProfileEdit() {
 
@@ -26,38 +27,9 @@ export default function ProfileEdit() {
   let [formData, setFormData] = useState(defaultValue)
   let [errors, setErrors] = useState(defaultValue)
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       // Example API call to fetch user data
-  //       const response = await postApi('/user/view/6690d3c3eb2e559034b9aaa2', formData); // Replace with your API endpoint
-  //       console.log(response)
-  //       const userData = response;
-
-
-  //       // Update formData state with fetched data
-  //       setFormData({
-  //         first_name: userData.first_name,
-  //         last_name: userData.last_name,
-  //         about_me: userData.about_me,
-  //         email: userData.email,
-  //       });
-  //     } catch (error) {
-  //       console.error('Error fetching user data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
 
   let handleInputChange = (e) => {
-
     let { name, value } = e.target
-    // setPreferences({
-    //     ...preferences,
-    //     [name]: value
-    // });
     setFormData((prevData) => {
       return {
         ...prevData,
@@ -84,7 +56,8 @@ export default function ProfileEdit() {
       })
     })
   }
-
+ 
+ 
   let handleSubmit = async (e) => {
     e.preventDefault()
     let validationRules = await validatorMake(formData, {
@@ -95,15 +68,18 @@ export default function ProfileEdit() {
       // // "password":"required",
 
     })
-    
-
+    getToken(tokenName.LOGIN_TOKEN)
+    console.log(tokenName.LOGIN_TOKEN)
     if (!validationRules.fails()) {
       console.log(formData, "formData")
-      let resp = await postApi('/user/update/66911399a76b4f1c076e0d1a', formData)
+      // let resp = await postApi('/user/update', formData)
+      // console.log(resp)
       if (resp.status) {
         // otp screen
         toast.success(resp.message)
         setFormData(defaultValue);
+       
+
         router.push('/profile')
       }
       else {
