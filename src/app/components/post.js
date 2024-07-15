@@ -25,7 +25,7 @@ import {getApi } from '../../helpers/General'
 
 // Post Data
 const getPostData = async () =>{
-    let res = getApi('user/post')
+    let res = await getApi('/user/post')
     console.log(res)
 }
 
