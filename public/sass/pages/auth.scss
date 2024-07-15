@@ -7,63 +7,225 @@
   background-color: $primarybackground;
   .auth_area {
     display: flex;
-    align-items: center;
-    position: relative;
     @include clearfix();
-
-    .logo_section {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      height: 53px;
-      width: 215px;
-    }
-
-    .left_Form {
+    .left_section {
       width: calc(100% - 50%);
       float: left;
-      padding: 0px 90px 0px 30px;
-
-      &.leftpass_form {
+      .logo_section {
+        height: 53px;
+        width: 215px;
+        margin-bottom: 30px;
+      }
+      .left_Form {
+        padding: 0px 90px 0px 30px;
         display: flex;
         flex-direction: column;
-      }
+        justify-content: center;
+        height: calc(100% - 98px);
 
-      .form_text {
-        margin-bottom: 56px;
+        .form_text {
+          margin-bottom: 56px;
 
-        &.signup_form_text {
-          .MuiTypography-h6 {
-            width: 308px;
+          &.signup_form_text {
+            .MuiTypography-h6 {
+              width: 308px;
+            }
           }
-        }
-        &.changepass_text {
+          &.changepass_text {
+            .MuiTypography-h4 {
+              margin-bottom: 8px;
+            }
+            .MuiTypography-h6 {
+              width: 530px;
+            }
+          }
           .MuiTypography-h4 {
-            margin-bottom: 8px;
+            font-family: Rozha One;
+            font-size: 30px;
+            font-weight: 700;
+            line-height: 42.6px;
+            margin-bottom: 24px;
+            color: $black;
           }
           .MuiTypography-h6 {
-            width: 530px;
+            // font-family: Roboto;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 20px;
+            width: 300px;
+            max-width: 100%;
+            color: $primarySubtext;
+            a {
+              text-decoration: none;
+              // font-family: Roboto;
+              text-indent: 4px;
+              font-size: 16px;
+              font-weight: 700;
+              line-height: 20px;
+              color: $primaryBlue_color;
+              @extend %bottom-Line_animation;
+            }
           }
         }
-        .MuiTypography-h4 {
-          font-family: Rozha One;
-          font-size: 30px;
-          font-weight: 700;
-          line-height: 42.6px;
-          margin-bottom: 24px;
-          color: $black;
+        .MuiFormHelperText-root {
+          color: $error;
+          line-height: 14px;
         }
-        .MuiTypography-h6 {
-          // font-family: Roboto;
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 20px;
-          width: 300px;
-          max-width: 100%;
-          color: $primarySubtext;
-          a {
-            text-decoration: none;
+        .name_area {
+          width: 100%;
+          height: 53px;
+          margin-bottom: 42px;
+          .left_name .MuiTextField-root {
+            width: 48%;
+            float: left;
+          }
+          .right_name .MuiTextField-root {
+            width: 48%;
+            float: right;
+          }
+          .css-ittuaa-MuiInputAdornment-root {
+            width: 14px;
+            height: 14px;
+          }
+          .MuiFormLabel-root {
             // font-family: Roboto;
+            font-size: 13px;
+            font-weight: 900;
+            line-height: 25px;
+          }
+          label + .css-1eed5fa-MuiInputBase-root-MuiInput-root {
+            height: 37px;
+          }
+          .css-1x51dt5-MuiInputBase-input-MuiInput-input {
+            // font-family: Roboto;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
+            color: $primarySubtext;
+
+            &:focus {
+              color: $primaryBlue_color;
+            }
+          }
+        }
+        .form_area {
+          margin-bottom: 50px;
+          &.signup_formarea {
+            margin-bottom: 42px;
+          }
+          &.changepass_area {
+            .MuiTextField-root {
+              margin-bottom: 70px;
+            }
+            .MuiFormLabel-root {
+              // font-family: Roboto;
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 20px;
+              text-align: left;
+            }
+            .css-1x51dt5-MuiInputBase-input-MuiInput-input {
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 20px;
+              color: $secondarytext;
+
+              &:focus {
+                color: $primarySubtext;
+              }
+            }
+          }
+          &.otp_input {
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            margin-bottom: 80px;
+            input {
+              font-size: 24px;
+              font-weight: 600;
+              line-height: 30px;
+              padding: 16px 8px;
+              border-radius: 12px;
+              border: 1px solid $primaryText;
+              background-color: $white;
+              color: $secondarytext;
+              margin-right: 24px;
+            }
+          }
+          .MuiTextField-root {
+            width: 100%;
+          }
+          .MuiFormLabel-root {
+            // font-family: Roboto;
+
+            font-size: 13px;
+            font-weight: 900;
+            line-height: 25px;
+            text-align: left;
+          }
+          label + .css-1eed5fa-MuiInputBase-root-MuiInput-root {
+            height: 37px;
+          }
+          .css-i4bv87-MuiSvgIcon-root {
+            font-size: 17px;
+          }
+          .css-1x51dt5-MuiInputBase-input-MuiInput-input {
+            // font-family: Roboto;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
+            color: $primarySubtext;
+
+            &:focus {
+              color: $primaryBlue_color;
+            }
+          }
+        }
+        .forget_passSection {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 53px;
+          .css-i4bv87-MuiSvgIcon-root {
+            width: 15px;
+            height: 15px;
+            // top: 583px;
+            // left: 124px;
+            border-radius: 3px;
+            border: 1.5px $primarySubtext;
+          }
+          .css-ahj2mt-MuiTypography-root {
+            // font-family: Roboto;
+            font-size: 13px;
+            font-weight: 900;
+            line-height: 25px;
+            color: $primarySubtext;
+          }
+        }
+
+        a {
+          // font-family: Roboto;
+          font-size: 13px;
+          font-weight: 700;
+          line-height: 25px;
+          color: $primaryBlue_color;
+          text-decoration: none;
+          @extend %bottom-Line_animation;
+        }
+        .btn_area {
+          &.otp_btn {
+            margin-bottom: 12px;
+          }
+        }
+        .resend_otp_section {
+          text-align: center;
+          .MuiTypography-h6 {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 20px;
+            color: $primarySubtext;
+          }
+          span {
             text-indent: 4px;
             font-size: 16px;
             font-weight: 700;
@@ -72,134 +234,6 @@
             @extend %bottom-Line_animation;
           }
         }
-      }
-      .MuiFormHelperText-root {
-        color: $error;
-      }
-      .name_area {
-        width: 100%;
-        height: 53px;
-        margin-bottom: 42px;
-        .left_name .MuiTextField-root {
-          width: 48%;
-          float: left;
-        }
-        .right_name .MuiTextField-root {
-          width: 48%;
-          float: right;
-        }
-        .css-ittuaa-MuiInputAdornment-root {
-          width: 14px;
-          height: 14px;
-        }
-        .MuiFormLabel-root {
-          // font-family: Roboto;
-          font-size: 13px;
-          font-weight: 900;
-          line-height: 25px;
-        }
-        label + .css-1eed5fa-MuiInputBase-root-MuiInput-root {
-          height: 37px;
-        }
-        .css-1x51dt5-MuiInputBase-input-MuiInput-input {
-          // font-family: Roboto;
-          font-size: 14px;
-          font-weight: 700;
-          line-height: 20px;
-          color: $primarySubtext;
-
-          &:focus {
-            color: $primaryBlue_color;
-          }
-        }
-      }
-      .form_area {
-        margin-bottom: 50px;
-
-        &.signup_formarea {
-          margin-bottom: 42px;
-        }
-        &.changepass_area {
-          .MuiTextField-root {
-            margin-bottom: 70px;
-          }
-          .MuiFormLabel-root {
-            // font-family: Roboto;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 20px;
-            text-align: left;
-          }
-          .css-1x51dt5-MuiInputBase-input-MuiInput-input {
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 20px;
-            color: $secondarytext;
-
-            &:focus {
-              color: $primarySubtext;
-            }
-          }
-        }
-        .MuiTextField-root {
-          width: 100%;
-        }
-        .MuiFormLabel-root {
-          // font-family: Roboto;
-
-          font-size: 13px;
-          font-weight: 900;
-          line-height: 25px;
-          text-align: left;
-        }
-        label + .css-1eed5fa-MuiInputBase-root-MuiInput-root {
-          height: 37px;
-        }
-        .css-i4bv87-MuiSvgIcon-root {
-          font-size: 17px;
-        }
-        .css-1x51dt5-MuiInputBase-input-MuiInput-input {
-          // font-family: Roboto;
-          font-size: 14px;
-          font-weight: 700;
-          line-height: 20px;
-          color: $primarySubtext;
-
-          &:focus {
-            color: $primaryBlue_color;
-          }
-        }
-      }
-      .forget_passSection {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 53px;
-        .css-i4bv87-MuiSvgIcon-root {
-          width: 15px;
-          height: 15px;
-          // top: 583px;
-          // left: 124px;
-          border-radius: 3px;
-          border: 1.5px $primarySubtext;
-        }
-        .css-ahj2mt-MuiTypography-root {
-          // font-family: Roboto;
-          font-size: 13px;
-          font-weight: 900;
-          line-height: 25px;
-          color: $primarySubtext;
-        }
-      }
-
-      a {
-        // font-family: Roboto;
-        font-size: 13px;
-        font-weight: 700;
-        line-height: 25px;
-        color: $primaryBlue_color;
-        text-decoration: none;
-        @extend %bottom-Line_animation;
       }
     }
     .right_Frame {
@@ -224,21 +258,69 @@
 
 /* Extra large desktops and mac laptops*/
 @media (min-width: 1400px) and (max-width: 1599px) {
+  .auth_section {
+    .auth_area {
+      .left_section {
+        .left_Form {
+          .form_text {
+            .MuiTypography-h4 {
+              min-width: 430px;
+              max-width: 530px;
+            }
+            &.signup_form_text {
+              margin-bottom: 30px;
+            }
+          }
+          .name_area {
+            margin-bottom: 24px;
+          }
+          .form_area {
+            &.signup_formarea {
+              margin-bottom: 24px;
+            }
+          }
+        }
+      }
+      .right_Frame {
+        padding: 0 20px;
+        .graphic_area {
+          height: 562px;
+        }
+      }
+    }
+  }
 }
 
 /* Extra large desktops and mac laptops*/
 @media (min-width: 1300px) and (max-width: 1399px) {
   .auth_section {
     .auth_area {
-      .left_Form {
-        &.leftpass_form {
-          padding: 0 30px 0px 30px;
+      .left_section {
+        .logo_section {
+          margin-bottom: 20px;
         }
-        .form_text {
-          &.changepass_text {
-            &.MuiTypography-h4 {
+        .left_Form {
+          &.otp_area {
+            padding: 0 30px;
+          }
+          .form_text {
+            .MuiTypography-h4 {
               min-width: 430px;
               max-width: 530px;
+            }
+            &.signup_form_text {
+              margin-bottom: 24px;
+              .MuiTypography-h4 {
+                margin-bottom: 20px;
+              }
+            }
+          }
+          .name_area {
+            margin-bottom: 20px;
+          }
+          .form_area {
+            &.signup_formarea {
+              margin-bottom: 20px;
             }
           }
         }
@@ -257,9 +339,30 @@
 @media (min-width: 1200px) and (max-width: 1299px) {
   .auth_section {
     .auth_area {
-      .left_Form {
-        &.leftpass_form {
+      .left_section {
+        .logo_section {
+          margin-bottom: 18px;
+        }
+        .left_Form {
           padding: 0 30px;
+          .form_text {
+            &.signup_form_text {
+              margin-bottom: 30px;
+              .MuiTypography-h4 {
+                margin-bottom: 16px;
+              }
+            }
+          }
+          .name_area {
+            margin-bottom: 22px;
+          }
+
+          .form_area {
+            margin-bottom: 40px;
+            &.signup_formarea {
+              margin-bottom: 22px;
+            }
+          }
         }
       }
       .right_Frame {
@@ -276,50 +379,51 @@
 @media (min-width: 992px) and (max-width: 1199px) {
   .auth_section {
     .auth_area {
-      .logo_section {
-        height: 40px;
-        width: 170px;
-      }
-      .left_Form {
-        width: 80%;
-        max-width: 100%;
-        padding: 0px 30px;
+      .left_section {
+        .logo_section {
+          height: 40px;
+          width: 170px;
+        }
         .left_Form {
-          &.leftpass_form {
-            padding: 0 30px;
+          padding: 0px 30px;
+
+          .form_text {
+            margin-bottom: 30px;
+            &.signup_form_text {
+              margin-bottom: 24px;
+              .MuiTypography-h4 {
+                margin-bottom: 16px;
+              }
+            }
+
+            &.changepass_text {
+              .MuiTypography-h6 {
+                width: 420px;
+              }
+            }
           }
-        }
-        .form_text {
-          margin-bottom: 34px;
-          &.signup_form_text {
+          .name_area {
             margin-bottom: 24px;
-            .MuiTypography-h4 {
-              margin-bottom: 12px;
+          }
+          .form_area {
+            margin-bottom: 30px;
+
+            &.signup_formarea {
+              margin-bottom: 20px;
+            }
+            &.otp_input {
+              input {
+                margin-right: 16px;
+                font-size: 20px;
+              }
             }
           }
-
-          &.changepass_text {
-            .MuiTypography-h6 {
-              width: 420px;
-            }
+          .forget_passSection {
+            margin-bottom: 34px;
           }
-        }
-        .name_area {
-          margin-bottom: 20px;
-        }
-        .form_area {
-          margin-bottom: 30px;
-
-          &.signup_formarea {
-            margin-bottom: 20px;
-          }
-        }
-        .forget_passSection {
-          margin-bottom: 34px;
         }
       }
       .right_Frame {
-        width: 80%;
         max-width: 100%;
         padding: 0 20px;
         .graphic_area {
@@ -335,54 +439,63 @@
 @media (min-width: 768px) and (max-width: 991px) {
   .auth_section {
     .auth_area {
-      display: flex;
-      justify-content: center;
-      .logo_section {
-        width: 120px;
-        height: 28px;
-      }
-      .left_Form {
-        padding: 0px;
-        width: 60%;
-        max-width: 100%;
-        height: calc(100vh - 68px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        .form_text {
-          margin-bottom: 25px;
-          &.signup_form_text {
-            .MuiTypography-h6 {
-              width: 350px;
-            }
-          }
+      height: calc(100vh - 60px);
+      .left_section {
+        width: 100%;
+        float: none;
 
-          .MuiTypography-h4 {
-            font-size: 22px;
-            line-height: 28px;
-            margin-bottom: 28px;
-          }
-          .MuiTypography-h6 {
-            font-size: 18px;
-            line-height: 28px;
-            width: 336px;
-            a {
+        .left_Form {
+          padding: 0 30px;
+          justify-content: center;
+
+          .form_text {
+            margin-bottom: 25px;
+
+            .MuiTypography-h4 {
+              font-size: 22px;
+              line-height: 32px;
+              margin-bottom: 28px;
+            }
+            .MuiTypography-h6 {
               font-size: 18px;
               line-height: 28px;
+              width: 336px;
+              a {
+                font-size: 18px;
+                line-height: 28px;
+              }
+            }
+            &.signup_form_text {
+              .MuiTypography-h6 {
+                width: 350px;
+              }
+            }
+            &.changepass_text {
+              .MuiTypography-h6 {
+                width: 610px;
+              }
+            }
+            &.otp_text {
+              margin-bottom: 56px;
             }
           }
-        }
-        .form_area {
-          margin-bottom: 30px;
-        }
-        .forget_passSection {
-          margin-bottom: 30px;
-        }
-        .btn_area {
-          .css-sghohy-MuiButtonBase-root-MuiButton-root {
-            height: 45px;
-            font-size: 20px;
-            line-height: 24px;
+          .form_area {
+            margin-bottom: 30px;
+            &.otp_input {
+              input {
+                padding: 10px 8px;
+                margin-right: 16px;
+              }
+            }
+          }
+          .forget_passSection {
+            margin-bottom: 30px;
+          }
+          .btn_area {
+            .css-sghohy-MuiButtonBase-root-MuiButton-root {
+              font-size: 20px;
+              line-height: 24px;
+            }
           }
         }
       }
@@ -397,49 +510,59 @@
 @media (min-width: 576px) and (max-width: 767px) {
   .auth_section {
     .auth_area {
-      display: flex;
-      justify-content: center;
-      .logo_section {
-        width: 120px;
-        height: 28px;
-      }
-      .left_Form {
-        padding: 0px;
-        width: 80%;
-        max-width: 100%;
-        height: calc(100vh - 68px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        .form_text {
-          margin-bottom: 25px;
+      height: calc(100vh - 60px);
+      .left_section {
+        width: 100%;
+        float: none;
+        .logo_section {
+          width: 120px;
+          height: 28px;
+        }
+        .left_Form {
+          padding: 0 30px;
 
-          .MuiTypography-h4 {
-            font-size: 22px;
-            line-height: 28px;
-            margin-bottom: 28px;
-          }
-          .MuiTypography-h6 {
-            font-size: 18px;
-            line-height: 28px;
-            width: 336px;
-            a {
+          .form_text {
+            margin-bottom: 25px;
+
+            .MuiTypography-h4 {
+              font-size: 22px;
+              line-height: 28px;
+              margin-bottom: 28px;
+            }
+            .MuiTypography-h6 {
               font-size: 18px;
               line-height: 28px;
+              width: 336px;
+              a {
+                font-size: 18px;
+                line-height: 28px;
+              }
+            }
+            &.signup_form_text {
+              .MuiTypography-h6 {
+                width: 350px;
+              }
             }
           }
-        }
-        .form_area {
-          margin-bottom: 20px;
-        }
-        .forget_passSection {
-          margin-bottom: 20px;
-        }
-        .btn_area {
-          .css-sghohy-MuiButtonBase-root-MuiButton-root {
-            height: 45px;
-            font-size: 20px;
-            line-height: 24px;
+          .form_area {
+            margin-bottom: 20px;
+            &.otp_input {
+              input {
+                padding: 10px 8px;
+                margin-right: 12px;
+                line-height: 24px;
+                font-size: 16px;
+              }
+            }
+          }
+          .forget_passSection {
+            margin-bottom: 20px;
+          }
+          .btn_area {
+            .css-sghohy-MuiButtonBase-root-MuiButton-root {
+              font-size: 20px;
+              line-height: 24px;
+            }
           }
         }
       }
@@ -454,50 +577,77 @@
 @media (min-width: 361px) and (max-width: 575px) {
   .auth_section {
     .auth_area {
-      .logo_section {
-        width: 120px;
-        height: 28px;
-      }
-      .left_Form {
-        padding: 0px;
+      height: calc(100vh - 60px);
+      .left_section {
         width: 100%;
-        height: calc(100vh - 68px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        float: none;
+        .logo_section {
+          width: 120px;
+          height: 28px;
+        }
+        .left_Form {
+          padding: 0px;
 
-        .form_text {
-          margin-bottom: 25px;
+          .form_text {
+            margin-bottom: 25px;
 
-          .MuiTypography-h4 {
-            font-size: 16px;
-            line-height: 22px;
-            margin-bottom: 12px;
-          }
-          .MuiTypography-h6 {
-            font-size: 14px;
-            line-height: 20px;
-            width: 260px;
-            a {
-              text-decoration: none;
-              // font-family: Roboto;
-              text-indent: 4px;
+            .MuiTypography-h4 {
+              font-size: 16px;
+              line-height: 22px;
+              margin-bottom: 12px;
+            }
+            .MuiTypography-h6 {
               font-size: 14px;
               line-height: 20px;
+              width: 260px;
+              a {
+                text-decoration: none;
+                // font-family: Roboto;
+                text-indent: 4px;
+                font-size: 14px;
+                line-height: 20px;
+              }
+            }
+            &.signup_form_text {
+              .MuiTypography-h6 {
+                width: 280px;
+              }
             }
           }
-        }
-        .form_area {
-          margin-bottom: 20px;
-        }
-        .forget_passSection {
-          margin-bottom: 20px;
-        }
-        .btn_area {
-          .css-sghohy-MuiButtonBase-root-MuiButton-root {
-            height: 45px;
-            font-size: 16px;
-            line-height: 22px;
+          .name_area {
+            margin-bottom: 24px;
+          }
+          .form_area {
+            margin-bottom: 20px;
+            &.signup_formarea {
+              margin-bottom: 24px;
+            }
+            &.otp_input {
+              input {
+                padding: 8px 8px;
+                margin-right: 10px;
+                line-height: 24px;
+                font-size: 14px;
+              }
+            }
+          }
+          .forget_passSection {
+            margin-bottom: 20px;
+          }
+          .btn_area {
+            .css-sghohy-MuiButtonBase-root-MuiButton-root {
+              height: 45px;
+              font-size: 16px;
+              line-height: 22px;
+            }
+          }
+          .resend_otp_section {
+            .MuiTypography-h6 {
+              font-size: 14px;
+            }
+            span {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -512,79 +662,95 @@
 @media (max-width: 360px) {
   .auth_section {
     .auth_area {
-      .logo_section {
-        width: 120px;
-        height: 28px;
-      }
-      .left_Form {
-        padding: 0px;
+      height: calc(100vh - 60px);
+      .left_section {
         width: 100%;
-        height: calc(100vh - 68px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        float: none;
+        .logo_section {
+          width: 120px;
+          height: 28px;
+        }
+        .left_Form {
+          padding: 0px;
 
-        .form_text {
-          margin-bottom: 25px;
-          &.signup_form_text {
-            .MuiTypography-h6 {
-              width: 270px;
+          .form_text {
+            margin-bottom: 25px;
+            &.signup_form_text {
+              .MuiTypography-h6 {
+                width: 270px;
+              }
             }
-          }
-          &.leftpass_form {
-            display: flex;
-            flex-direction: column;
-            height: 0;
-            max-height: 0;
-          }
+            &.leftpass_form {
+              display: flex;
+              flex-direction: column;
+              height: 0;
+              max-height: 0;
+            }
 
-          .MuiTypography-h4 {
-            font-size: 16px;
-            line-height: 22px;
-            margin-bottom: 12px;
-          }
-          .MuiTypography-h6 {
-            font-size: 14px;
-            line-height: 20px;
-            width: 260px;
-            a {
-              text-decoration: none;
-              // font-family: Roboto;
-              text-indent: 4px;
+            .MuiTypography-h4 {
+              font-size: 16px;
+              line-height: 22px;
+              margin-bottom: 12px;
+            }
+            .MuiTypography-h6 {
               font-size: 14px;
               line-height: 20px;
+              width: 260px;
+              a {
+                text-decoration: none;
+                // font-family: Roboto;
+                text-indent: 4px;
+                font-size: 14px;
+                line-height: 20px;
+              }
             }
           }
-        }
-        .name_area {
-          height: 124px;
-          margin-bottom: 20px;
-          .left_name {
+          .name_area {
+            height: 124px;
             margin-bottom: 20px;
-            .MuiTextField-root {
+            .left_name {
+              margin-bottom: 20px;
+              .MuiTextField-root {
+                width: 100%;
+                float: none;
+              }
+            }
+            .right_name .MuiTextField-root {
               width: 100%;
               float: none;
             }
           }
-          .right_name .MuiTextField-root {
-            width: 100%;
-            float: none;
+          .form_area {
+            margin-bottom: 20px;
+            &.signup_formarea {
+              margin-bottom: 20px;
+            }
+            &.otp_input {
+              input {
+                font-size: 14px;
+                padding: 8px 8px;
+                margin-right: 8px;
+                line-height: 24px;
+              }
+            }
           }
-        }
-        .form_area {
-          margin-bottom: 20px;
-          &.signup_formarea {
+          .forget_passSection {
             margin-bottom: 20px;
           }
-        }
-        .forget_passSection {
-          margin-bottom: 20px;
-        }
-        .btn_area {
-          .css-sghohy-MuiButtonBase-root-MuiButton-root {
-            height: 45px;
-            font-size: 16px;
-            line-height: 22px;
+          .btn_area {
+            .css-sghohy-MuiButtonBase-root-MuiButton-root {
+              height: 45px;
+              font-size: 16px;
+              line-height: 22px;
+            }
+          }
+          .resend_otp_section {
+            .MuiTypography-h6 {
+              font-size: 14px;
+            }
+            span {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -593,8 +759,4 @@
       }
     }
   }
-}
-
-/* Smaller phones */
-@media (max-width: 320px) {
 }

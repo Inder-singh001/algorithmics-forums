@@ -15,7 +15,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const ResetPassword = () => {
 
-    
+
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -26,68 +26,70 @@ const ResetPassword = () => {
         event.preventDefault();
     };
 
-    
+
     return (
         <div className="auth_section">
             <Container>
                 <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                         <div className="auth_area">
-                            <div className="logo_section">
-                                <Image src={Logo} alt="Logo" />
-                            </div>
-                            <div className="left_Form leftpass_form">
-                                <div className="form_text changepass_text">
-                                    <Typography variant="h4">Reset Password</Typography>
-                                    <Typography variant="h6">Please enter the email address you use when creating your account, We'll send you the instructions to reset your password.</Typography>
+                            <div className="left_section">
+                                <div className="logo_section">
+                                    <Image src={Logo} alt="Logo" />
                                 </div>
-                                <div className="form_area changepass_area">
-                                    <TextField
-                                        id="input-with-icon-textfield"
-                                        label="New Password"
-                                        type={showPassword ? 'text' : 'password'}
-                                        placeholder="Enter your new password"
-                                        InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowPassword}
-                                                        onMouseDown={handleMouseDownPassword}
-                                                        edge="end"
-                                                    >
-                                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        variant="standard"
-                                    />
+                                <div className="left_Form leftpass_form">
+                                    <div className="form_text changepass_text">
+                                        <Typography variant="h4">Reset Password</Typography>
+                                        <Typography variant="h6">Please enter the email address you use when creating your account, We'll send you the instructions to reset your password.</Typography>
+                                    </div>
+                                    <div className="form_area changepass_area">
+                                        <TextField
+                                            id="input-with-icon-textfield"
+                                            label="New Password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            placeholder="Enter your new password"
+                                            InputProps={{
+                                                endAdornment: (
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            variant="standard"
+                                        />
 
-                                    <TextField
-                                        id="input-with-icon-textfield"
-                                        label="Confirm Password"
-                                        type={showConfirmPassword ? 'text' : 'password'}
-                                        placeholder="Enter your confirm password"
-                                        InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowConfirmPassword}
-                                                        onMouseDown={handleMouseDownPassword}
-                                                        edge="end"
-                                                    >
-                                                        {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        variant="standard"
-                                    />
-                                </div>
-                                <div className="btn_area passbtn_area">
-                                    <Button variant="contained">Reset Password</Button>
+                                        <TextField
+                                            id="input-with-icon-textfield"
+                                            label="Confirm Password"
+                                            type={showConfirmPassword ? 'text' : 'password'}
+                                            placeholder="Enter your confirm password"
+                                            InputProps={{
+                                                endAdornment: (
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowConfirmPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            variant="standard"
+                                        />
+                                    </div>
+                                    <div className="btn_area passbtn_area">
+                                        <Button variant="contained">Reset Password</Button>
+                                    </div>
                                 </div>
                             </div>
                             <div className="right_Frame">
