@@ -40,50 +40,63 @@ function a11yProps(index) {
 }
 
 export const ProfileView = () => {
+  useEffect(() => {
+    handleProfile(),
+      handleFriend(),
+      getPostData()
+  }, []);
+
   const [value, setValue] = useState(0);
   const [profileData, setProfileData] = useState({});
   const [friendData, setfriendData] = useState({});
   const router = useRouter();
 
-  useEffect(() => {
-    const handleFriend = async () => {
-      try {
-        const friend = await getApi("/user/profile");
-        console.log(friend, "friend");
-        // Map the response data to the frontend
-        const { followers, following } = friend;
-        setfriendData({
-          followers,
-          following,
-        });
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to fetch profile data");
-      }
-    };
-    handleFriend();
-  }, []);
+  // get User Post Data
+  const [postData, setPostData] = useState([]);
 
-  useEffect(() => {
-    const handleProfile = async () => {
-      try {
-        const response = await getApi("/user/profile");
-        console.log(response, "response");
-        // Map the response data to the frontend
-        const { first_name, last_name, email, about_me } = response.data;
-        setProfileData({
-          first_name,
-          last_name,
-          email,
-          about_me,
-        });
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to fetch profile data");
-      }
-    };
-    handleProfile();
-  }, []);
+  const getPostData = async () => {
+    let res = await getApi("/user/post");
+    const postdata = res.data;
+    if (postdata) {
+      setPostData(postdata);
+    } else {
+      console.log([]);
+    }
+  };
+
+  const handleFriend = async () => {
+    try {
+      const friend = await getApi("/user/profile");
+      console.log(friend, "friend");
+      // Map the response data to the frontend
+      const { followers, following } = friend;
+      setfriendData({
+        followers,
+        following,
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch profile data");
+    }
+  };
+
+  const handleProfile = async () => {
+    try {
+      const response = await getApi("/user/profile");
+      console.log(response, "response");
+      // Map the response data to the frontend
+      const { first_name, last_name, email, about_me } = response.data;
+      setProfileData({
+        first_name,
+        last_name,
+        email,
+        about_me,
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch profile data");
+    }
+  };
 
   const handleEditChanges = () => {
     router.push("/profile/edit");
@@ -102,7 +115,9 @@ export const ProfileView = () => {
           </div>
           <div className="name_section">
             <div className="name_area">
-              <Typography>{profileData.first_name+" "+profileData.last_name}</Typography>
+              <Typography>
+                {profileData.first_name + " " + profileData.last_name}
+              </Typography>
             </div>
             <div className="email_area">
               <Typography>{profileData.email}</Typography>
@@ -161,7 +176,13 @@ export const ProfileView = () => {
           </Tabs>
         </div>
         <CustomTabPanel value={value} index={0}>
-          <Posts />
+          {postData ? (
+            postData.map((post) => (
+              <Posts post={post} />
+            ))
+          ) : (
+            <div>Haven't Posted a Question</div>
+          )}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           Answers
