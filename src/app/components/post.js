@@ -23,6 +23,12 @@ import Options from "../../../public/images/threedots.png"
 import Comments from './comments';
 import {getApi } from '../../helpers/General'
 
+// Post Data
+const getPostData = async () =>{
+    let res = await getApi('/user/post')
+    console.log(res)
+}
+
 
 
 const ExpandMore = styled((props) => {
@@ -34,10 +40,6 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const getPostData = async() =>{
-    let res = await getApi('/post/index')
-    console.log(res)
-}
 
 
 

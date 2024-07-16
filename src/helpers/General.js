@@ -1,4 +1,4 @@
-import { getToken, tokenName } from '@/dataCenter/LocalStorage';
+import { getToken, tokenName, setToken } from '@/dataCenter/LocalStorage';
 import axios from 'axios';
 import Validator from 'validatorjs';
 
@@ -33,9 +33,27 @@ let getApi = async (url) => {
             headers: {
                 Authorization: "Bearer " + getToken(tokenName.LOGIN_TOKEN)
             }
+        }).catch((error) => {
+            if(error.response.status == 401)
+            {
+                setToken(tokenName.LOGIN_TOKEN,"")
+            }
         })
-    let { data } = resp
-    return data
+
+    if(resp)
+    {
+        let { data } = resp
+        return data
+    }
+    else
+    {
+        return []
+    }
+}
+
+let checkLogin = async () => {
+    let resp = await getApi('/check-login')
+    console.log(resp)
 }
 
 const getHash = (length = 32) => {
