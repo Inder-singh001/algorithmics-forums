@@ -21,13 +21,10 @@ import Comment from "../../../public/images/comments.png"
 import Share from "../../../public/images/share.png"
 import Options from "../../../public/images/threedots.png"
 import Comments from './comments';
-import {getApi } from '../../helpers/General'
+import { getApi } from '../../helpers/General'
+import { getToken, tokenName } from '@/dataCenter/LocalStorage';
+import { toast } from 'react-toastify';
 
-// Post Data
-const getPostData = async () =>{
-    let res = await getApi('/user/post')
-    console.log(res)
-}
 
 
 
@@ -44,11 +41,9 @@ const ExpandMore = styled((props) => {
 
 
 
-export const Posts = () => {
-useEffect(()=>{
-     getPostData()
-},[])
+export const Posts = ({ post }) => {
 
+    const [postData, setPostData] = useState([])
     const [expanded, setExpanded] = useState(false);
     const [upvoteCount, setUpvoteCount] = useState(0);
     const [downvoteCount, setDownvoteCount] = useState(0);
@@ -56,6 +51,8 @@ useEffect(()=>{
     const [upvoted, setUpvoted] = useState(false);
     const [downvoted, setDownvoted] = useState(false);
     const [follow, setFollow] = useState(false);
+
+    let name = post.user_id.first_name + " " + post.user_id.last_name;
 
     const handleFollowing = () => {
         if (follow) {
@@ -135,14 +132,14 @@ useEffect(()=>{
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             variant="dot"
                         >
-                            <Avatar alt="Pablo Graces" src={AvatarImg} />
+                            <Avatar alt={`${name}`} src={AvatarImg} />
 
                         </StyledBadge>
                     </div>
                     <div className='profile_text'>
                         <div className='title_area'>
                             <div className='title_text'>
-                                <Typography>Pablo Graces</Typography>
+                                <Typography>{`${name}`}</Typography>
                             </div>
                             <div className='btn_text' >
                                 <Typography onClick={handleFollowing} >
@@ -163,9 +160,9 @@ useEffect(()=>{
                 </div>
                 <CardContent>
                     <div className='post_content'>
-                        <Typography variant='h4'>This is a question or post title, what do you want to ask?</Typography>
+                        <Typography variant='h4'>{post.title}</Typography>
                         <Typography variant="body2">
-                            Lorem ipsum dolor sit amet consectetur. Odio ultricies ac orci scelerisque elementum id id enim malesuada. Urna augue sit vitae viverra mattis nunc quis sed leo. Tempor pulvinar posuere enim id. Non lobortis vulputate tortor mattis sit.
+                            {post.description}
                         </Typography>
                     </div>
                 </CardContent>

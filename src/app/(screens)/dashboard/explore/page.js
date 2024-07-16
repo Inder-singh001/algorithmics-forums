@@ -7,8 +7,28 @@ import { Posts } from "@/app/components/post";
 import FeatuerdPosts from "@/app/components/featured_posts";
 import Categories from "@/app/components/categories";
 import { getValue } from "@/dataCenter/LocalStorage";
+import { getApi } from "@/helpers/General"
 
 const Dashboard = () => {
+  const [postData, setPostData] = useState([]);
+
+  useEffect(() => {
+    getPostData()
+  }, [])
+  const getPostData = async () => {
+    let res = await getApi('/user/post')
+    const postdata = res.data
+    console.log(postdata)
+    if (postdata) {
+      setPostData(postdata)
+    }
+    else {
+      console.log([])
+    }
+  }
+
+
+
 
   //Modal Props
   const [preferences, setPreferences] = useState(null);
@@ -39,9 +59,13 @@ const Dashboard = () => {
         <div className="right_section">
 
           <div className="explore_area">
-            <Posts />
-            <Posts />
-            <Posts />
+            {postData ? (
+              postData.map((post) => (
+                <Posts post={post} />
+              ))
+            ) : (
+              <div>Haven't Posted a Question</div>
+            )}
           </div>
           <div className="suggestion_area">
             <FeatuerdPosts />
