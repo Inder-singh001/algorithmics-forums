@@ -9,24 +9,70 @@ import { useRouter } from "next/navigation";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import AvatarPic from "../../../public/images/profile_pic.png";
-import { validatorMake, foreach, postApi,getApi } from '../../helpers/General';
+import { validatorMake, foreach, postApi, getApi } from '../../helpers/General';
 import { toast } from 'react-toastify';
 import { useEffect } from "react";
 import { tokenName, getToken } from "@/dataCenter/LocalStorage";
 
-export default function ProfileEdit() {
+const ProfileEdit = () => {
 
-  let defaultValue = {
+  const getData = async (token) => {
+    try {
+      let res = await getApi('/user/profile')
+      let {data} = res.data;
+      return data;
+    }
+    catch (error) {
+      console.error("Error fetching user data:", error);
+      throw error;
+    }
+  }
+
+  // let defaultValue = {
+  //   first_name: '',
+  //   last_name: '',
+  //   about_me: '',
+  //   email: '',
+  //   // password:'',
+  // }
+
+  // let [formData, setFormData] = useState(defaultValue)
+  // let [errors, setErrors] = useState(defaultValue)
+  const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
     about_me: '',
     email: '',
-    // password:'',
-  }
+  });
+  
+  const [errors, setErrors] = useState({
+    first_name: '',
+    last_name: '',
+    about_me: '',
+    email: '',
+  });
 
-  let [formData, setFormData] = useState(defaultValue)
-  let [errors, setErrors] = useState(defaultValue)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = getToken(tokenName.LOGIN_TOKEN);
+        const userData = await getData(token); 
+        if (userData) {
+          setFormData({
+            first_name: userData.first_name || '',
+            last_name: userData.last_name || '',
+            about_me: userData.about_me || '',
+            email: userData.email || '',
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        
+      }
+    };
 
+    fetchData();
+  }, []);
 
   let handleInputChange = (e) => {
     let { name, value } = e.target
@@ -56,30 +102,30 @@ export default function ProfileEdit() {
       })
     })
   }
- 
- 
+
+
   let handleSubmit = async (e) => {
     e.preventDefault()
     let validationRules = await validatorMake(formData, {
-      "first_name": "required",
-      "last_name": "required",
-      "about_me": "required",
-      "email": "required|email",
+      "first_name": "",
+      "last_name": "",
+      "about_me": "",
+      "email": "|email",
       // // "password":"required",
 
     })
-    getToken(tokenName.LOGIN_TOKEN)
-    console.log(tokenName.LOGIN_TOKEN)
+    let token = getToken(tokenName.LOGIN_TOKEN)
+    console.log(token)
+    let userData = await getData(token)
+    console.log(userData)
     if (!validationRules.fails()) {
       console.log(formData, "formData")
-      // let resp = await postApi('/user/update', formData)
-      // console.log(resp)
+      let resp = await postApi(`/user/update/${userData._id}`, formData)
+      console.log(resp)
       if (resp.status) {
         // otp screen
         toast.success(resp.message)
         setFormData(defaultValue);
-       
-
         router.push('/profile')
       }
       else {
@@ -90,7 +136,7 @@ export default function ProfileEdit() {
           toast.error(resp.message)
         }
       }
-      console.log(resp, "resp")
+       console.log(resp, "resp")
     }
     else {
       handleErrors(validationRules.errors.errors)
@@ -111,6 +157,8 @@ export default function ProfileEdit() {
   // }
 
   return (
+
+
     <div className="edit_section">
       <form onSubmit={handleSubmit}>
         <div className="head_section">
@@ -120,36 +168,36 @@ export default function ProfileEdit() {
           </div>
           <div className="btn_section" >
             {/* <Typography type="submit" >Save changes</Typography> */}
-             <Button  type="submit">
+            <Button type="submit">
               Save changes
             </Button>
           </div>
         </div>
         <div className="body_section">
           <div className="text_section">
-            <InputLabel htmlFor="standard-name">First Name</InputLabel>
+            <InputLabel htmlFor="first-name">First Name</InputLabel>
             <Input
               id="standard-basic"
               placeholder="First Name"
               name="first_name"
               value={formData.first_name}
               onChange={handleInputChange}
-              // helperText={errors.first_name ? errors.first_name : ''}
+            // helperText={errors.first_name ? errors.first_name : ''}
             />
           </div>
           <div className="text_section">
-            <InputLabel htmlFor="standard-name">Last Name</InputLabel>
+            <InputLabel htmlFor="lat_name">Last Name</InputLabel>
             <Input
               id="standard-basic"
               placeholder="Last Name"
               name="last_name"
               value={formData.last_name}
               onChange={handleInputChange}
-              // helperText={errors.last_name ? errors.last_name : ''}
+            // helperText={errors.last_name ? errors.last_name : ''}
             />
           </div>
           <div className="text_section">
-            <InputLabel htmlFor="standard-description">About</InputLabel>
+            <InputLabel htmlFor="description">About</InputLabel>
             <Input
               id="standard-multiline-flexible"
               placeholder="Write something about yourself!"
@@ -162,14 +210,14 @@ export default function ProfileEdit() {
             />
           </div>
           <div className="text_section">
-            <InputLabel htmlFor="standard-email">Email</InputLabel>
+            <InputLabel htmlFor="email">Email</InputLabel>
             <Input
               id="standard-basic"
               placeholder="Email"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              // helperText={errors.email ? errors.email : ''}
+            // helperText={errors.email ? errors.email : ''}
             />
           </div>
           {/* <div className="text_section">
@@ -214,3 +262,4 @@ export default function ProfileEdit() {
 
   );
 }
+export default ProfileEdit
