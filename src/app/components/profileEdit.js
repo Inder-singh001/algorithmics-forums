@@ -30,32 +30,15 @@ const ProfileEdit = () => {
     }
   }
 
-  // let defaultValue = {
-  //   first_name: '',
-  //   last_name: '',
-  //   about_me: '',
-  //   email: '',
-  //   // password:'',
-  // }
-
-  // let [formData, setFormData] = useState(defaultValue)
-  // let [errors, setErrors] = useState(defaultValue)
-
-  const [formData, setFormData] = useState({
+  let editData = {
     first_name: '',
     last_name: '',
     about_me: '',
     email: '',
     password: '',
-  });
-
-  const [errors, setErrors] = useState({
-    first_name: '',
-    last_name: '',
-    about_me: '',
-    email: '',
-    password: '',
-  });
+  }
+  const [formData, setFormData] = useState(editData);
+  const [errors, setErrors] = useState(editData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -117,7 +100,7 @@ const ProfileEdit = () => {
       "last_name": "required",
       "about_me": "required",
       "email": "required|email",
-      "password":"required",
+      "password": "required",
 
     })
     let coin = getToken(tokenName.LOGIN_TOKEN)
@@ -127,7 +110,6 @@ const ProfileEdit = () => {
       let resp = await postApi(`/user/update/${userData._id}`, formData)
       console.log(resp)
       if (resp.status) {
-        // otp screen
         toast.success(resp.message)
         setFormData({
           first_name: userData.first_name || '',
@@ -154,12 +136,6 @@ const ProfileEdit = () => {
     }
   }
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  }
-
   return (
 
 
@@ -171,7 +147,6 @@ const ProfileEdit = () => {
             <EditIcon />
           </div>
           <div className="btn_section" >
-            {/* <Typography type="submit" >Save changes</Typography> */}
             <Button type="submit">
               Save changes
             </Button>
@@ -186,8 +161,6 @@ const ProfileEdit = () => {
               name="first_name"
               value={formData.first_name}
               onChange={handleInputChange}
-              // error={!!errors.first_name}
-            // helperText={errors.first_name || ''}
             />
             <HelperText error={errors.first_name ? errors.first_name : ""} />
           </div>
@@ -199,10 +172,8 @@ const ProfileEdit = () => {
               name="last_name"
               value={formData.last_name}
               onChange={handleInputChange}
-              // error={!!errors.last_name}
-              // helperText={errors.last_name || ''}
             />
-             <HelperText error={errors.last_name ? errors.last_name : ""} />
+            <HelperText error={errors.last_name ? errors.last_name : ""} />
           </div>
           <div className="text_section">
             <InputLabel htmlFor="about_me">About</InputLabel>
@@ -212,10 +183,6 @@ const ProfileEdit = () => {
               name="about_me"
               value={formData.about_me}
               onChange={handleInputChange}
-              // error={!!errors.about_me}
-              // // helperText={errors.about_me || ''}
-              // helperText={errors.about_me ? errors.about_me : ""}
-              // rows={6}
               multiline
             />
             <HelperText error={errors.about_me ? errors.about_me : ""} />
@@ -228,48 +195,12 @@ const ProfileEdit = () => {
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              // error={!!errors.email}
-              // helperText={errors.email || ''}
             />
-             <HelperText error={errors.email ? errors.email: ""} />
+            <HelperText error={errors.email ? errors.email : ""} />
           </div>
-          <div className="text_section">
-            <div className="label_section">
-              <div className="pass_area">
-                <InputLabel htmlFor="standard-adornment-password">
-                  Password
-                </InputLabel>
-              </div>
-              <div className="change_pass_area">
-                <Link href="/auth/change-password">Change Password </Link>
-              </div>
-            </div>
-            <Input
-              id="standard-adornment-password"
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              helperText={errors.password ? errors.password : ""}
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {!showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              // inputProps={{
-              //   'aria-label': 'weight',
-              // }}
-            />
-             <HelperText error={errors.password ? errors.password: ""} />
+          <div className="change_pass_area">
+            <Link href="/auth/change-password">Change Password </Link>
           </div>
-
         </div>
       </form>
     </div>
