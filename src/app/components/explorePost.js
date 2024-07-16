@@ -23,6 +23,8 @@ import Options from "../../../public/images/threedots.png"
 import Comments from './comments';
 
 
+
+
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -35,7 +37,8 @@ const ExpandMore = styled((props) => {
 
 
 
-export const Posts = ({ post }) => {
+
+export const ExplorePosts = ({ explorepost }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [upvoteCount, setUpvoteCount] = useState(0);
@@ -45,7 +48,8 @@ export const Posts = ({ post }) => {
     const [downvoted, setDownvoted] = useState(false);
     const [follow, setFollow] = useState(false);
 
-    let name = post.user_id.first_name + " " + post.user_id.last_name;
+    console.log(explorepost)
+    let name = `${explorepost.first_name}" "${explorepost.last_name}`;
 
     const handleFollowing = () => {
         if (follow) {
@@ -151,9 +155,9 @@ export const Posts = ({ post }) => {
                 </div>
                 <CardContent>
                     <div className='post_content'>
-                        <Typography variant='h4'>{post.title}</Typography>
+                        <Typography variant='h4'>{explorepost.title}</Typography>
                         <Typography variant="body2">
-                            {post.description}
+                            {explorepost.description}
                         </Typography>
                     </div>
                 </CardContent>
