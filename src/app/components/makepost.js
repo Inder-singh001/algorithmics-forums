@@ -1,293 +1,77 @@
 "use client";
-import {
-  Avatar,
-  Button,
-  Input,
-  InputLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Avatar, Button, Input, InputLabel, Typography } from "@mui/material";
 import * as React from "react";
 import "../../.././public/sass/pages/makepost.scss";
 import { useState, useEffect } from "react";
 import UploadIcon from "@mui/icons-material/UploadFile";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Description } from "@mui/icons-material";
-import Menu from "@mui/material/Menu";
-import MenuList from "@mui/material/MenuList";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { validatorMake, foreach, postApi } from "../../helpers/General";
+import { validatorMake, foreach, postApi, getApi } from "../../helpers/General";
 import { toast } from "react-toastify";
 
-// const DropSelect = ({ selectedOption, setSelectedOption }) => {
-//   // const [selectedOption, setSelectedOption] = useState("Public");
-//   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-//   const toggleDropdown = () => {
-//     setIsDropdownOpen(!isDropdownOpen);
-//   };
-
-//   const handleOptionClick = (option) => {
-//     setSelectedOption(option);
-//     setIsDropdownOpen(false);
-//   };
-
-//   useEffect(() => {
-//     // This effect runs when selectedOption changes
-//     console.log(`Selected option: ${selectedOption}`);
-//   }, [selectedOption]);
-
-//   return (
-//     <div className="dropdown-container">
-//       <button className="dropdown-button" onClick={toggleDropdown}>
-//         <span>{selectedOption}</span>
-//         <ArrowDropDownIcon className="dropdown-arrow" />
-//       </button>
-//       {isDropdownOpen && (
-//         <div className="dropdown-menu">
-//           <div onClick={() => handleOptionClick("Public")}>
-//             <PeopleAltIcon />
-//             Public
-//           </div>
-//           <div onClick={() => handleOptionClick("Private")}>
-//             <Diversity3Icon />
-//             Private
-//           </div>
-//           <div onClick={() => handleOptionClick("Personal")}>
-//             <LockPersonIcon />
-//             Personal
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// const CategoryDropSelect = ({ selectedCategory, setSelectedCategory }) => {
-//   // const [selectedCategory, setSelectedCategory] = useState("Technology");
-//   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
-
-//   const toggleCategoryDropdown = () => {
-//     setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
-//   };
-
-//   const handleCategoryOptionClick = (category) => {
-//     setSelectedCategory(category);
-//     setIsCategoryDropdownOpen(false);
-//   };
-
-//   useEffect(() => {
-//     // This effect runs when selectedOption changes
-//     console.log(`Selected category: ${selectedCategory}`);
-//   }, [selectedCategory]);
-
-// const postCategory = [
-//   {
-//     key: 1,
-//     name: "Technology",
-//     title: "Technology",
-//   },
-//   {
-//     key: 2,
-//     name: "Science",
-//     title: "Science",
-//   },
-//   {
-//     key: 3,
-//     name: "Design",
-//     title: "Design",
-//   },
-//   {
-//     key: 4,
-//     name: "Books",
-//     title: "Books",
-//   },
-//   {
-//     key: 5,
-//     name: "Travel",
-//     title: "Travel",
-//   },
-//   {
-//     key: 6,
-//     name: "Health",
-//     title: "Health",
-//   },
-//   {
-//     key: 7,
-//     name: "Career",
-//     title: "Career",
-//   },
-//   {
-//     key: 8,
-//     name: "Food",
-//     title: "Food",
-//   },
-//   {
-//     key: 9,
-//     name: "Cricket",
-//     title: "Cricket",
-//   },
-//   {
-//     key: 10,
-//     name: "Hobbies",
-//     title: "Hobbies",
-//   },
-//   {
-//     key: 11,
-//     name: "Movies",
-//     title: "Movies",
-//   },
-//   {
-//     key: 12,
-//     name: "Vacations",
-//     title: "Vacations",
-//   },
-//   {
-//     key: 13,
-//     name: "Sports",
-//     title: "Sports",
-//   },
-//   {
-//     key: 14,
-//     name: "IT",
-//     title: "IT",
-//   },
-//   {
-//     key: 15,
-//     name: "Shopping",
-//     title: "Shopping",
-//   },
-// ];
-// console.log(postCategory.title);
-//   return (
-//     <div className="dropdown-container">
-//       <button className="dropdown-button" onClick={toggleCategoryDropdown}>
-//         <span>{selectedCategory}</span>
-//         <ArrowDropDownIcon className="dropdown-arrow" />
-//       </button>
-//       {isCategoryDropdownOpen && (
-//         <div className="dropdown-menu">
-//           {postCategory.map((category) => (
-//             <div
-//               key={category.key}
-//               onClick={() => handleCategoryOptionClick(`${category.title}`)}
-//             >
-//               {category.name}
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
+export const HelperText = ({ error }) => {
+  return (
+    <div
+      className="helper_
+    text_field"
+    >
+      <Typography>{error}</Typography>
+    </div>
+  );
+};
 
 export default function MakeAPost() {
+  const [profileData, setprofileData] = useState({});
+
+  useEffect(() => {
+    const handleProfile = async () => {
+      try {
+        const response = await getApi("/user/profile");
+        console.log(response, "response");
+        const { _id, first_name, last_name } = response.data;
+        setprofileData({
+          _id,
+          first_name,
+          last_name,
+        });
+        setFormData((prevData) => {
+          return {
+            ...prevData,
+            user_id: _id,
+          };
+        });
+      } catch (error) {
+        console.log(error);
+        toast.error("failed to get User Data");
+      }
+    };
+    handleProfile();
+  }, []);
+
   const router = useRouter();
   let defaultValue = {
     title: "",
     description: "",
-    // type: "",
-    // cat_id: "",
-  };
-
-  const postCategory = [
-    {
-      key: 1,
-      name: "Technology",
-      title: "Technology",
-    },
-    {
-      key: 2,
-      name: "Science",
-      title: "Science",
-    },
-    {
-      key: 3,
-      name: "Design",
-      title: "Design",
-    },
-    {
-      key: 4,
-      name: "Books",
-      title: "Books",
-    },
-    {
-      key: 5,
-      name: "Travel",
-      title: "Travel",
-    },
-    {
-      key: 6,
-      name: "Health",
-      title: "Health",
-    },
-    {
-      key: 7,
-      name: "Career",
-      title: "Career",
-    },
-    {
-      key: 8,
-      name: "Food",
-      title: "Food",
-    },
-    {
-      key: 9,
-      name: "Cricket",
-      title: "Cricket",
-    },
-    {
-      key: 10,
-      name: "Hobbies",
-      title: "Hobbies",
-    },
-    {
-      key: 11,
-      name: "Movies",
-      title: "Movies",
-    },
-    {
-      key: 12,
-      name: "Vacations",
-      title: "Vacations",
-    },
-    {
-      key: 13,
-      name: "Sports",
-      title: "Sports",
-    },
-    {
-      key: 14,
-      name: "IT",
-      title: "IT",
-    },
-    {
-      key: 15,
-      name: "Shopping",
-      title: "Shopping",
-    },
-  ];
-  console.log(postCategory.title);
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
+    user_id: "",
+    cat_id: "",
   };
 
   let [formData, setFormData] = useState(defaultValue);
   let [errors, setErrors] = useState(defaultValue);
+  let [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    postCategory();
+  }, []);
+
+  const postCategory = async () => {
+    let res = await getApi("/post-category");
+    setCategories(res.data); // Assume the API response has data in res.data
+    console.log(res);
+  };
 
   let handleInputChange = (e) => {
     let { name, value } = e.target;
@@ -326,19 +110,19 @@ export default function MakeAPost() {
     let validationRules = await validatorMake(formData, {
       title: "required",
       description: "required",
-      // type: "required",
-      // cat_id: "required",
+      user_id: "required",
+      cat_id: "required",
     });
 
     if (!validationRules.fails()) {
       console.log(formData, "formData");
       let resp = await postApi("/post/add", formData);
-
+      console.log(resp, "resp");
       if (resp.status) {
         // otp screen
         toast.success(resp.message);
         setFormData(defaultValue);
-        // getToken(tokenName.LOGIN_TOKEN, resp.data.login_token);
+
         router.push("/dashboard/explore");
       } else {
         if (typeof resp.message == "object") {
@@ -366,51 +150,38 @@ export default function MakeAPost() {
               <Avatar alt="Remy Sharp" src="/images/profile.jpg" />
             </div>
             <div className="profile_name">
-              <Typography>John Doe</Typography>
+              <Typography>
+                {profileData.first_name + " " + profileData.last_name}
+              </Typography>
             </div>
-
-            <div class="type">
-              <Button
-                id="basic-button"
-                aria-controls={open ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
+            <select
+              className="type"
+              name="type"
+              value={formData.type}
+              onChange={handleInputChange}
+            >
+              <option
+                name="type"
+                value={formData.Public}
+                onChange={handleInputChange}
               >
-                <PeopleAltIcon fontSize="small" />
                 Public
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
+              </option>
+              <option
+                name="type"
+                value={formData.Private}
+                onChange={handleInputChange}
               >
-                <MenuList>
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <PeopleAltIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Public</ListItemText>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <Diversity3Icon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Private</ListItemText>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <LockPersonIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Personal</ListItemText>
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            </div>
+                Private
+              </option>
+              <option
+                name="type"
+                value={formData.Personal}
+                onChange={handleInputChange}
+              >
+                Personal
+              </option>
+            </select>
           </div>
 
           <div className="post_category">
@@ -419,18 +190,19 @@ export default function MakeAPost() {
             </div>
             <select
               className="category"
+              name="cat_id"
               value={formData.category}
               onChange={handleInputChange}
-              helperText={errors.type ? errors.type : ""}
+              // helperText={errors.type ? errors.type : ""}
             >
-              {postCategory.map((category) => (
+              {categories.map((category) => (
                 <option
-                  key={category.key}
-                  value={formData.category}
-                  onChange={() => handleInputChange(`${category.title}`)}
+                  key={category._id}
+                  value={category._id}
+                  selected={formData.category == category._id ? true : false}
                   helperText={errors.type ? errors.type : ""}
                 >
-                  {category.name}
+                  {category.title}
                 </option>
               ))}
             </select>
@@ -462,8 +234,8 @@ export default function MakeAPost() {
               name="title"
               value={formData.title}
               onChange={handleInputChange}
-              helperText={errors.title ? errors.title : ""}
             />
+            <HelperText error={errors.title ? errors.title : ""} />
           </div>
           <div className="ques_area">
             <InputLabel htmlFor="standard-description" required>
@@ -475,10 +247,10 @@ export default function MakeAPost() {
               name="description"
               value={formData.description}
               onChange={handleInputChange}
-              helperText={errors.description ? errors.description : ""}
               // rows={6}
               multiline
             />
+            <HelperText error={errors.description ? errors.description : ""} />
           </div>
         </div>
         <div className="attachment_container">
