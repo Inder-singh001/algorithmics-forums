@@ -20,7 +20,6 @@ const ProfileEdit = () => {
   const getData = async (token) => {
     try {
       let res = await getApi('/user/profile')
-      console.log(res)
       return (res.data);
 
     }
@@ -35,7 +34,6 @@ const ProfileEdit = () => {
     last_name: '',
     about_me: '',
     email: '',
-    password: '',
   }
   const [formData, setFormData] = useState(editData);
   const [errors, setErrors] = useState(editData);
@@ -50,8 +48,7 @@ const ProfileEdit = () => {
             first_name: userData.first_name || '',
             last_name: userData.last_name || '',
             about_me: userData.about_me || '',
-            email: userData.email || '',
-            password: userData.password || '',
+            email: userData.email || '',       
           });
         }
       } catch (error) {
@@ -100,8 +97,6 @@ const ProfileEdit = () => {
       "last_name": "required",
       "about_me": "required",
       "email": "required|email",
-      "password": "required",
-
     })
     let coin = getToken(tokenName.LOGIN_TOKEN)
     let userData = await getData(coin.data)
@@ -115,8 +110,7 @@ const ProfileEdit = () => {
           first_name: userData.first_name || '',
           last_name: userData.last_name || '',
           about_me: userData.about_me || '',
-          email: userData.email || '',
-          password: userData.password || '',
+          email: userData.email || '',     
         });
         router.push('/profile')
       }
@@ -137,8 +131,6 @@ const ProfileEdit = () => {
   }
   const router = useRouter();
   return (
-
-
     <div className="edit_section">
       <form onSubmit={handleSubmit}>
         <div className="head_section">
@@ -199,7 +191,7 @@ const ProfileEdit = () => {
             <HelperText error={errors.email ? errors.email : ""} />
           </div>
           <div className="change_pass_area">
-            <Link href="/auth/change-password">Change Password </Link>
+            <Link href="/auth/editPassword">Change Password </Link>
           </div>
         </div>
       </form>

@@ -6,8 +6,15 @@
 //   box-sizing: border-box;
 
 // }
-.edit_section {
+.edit_section,.editSection_editPassword {
   margin: 16px 0px 0px 10px;
+  .header_editPassword{
+    font-size: large;
+    font-weight: 700;
+    line-height: 14px;
+    margin-bottom:24px;
+    color: $black;
+  }
 
   .head_section {
     position: relative;
@@ -94,7 +101,7 @@
     }
   }
 
-  .body_section {
+  .body_section,.body_section_editPassword {
     .text_section {
       margin-bottom: 24px;
 
