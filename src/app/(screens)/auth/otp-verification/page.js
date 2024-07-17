@@ -38,19 +38,17 @@ const OTPverify = () => {
 
         if (!validationRules.fails()) {
             let resp = await postApi('/user/verify-otp', formData)
-            if (resp.status) {
+            if (resp.data.email_verified ==null) {
                 toast.success(resp.message)
                 setOtp("");
                 setToken(tokenName.OTP_TOKEN, null)
                 router.push('/auth/login')
             }
-            else {
-                if (typeof resp.message == 'object') {
-                    handleErrors(resp.message.errors)
-                }
-                else {
-                    toast.error(resp.message)
-                }
+            else if (resp.data.email_verified !=null) {
+                toast.success(resp.message)
+                setOtp("");
+                setToken(tokenName.LOGIN_TOKEN,resp.data.login_token)
+                router.push('/auth/reset-password')
             }
             console.log(resp.message.errors, "resp")
         }
