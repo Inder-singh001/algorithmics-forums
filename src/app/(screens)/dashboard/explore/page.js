@@ -3,12 +3,31 @@ import { useState, useEffect } from "react";
 import Navbar from "../../../components/navbar";
 import Sidebar from "../../../components/sidebar";
 import "../../../../../public/sass/dashboard/explore.scss";
-import { Posts } from "@/app/components/post";
+import { ExplorePosts } from "@/app/components/explorePost";
 import FeatuerdPosts from "@/app/components/featured_posts";
 import Categories from "@/app/components/categories";
 import { getValue } from "@/dataCenter/LocalStorage";
+import { getApi } from "@/helpers/General"
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
+  useEffect(() => {
+    getAllPostData()
+  }, [])
+
+  // get All Post Data
+  const [allpostData, setAllPostData] = useState([]);
+
+  const getAllPostData = async () => {
+    let res = await getApi("/post/index");
+    const postdata = res.data;
+    console.log(postdata);
+    if (postdata) {
+      setAllPostData(postdata);
+    } else {
+      toast.error("NO Post")
+    }
+  };
 
   //Modal Props
   const [preferences, setPreferences] = useState(null);
@@ -39,9 +58,13 @@ const Dashboard = () => {
         <div className="right_section">
 
           <div className="explore_area">
-            <Posts />
-            <Posts />
-            <Posts />
+          {allpostData ? (
+            allpostData.map((explorepost) => (
+              <ExplorePosts explorepost={explorepost} />
+            ))
+          ) : (
+            <div>Haven't Posted a Question</div>
+          )}
           </div>
           <div className="suggestion_area">
             <FeatuerdPosts />
