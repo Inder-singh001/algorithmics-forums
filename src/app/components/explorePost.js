@@ -48,8 +48,8 @@ export const ExplorePosts = ({ explorepost }) => {
     const [downvoted, setDownvoted] = useState(false);
     const [follow, setFollow] = useState(false);
 
-    console.log(explorepost)
-    let name = `${explorepost.first_name}" "${explorepost.last_name}`;
+    // name variable
+    let name = explorepost.user_id.first_name + " " + explorepost.user_id.last_name;
 
     const handleFollowing = () => {
         if (follow) {
