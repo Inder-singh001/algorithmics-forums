@@ -49,7 +49,7 @@ export const ExplorePosts = ({ explorepost }) => {
     const [follow, setFollow] = useState(false);
 
     // name variable
-    let name = explorepost.user_id.first_name + " " + explorepost.user_id.last_name;
+    let name = explorepost.user.first_name + " " + explorepost.user.last_name;
 
     const handleFollowing = () => {
         if (follow) {
