@@ -6,16 +6,17 @@
 //   box-sizing: border-box;
 
 // }
-.edit_section,.editSection_editPassword {
+.edit_section {
   margin: 16px 0px 0px 10px;
   .header_editPassword{
-    font-size: large;
+    font-size: x-large;
     font-weight: 700;
     line-height: 14px;
     margin-bottom:24px;
     color: $black;
+   
   }
-
+ 
   .head_section {
     position: relative;
     display: flex;
@@ -101,13 +102,13 @@
     }
   }
 
-  .body_section,.body_section_editPassword {
+  .body_section{
     .text_section {
       margin-bottom: 24px;
 
       .MuiFormLabel-root {
         // font-family: Roboto;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         line-height: 20px;
         color: $secondarytext;
@@ -132,10 +133,15 @@
         font-weight: 500;
         line-height: 22px;
       }
+      .css-i4bv87-MuiSvgIcon-root{
+        font-size: 14px;
+      }
     }
 
     .change_pass_area {
-      a {
+      .MuiButtonBase-root {
+        text-transform: none;
+        padding: 0px;
         font-size: 13px;
         font-weight: 700;
         line-height: 25px;
