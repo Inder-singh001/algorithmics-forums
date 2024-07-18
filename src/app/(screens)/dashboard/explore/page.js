@@ -11,17 +11,12 @@ import { getApi } from "@/helpers/General"
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
-  useEffect(() => {
-    getAllPostData()
-  }, [])
 
   // get All Post Data
   const [allpostData, setAllPostData] = useState([]);
-
   const getAllPostData = async () => {
     let res = await getApi("/post/index");
     const postdata = res.data;
-    console.log(postdata);
     if (postdata) {
       setAllPostData(postdata);
     } else {
@@ -34,12 +29,17 @@ const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const storedPreferences = getValue("preference")
+    const getPreference = () => {
+      let storedPreferences = getValue("preferenceCount") 
 
-    if (storedPreferences) {
-      setPreferences(JSON.stringify(storedPreferences));
-      setShowModal(true);
+      if (storedPreferences && storedPreferences === "0") {
+        setPreferences(JSON.stringify(storedPreferences));
+        setShowModal(true);
+      }
+      else setShowModal(false)
     }
+    getAllPostData()
+    getPreference()
   }, []);
 
   const handleCloseModal = () => {
@@ -58,13 +58,13 @@ const Dashboard = () => {
         <div className="right_section">
 
           <div className="explore_area">
-          {allpostData ? (
-            allpostData.map((explorepost) => (
-              <ExplorePosts explorepost={explorepost} />
-            ))
-          ) : (
-            <div>Haven't Posted a Question</div>
-          )}
+            {allpostData ? (
+              allpostData.map((explorepost) => (
+                <ExplorePosts explorepost={explorepost} />
+              ))
+            ) : (
+              <div>Haven't Posted a Question</div>
+            )}
           </div>
           <div className="suggestion_area">
             <FeatuerdPosts />

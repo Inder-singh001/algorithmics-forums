@@ -22,9 +22,7 @@ import Share from "../../../public/images/share.png"
 import Options from "../../../public/images/threedots.png"
 import Comments from './comments';
 
-
-
-
+//Comment Expand Function
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -34,10 +32,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-
-
-
-
+//Main Component
 export const ExplorePosts = ({ explorepost }) => {
 
     const [expanded, setExpanded] = useState(false);
