@@ -215,17 +215,24 @@
         }
         .inApp_share_icon {
           margin-right: 20px;
-          align-self: flex-end;
           .css-i4bv87-MuiSvgIcon-root {
             color: $icons;
             transform: rotate(90deg);
+            font-size: 20px;
           }
         }
         .comment_icon {
+          padding: 4px;
           .css-9zmlxc-MuiButtonBase-root-MuiIconButton-root {
             width: 16px;
             height: 16px;
             padding: 0px;
+            img {
+              object-fit: contain;
+            }
+            .MuiTouchRipple-root{
+              left: -10px;
+            }
             .MuiTypography-root {
               // font-family: Roboto;
               margin-left: 10px;

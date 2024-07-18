@@ -32,7 +32,6 @@ const Categories = ({ open, handleClose, preferences }) => {
     let handleSubmit = async (e) => {
         e.preventDefault()
         const cat_id = selectedTags
-        console.log("Selected Tags (cat_id):", cat_id);
 
         if (cat_id.length < 5) toast.error("Select minimum 5 topics of your interests.")
 

@@ -43,7 +43,7 @@ export const Posts = ({ post }) => {
 
 
 
-  let name = post.user_id.first_name + " " + post.user_id.last_name;
+  let name = post.user.first_name + " " + post.user.last_name;
 
   const handleVote = async (type) => {
     let voteData = {
@@ -306,7 +306,7 @@ export const Posts = ({ post }) => {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Comments />
+            <Comments post={post} />
           </CardContent>
         </Collapse>
       </Card>

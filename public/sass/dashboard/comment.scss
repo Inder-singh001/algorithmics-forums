@@ -6,11 +6,20 @@
     margin-bottom: 16px;
     .MuiInputBase-root {
       width: 100%;
+      padding-left: 4px;
+      align-items: end;
       &::before {
         border-bottom: 1px solid $icons;
       }
       &::after {
         border-bottom: 2px solid $secondarytext;
+      }
+    }
+    .css-ittuaa-MuiInputAdornment-root {
+      width: 24px;
+      height: 24px;
+      img {
+        object-fit: contain;
       }
     }
     .MuiInputBase-input {
@@ -21,13 +30,21 @@
       line-height: 25px;
       height: 34px;
     }
-    .MuiInputAdornment-root {
-      padding-left: 4px;
+    .css-1laqsz7-MuiInputAdornment-root {
+      padding-bottom: 12px;
     }
-    .css-78trlr-MuiButtonBase-root-MuiIconButton-root.Mui-disabled {
-      width: 16px;
-      height: 16px;
+    .css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+      width: 36px;
+      height: 24px;
+      border-radius: 50px;
       padding: 0px;
+      background-color: $primaryBlue_color;
+    }
+    .css-i4bv87-MuiSvgIcon-root {
+      font-size: 14px;
+      line-height: 24px;
+      font-weight: 700;
+      color: $white;
     }
   }
   .comment_user {

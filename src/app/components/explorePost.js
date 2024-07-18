@@ -33,7 +33,7 @@ const ExpandMore = styled((props) => {
 }));
 
 //Main Component
-export const ExplorePosts = ({ explorepost }) => {
+export const posts = ({ post }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [upvoteCount, setUpvoteCount] = useState(0);
@@ -44,7 +44,7 @@ export const ExplorePosts = ({ explorepost }) => {
     const [follow, setFollow] = useState(false);
 
     // name variable
-    let name = explorepost.user.first_name + " " + explorepost.user.last_name;
+    let name = post.user.first_name + " " + post.user.last_name;
 
     const handleFollowing = () => {
         if (follow) {
@@ -150,9 +150,9 @@ export const ExplorePosts = ({ explorepost }) => {
                 </div>
                 <CardContent>
                     <div className='post_content'>
-                        <Typography variant='h4'>{explorepost.title}</Typography>
+                        <Typography variant='h4'>{post.title}</Typography>
                         <Typography variant="body2">
-                            {explorepost.description}
+                            {post.description}
                         </Typography>
                     </div>
                 </CardContent>
@@ -225,7 +225,7 @@ export const ExplorePosts = ({ explorepost }) => {
                 </CardActions >
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Comments />
+                        <Comments post={post} />
                     </CardContent>
                 </Collapse>
             </Card >

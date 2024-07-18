@@ -1,18 +1,28 @@
 'use client'
 import { useState } from 'react';
+import { validatorMake, foreach, postApi } from '@/helpers/General'
 import Image from "next/image";
 import { Button, IconButton, Input, InputAdornment, Typography } from "@mui/material";
-// import Avatar from '@mui/material/Avatar';
+import ArrowDownwardRoundedIcon from '@mui/icons-material/ArrowDownwardRounded';
 import AvatarImg from "../../../public/images/avatar.png"
 import Comment from "../../../public/images/comments.png"
 import NotVoted from "../../../public/images/unselect.png"
 import Voted from "../../../public/images/select.png"
 import "../../../public/sass/dashboard/comment.scss"
-const Comments = () => {
+
+const Comments = ({ post }) => {
+
+    let postData = {
+        post_id: post._id,
+        description: ''
+    }
+
     const [upvoteCount, setUpvoteCount] = useState(0);
     const [downvoteCount, setDownvoteCount] = useState(0);
     const [upvoted, setUpvoted] = useState(false);
     const [downvoted, setDownvoted] = useState(false);
+    const [commentData, setCommentData] = useState(postData);
+    const [errors, setErrors] = useState(postData)
 
     const handleUpvote = () => {
         if (upvoted) {
@@ -42,21 +52,90 @@ const Comments = () => {
         }
     };
 
+    //Comments Api
+    const handleComment = async (e) => {
+        e.preventDefault()
+        let validationRules = await validatorMake(commentData, {
+            "post_id": "required",
+            "description": "required"
+        })
+
+        if (!validationRules.fails()) {
+            let postComment = await postApi('/post-comments/add-comments', commentData)
+            if (postComment.status) {
+                setCommentData(postData);
+            }
+            else {
+                if (typeof resp.message == 'object') {
+                    handleErrors(resp.message.errors)
+                }
+                else {
+                    toast.error(resp.message)
+                }
+            }
+        }
+        else {
+            handleErrors(validationRules.errors.errors)
+            console.log(validationRules.errors.errors)
+        }
+
+    }
+
+    let handleInputChange = (e) => {
+        let { name, value } = e.target
+        setCommentData((prevData) => {
+            return {
+                ...prevData,
+                [name]: value
+            }
+        })
+
+        setErrors((prevData) => {
+            return {
+                ...prevData,
+                [name]: null
+            }
+        })
+    }
+
+    let handleErrors = (errors) => {
+        foreach(errors, (index, item) => {
+            setErrors((prevData) => {
+                return {
+                    ...prevData,
+                    [index]: item[0]
+                }
+            })
+        })
+    }
+
+
     return (
         <div className="comments_section">
-            <div className="comment_input">
-                <Input
-                    id="standard-adornment-password"
-                    placeholder="Comment Here...."
-                    startAdornment={
-                        <InputAdornment position="start">
-                            <IconButton disabled>
+            <form onSubmit={handleComment}>
+                <div className="comment_input">
+                    <Input
+                        id="standard-adornment-password"
+                        placeholder="Comment Here...."
+                        name="description"
+                        value={commentData.description}
+                        onChange={handleInputChange}
+                        multiline
+                        startAdornment={
+                            <InputAdornment position="start">
                                 <Image src={Comment} alt='comment icon' />
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                />
-            </div>
+                            </InputAdornment>
+                        }
+                        endAdornment={
+                            <InputAdornment position='end'>
+                                <IconButton type='Submit'>
+                                    <ArrowDownwardRoundedIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                </div>
+            </form>
             <div className="comment_user">
                 <div className='user_pic_area'>
                     <Image alt="Pablo Graces" src={AvatarImg} />
@@ -195,6 +274,7 @@ const Comments = () => {
             <div className='more_replies'>
                 <Typography>View More replies</Typography>
             </div>
+
         </div>
     )
 }

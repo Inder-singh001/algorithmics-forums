@@ -15,7 +15,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { validatorMake, foreach, postApi, getHash } from '../../../../helpers/General'
+import { validatorMake, foreach, postApi } from '../../../../helpers/General'
 import { toast } from "react-toastify";
 import { setToken, setValue, tokenName } from "@/dataCenter/LocalStorage";
 

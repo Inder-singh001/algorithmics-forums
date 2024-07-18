@@ -59,8 +59,8 @@ const Dashboard = () => {
 
           <div className="explore_area">
             {allpostData ? (
-              allpostData.map((explorepost) => (
-                <ExplorePosts explorepost={explorepost} />
+              allpostData.map((post) => (
+                <ExplorePosts post={post} />
               ))
             ) : (
               <div>Haven't Posted a Question</div>
