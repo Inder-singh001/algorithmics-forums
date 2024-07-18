@@ -3,38 +3,50 @@ import { Modal, Typography } from "@mui/material"
 import "../../../public/sass/pages/categories.scss"
 import Button from '@mui/material/Button';
 import { useState, useEffect } from "react"
-import { tags } from "@/helpers/catgory";
-
+import { validatorMake, foreach, postApi, getApi } from '@/helpers/General'
+import { toast } from "react-toastify";
 
 
 const Categories = ({ open, handleClose, preferences }) => {
+
+    //GetCategory Data
+    const [categoryData, setCategoryData] = useState([])
+    let getCategoryData = async () => {
+        let res = await getApi('/post-category')
+        if (res) {
+            setCategoryData(res.data)
+        }
+        else {
+            console.error("No data found");
+        }
+    }
+
     //Modal Props
     const [localPreferences, setLocalPreferences] = useState(preferences);
     useEffect(() => {
-        setLocalPreferences(preferences);
-    }, [preferences]);
+            setLocalPreferences(preferences),
+                getCategoryData()
+    }, [preferences, handleClose]);
 
     //Validations 
-    const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
-
     let handleSubmit = async (e) => {
-        let formData
         e.preventDefault()
-        let validationRules = await validatorMake(formData, {
-            "user_id": "required",
-            "cat_id": "required",
+        const cat_id = selectedTags
+        console.log("Selected Tags (cat_id):", cat_id);
+
+        if (cat_id.length < 5) toast.error("Select minimum 5 topics of your interests.")
+
+        let validationRules = await validatorMake({ cat_id }, {
+            "cat_id": "required|array|min:5"
         })
 
-
         if (!validationRules.fails()) {
-            let resp = await postApi('/user-category/add', formData)
+            let resp = await postApi('/user-category/add', { cat_id })
+
             if (resp.status) {
                 toast.success(resp.message)
-                setFormData(defaultValue);
+                setSelectedTags([])
                 handleClose();
-                // setToken(tokenName.OTP_TOKEN, resp.data.token)
-                // setValue("preference", getHash(64))
-                // router.push('/auth/otp-verification')
             }
             else {
                 if (typeof resp.message == 'object') {
@@ -51,16 +63,26 @@ const Categories = ({ open, handleClose, preferences }) => {
         }
     }
 
-
-
+    //handling errors
+    let [errors, setErrors] = useState()    
+    let handleErrors = (errors) => {
+        foreach(errors, (index, item) => {
+            setErrors((prevData) => {
+                return {
+                    ...prevData,
+                    [index]: item[0]
+                }
+            })
+        })
+    }
 
     //tags mapped
     const [selectedTags, setSelectedTags] = useState([]);
     const handleSelectTag = (tag) => {
         setSelectedTags((prevSelectedTags) =>
-            prevSelectedTags.includes(tag)
-                ? prevSelectedTags.filter((t) => t !== tag)
-                : [...prevSelectedTags, tag]
+            prevSelectedTags.includes(tag._id)
+                ? prevSelectedTags.filter((t) => t !== tag._id)
+                : [...prevSelectedTags, tag._id]
         );
     };
 
@@ -72,21 +94,27 @@ const Categories = ({ open, handleClose, preferences }) => {
             <div className="categories_area">
                 <div className="tags_section">
                     <Typography>Select the Topics you would like to see in your feed.</Typography>
-                    <div className="tags_list">
-                        {tags.map((tag) => (
-                            <div
-                                key={tag}
-                                className={`tags ${selectedTags.includes(tag) ? "selected" : ""}`}
-                                onClick={() => handleSelectTag(tag)}
+                    <form onSubmit={handleSubmit}>
+                        {categoryData ? (
+                            <ul className="tags_list">
+                                {categoryData.map((tag) => (
+                                    <li
+                                        key={tag._id}
+                                        className={`tags ${selectedTags.includes(tag._id) ? "selected" : ""}`}
+                                        onClick={() => handleSelectTag(tag)}
 
-                            >
-                                <Typography variant="subtitle1">{tag.title}</Typography>
+                                    >
+                                        <Typography variant="subtitle1">{tag.title}</Typography>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (<></>)}
+                        {selectedTags.length > 0 && (
+                            <div className="btn_area">
+                                <Button variant="contained" type="Submit">Submit</Button>
                             </div>
-                        ))}
-                    </div>
-                    <div className="btn_area">
-                        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
-                    </div>
+                        )}
+                    </form>
                 </div>
             </div>
         </Modal >

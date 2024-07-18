@@ -83,7 +83,6 @@ const SignUp = () => {
                 toast.success(resp.message)
                 setFormData(defaultValue);
                 setToken(tokenName.OTP_TOKEN, resp.data.token)
-                setValue("preference", getHash(64))
                 router.push('/auth/otp-verification')
             }
             else {
