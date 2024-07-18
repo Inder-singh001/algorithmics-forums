@@ -22,9 +22,7 @@ import Share from "../../../public/images/share.png"
 import Options from "../../../public/images/threedots.png"
 import Comments from './comments';
 
-
-
-
+//Comment Expand Function
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -34,10 +32,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-
-
-
-
+//Main Component
 export const ExplorePosts = ({ explorepost }) => {
 
     const [expanded, setExpanded] = useState(false);
@@ -49,7 +44,7 @@ export const ExplorePosts = ({ explorepost }) => {
     const [follow, setFollow] = useState(false);
 
     // name variable
-    let name = explorepost.user_id.first_name + " " + explorepost.user_id.last_name;
+    let name = explorepost.user.first_name + " " + explorepost.user.last_name;
 
     const handleFollowing = () => {
         if (follow) {
