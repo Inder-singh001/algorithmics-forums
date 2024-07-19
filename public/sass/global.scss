@@ -17,6 +17,15 @@ body {
   background-color: #f5f5f5;
   padding: 0px;
   margin: 0px;
+
+  .helper_text_field{
+    .MuiTypography-root{
+      color: $error;
+      line-height: 14px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
 }
 
 .container,

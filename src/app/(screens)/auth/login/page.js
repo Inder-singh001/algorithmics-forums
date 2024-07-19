@@ -19,7 +19,7 @@ import Link from "next/link"; // Next.js Link component for client-side navigati
 import { useRouter } from "next/navigation"; // Next.js hook for navigation
 import { validatorMake, foreach, postApi } from "../../../../helpers/General"; // Importing custom helper functions
 import { toast } from "react-toastify"; // For toast notifications
-import { setToken, tokenName } from "@/dataCenter/LocalStorage"; // Importing functions for local storage operations
+import { setToken, setValue, tokenName } from "@/dataCenter/LocalStorage"; // Importing functions for local storage operations
 
 const Login = () => {
   const router = useRouter(); // Initializing the router
@@ -78,6 +78,7 @@ const Login = () => {
           if (resp.data.email_verified !=null)
           {
             toast.success(resp.message); // Show success message
+            setValue("preferenceCount", resp.preferenceCount) //preferenceCount to show modal
             router.push("/dashboard/explore"); // Redirect to dashboard if email is verified
           }
           else if (resp.data.email_verified == null)

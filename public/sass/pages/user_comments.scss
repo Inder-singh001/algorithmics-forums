@@ -1,0 +1,52 @@
+@import "../base/variable.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.user_comments {
+    .css-1086bdv-MuiPaper-root-MuiAccordion-root {
+        background: #F7F8FA;
+
+        .css-1f773le-MuiButtonBase-root-MuiAccordionSummary-root {
+            .css-eqpfi5-MuiAccordionSummary-content {
+            .css-ahj2mt-MuiTypography-root {
+                // font-family: Roboto;
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 20px;
+            }
+
+            .css-yw020d-MuiAccordionSummary-expandIconWrapper {
+                .css-i4bv87-MuiSvgIcon-root{
+                color: red;
+                }
+            }
+            }
+        }
+        .css-pwcg7p-MuiCollapse-root{
+            .css-smkl36-MuiCollapse-wrapper{
+            color:#7d8fb3;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            .css-9l5vo-MuiCollapse-wrapperInner{
+                .MuiAccordion-region{
+                .css-15v22id-MuiAccordionDetails-root{
+                    .css-ahj2mt-MuiTypography-root{
+                    color:#7d8fb3;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 20px;
+                    }
+
+                }
+                }
+            }
+
+            }
+        }
+    }
+}

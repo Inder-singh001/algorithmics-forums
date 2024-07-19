@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { validatorMake, foreach, getApi, getHash } from "../../helpers/General";
 import { toast } from "react-toastify";
 import { setToken, setValue, tokenName } from "@/dataCenter/LocalStorage";
+import AccordionExpand from "./user_comments";
 
 const CustomTabPanel = ({ children, value, index, ...other }) => (
   <div
@@ -186,6 +187,7 @@ export const ProfileView = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           Answers
+          <AccordionExpand/>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           Questions

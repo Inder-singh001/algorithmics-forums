@@ -34,10 +34,16 @@ let getApi = async (url) => {
                 Authorization: "Bearer " + getToken(tokenName.LOGIN_TOKEN)
             }
         }).catch((error) => {
-            if(error.response.status == 401)
-            {
-                setToken(tokenName.LOGIN_TOKEN,"")
+            if(error.response){
+                if(error.response.status == 401)
+                    {
+                        setToken(tokenName.LOGIN_TOKEN,"")
+                    }
             }
+            else{
+                console.error("Network or other error:", error.message);
+            }
+            
         })
 
     if(resp)

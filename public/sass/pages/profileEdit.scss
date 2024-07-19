@@ -8,20 +8,32 @@
 // }
 .edit_section {
   margin: 16px 0px 0px 10px;
+  .header_editPassword{
+    font-size: x-large;
+    font-weight: 700;
+    line-height: 14px;
+    margin-bottom:24px;
+    color: $black;
+   
+  }
+ 
   .head_section {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 26px;
+
     .avatar_section {
       width: 162px;
       height: 162px;
       display: inline-block;
       position: relative;
+
       img {
         border-radius: 50%;
       }
+
       .css-i4bv87-MuiSvgIcon-root {
         position: absolute;
         top: 50%;
@@ -33,6 +45,7 @@
         color: $white;
         z-index: 1;
       }
+
       &:hover {
         &::after {
           content: "";
@@ -45,47 +58,74 @@
           border-radius: 50%;
           z-index: 0;
         }
+
         .css-i4bv87-MuiSvgIcon-root {
           opacity: 1;
         }
       }
     }
+
     .btn_section {
       position: absolute;
       top: 0px;
       right: 0px;
-      .MuiTypography-root {
+
+      // .MuiTypography-root {
+      //   color: $primaryBlue_color;
+      //   // font-family: Roboto;
+      //   font-size: 13px;
+      //   font-weight: 900;
+      //   line-height: 25px;
+      //   @extend %bottom-Line_animation;
+      //   &::after {
+      //     bottom: 2px;
+      //   }
+      // }
+      .MuiButtonBase-root {
         color: $primaryBlue_color;
         // font-family: Roboto;
         font-size: 13px;
         font-weight: 900;
         line-height: 25px;
+        text-transform: none;
+
         @extend %bottom-Line_animation;
+
         &::after {
           bottom: 2px;
+        }
+
+        .MuiTouchRipple-root {
+          display: none;
         }
       }
     }
   }
-  .body_section {
+
+  .body_section{
     .text_section {
       margin-bottom: 24px;
+
       .MuiFormLabel-root {
         // font-family: Roboto;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         line-height: 20px;
         color: $secondarytext;
       }
+
       .MuiInputBase-root {
         width: 100%;
+
         &::before {
           border-bottom: 1px solid $icons;
         }
+
         &::after {
           border-bottom: 2px solid $secondarytext;
         }
       }
+
       .MuiInputBase-input {
         color: $descriptionText;
         // font-family: Roboto;
@@ -93,28 +133,23 @@
         font-weight: 500;
         line-height: 22px;
       }
-      .label_section {
-        display: flex;
-        .pass_area {
-          width: calc(100% - 50%);
-          .MuiInputBase-input {
-            float: left;
-          }
-        }
-        .change_pass_area {
-          width: 50%;
-          a {
-            float: right;
-            // font-family: Roboto;
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 25px;
-            color: $primaryBlue_color;
-            @extend %bottom-Line_animation;
-            &::after {
-              bottom: 2px;
-            }
-          }
+      .css-i4bv87-MuiSvgIcon-root{
+        font-size: 14px;
+      }
+    }
+
+    .change_pass_area {
+      .MuiButtonBase-root {
+        text-transform: none;
+        padding: 0px;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 25px;
+        color: $primaryBlue_color;
+        @extend %bottom-Line_animation;
+
+        &::after {
+          bottom: 2px;
         }
       }
     }
@@ -143,9 +178,9 @@
 
 /* Landscape tablets and ipad */
 @media (min-width: 768px) and (max-width: 991px) {
-.edit_section{
-  margin: 4px 0px 0px 0px;
-}
+  .edit_section {
+    margin: 4px 0px 0px 0px;
+  }
 }
 
 

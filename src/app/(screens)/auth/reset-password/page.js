@@ -67,7 +67,7 @@ const ResetPassword = () => {
           console.log(resp, "resp");
           toast.success(resp.message);
           setFormData(defaultValue);
-          getToken(tokenName.OTP_TOKEN, resp.data.token);
+          getToken(tokenName.LOGIN_TOKEN, resp.data._token);
           router.push("/auth/login");
         } else {
           if (typeof resp.message === "object") {
