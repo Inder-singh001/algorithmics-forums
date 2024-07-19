@@ -56,7 +56,6 @@ const Dashboard = () => {
           <Sidebar />
         </div>
         <div className="right_section">
-
           <div className="explore_area">
             {allpostData ? (
               allpostData.map((post) => (

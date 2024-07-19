@@ -33,7 +33,7 @@ const ExpandMore = styled((props) => {
 }));
 
 //Main Component
-export const posts = ({ post }) => {
+export const ExplorePosts = ({ post }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [upvoteCount, setUpvoteCount] = useState(0);

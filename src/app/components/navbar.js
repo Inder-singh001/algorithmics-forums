@@ -23,6 +23,8 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRouter } from "next/navigation";
 import { getToken, tokenName } from "@/dataCenter/LocalStorage";
+import { postApi } from "@/helpers/General";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
 
@@ -43,6 +45,18 @@ export default function Navbar() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleLogout = async () => {
+    setAnchorEl(null);
+    const resp = await postApi('/user/logout')
+    if(resp){
+      toast.success(resp.message)
+      localStorage.removeItem(tokenName.LOGIN_TOKEN)
+      router.push('/auth/login')
+    }
+    else{
+      toast.error(resp.message)
+    }
   };
 
   //Menu Drawer
@@ -159,7 +173,7 @@ export default function Navbar() {
                       >
                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                         <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </Menu>
                     </div>
                   </>

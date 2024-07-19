@@ -12,6 +12,7 @@ import "../../../public/sass/dashboard/comment.scss"
 
 const Comments = ({ post }) => {
 
+    console.log(post)
     let postData = {
         post_id: post._id,
         description: ''
@@ -143,7 +144,7 @@ const Comments = ({ post }) => {
                 <div className='user_profile'>
                     <div className='user_area'>
                         <div className='user_name'>
-                            <Typography>Pablo Graces</Typography>
+                            {/* <Typography>{post.comments.user.first_name}</Typography> */}
                         </div>
                         <div className='time_commented' >
                             <Typography >

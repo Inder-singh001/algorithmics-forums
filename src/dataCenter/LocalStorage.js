@@ -17,7 +17,7 @@ const setValue = (key, value) => {
 
 const getValue = (key) => {
     const modalToken = localStorage.getItem(key);
-    // localStorage.removeItem(key)
+    localStorage.removeItem(key)
     return modalToken
 }
 
