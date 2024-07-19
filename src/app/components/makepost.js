@@ -2,7 +2,7 @@
 import { Avatar, Button, Input, InputLabel, Typography } from "@mui/material";
 import * as React from "react";
 import "../../.././public/sass/pages/makepost.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import UploadIcon from "@mui/icons-material/UploadFile";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
@@ -12,8 +12,55 @@ import axios from "axios";
 import { validatorMake, foreach, postApi, getApi } from "../../helpers/General";
 import { toast } from "react-toastify";
 import { HelperText } from "./helpertext";
+import { uploadImage } from "../../helpers/Filesystem"
 
 export default function MakeAPost() {
+    let [uploadResponse, setUploadResponse] = useState({})
+    let uploadInput = useRef(null)
+    let handelImageUpload = async (e) => {
+        let file = e.target.files[0];
+        console.log(file)
+        await uploadImage(file,"blog",setUploadResponse)
+    }
+
+    let handelUploadResponse = (response) => {
+        console.log(response)
+        if(response)
+        {
+            if(response.status)
+            {
+                setFormData((prevData) => {
+                    let data = {
+                        ...prevData,
+                        "image":response.imageUrl ? response.imageUrl : ''
+                    }
+                    return data;
+                })
+                
+                setErrors((prev)=>{
+                    let data = {
+                        ...prev,
+                        "image":''
+                    }
+                    return data;
+                })
+                toast.success(response.message)
+            }
+            else
+            {
+                toast.error(response.message)
+            }
+        }
+        else
+        {
+            toast.error("Something went wrong try again later")
+        }
+    }
+
+    useEffect(() => {
+        handelUploadResponse(uploadResponse)
+    },[uploadResponse])
+
   const [profileData, setprofileData] = useState({});
 
   useEffect(() => {
@@ -249,7 +296,16 @@ export default function MakeAPost() {
 
         <div className="file_input_container">
           <div className="file_input_other_container ">
-            <input type="file" multiple className="file_input" />
+            {
+                !formData.image ?
+                <input
+                type="file"
+                onChange={handelImageUpload}
+                ref={uploadInput}
+                className="file_input" />
+                :
+                <img height="100px" width="100px" src={process.env.NEXT_PUBLIC_HOST+'/'+formData.image}/>
+            }
             <div className="file_input_icon">
               <UploadIcon />
               <Typography>Click to Upload or drag and drop</Typography>
