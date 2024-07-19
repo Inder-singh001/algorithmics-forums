@@ -11,17 +11,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { validatorMake, foreach, postApi, getApi } from "../../helpers/General";
 import { toast } from "react-toastify";
-
-export const HelperText = ({ error }) => {
-  return (
-    <div
-      className="helper_
-    text_field"
-    >
-      <Typography>{error}</Typography>
-    </div>
-  );
-};
+import { HelperText } from "./helpertext";
 
 export default function MakeAPost() {
   const [profileData, setprofileData] = useState({});
