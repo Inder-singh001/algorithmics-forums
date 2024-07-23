@@ -12,13 +12,31 @@ import { toast } from "react-toastify";
 
 const Dashboard = () => {
 
+  // Define a state for search
   // get All Post Data
+  const [page, setPage] = useState(1)
   const [allpostData, setAllPostData] = useState([]);
-  const getAllPostData = async () => {
-    let res = await getApi("/post/index");
+
+  const getAllPostData = async (nextPage = 1) => {
+    // /post/index?search=bsdvfsgvgs
+    console.log(nextPage, " nextPage ")
+    let res = await getApi(`/post/index?page=${nextPage}&limit=5&search=`);
     const postdata = res.data;
     if (postdata) {
-      setAllPostData(postdata);
+      setAllPostData((oldData) => {
+        if(oldData.length > 0)
+        {
+          let newData = [
+            ...oldData,
+            ...postdata
+          ] 
+          return newData 
+        }
+        else
+        {
+          return postdata
+        }
+      });
     } else {
       toast.error("NO Post")
     }
@@ -28,7 +46,22 @@ const Dashboard = () => {
   const [preferences, setPreferences] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => {    
+    let handelScrollEnd = async () => {
+      if (parseInt(window.innerHeight+window.scrollY+50) >= document.body.offsetHeight)
+      {
+          await setPage((prev) => {
+            return prev+1
+          })  
+          getAllPostData(page+1)
+      }
+    }
+
+    document.addEventListener('scrollend',handelScrollEnd)
+    return () => window.removeEventListener("scrollend", handelScrollEnd);
+  }, [page]);
+
+  useEffect(()=>{
     const getPreference = () => {
       let storedPreferences = getValue("preferenceCount") 
 
@@ -40,7 +73,8 @@ const Dashboard = () => {
     }
     getAllPostData()
     getPreference()
-  }, []);
+    
+  },[])
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -59,7 +93,7 @@ const Dashboard = () => {
           <div className="explore_area">
             {allpostData ? (
               allpostData.map((post) => (
-                <ExplorePosts post={post} />
+                <ExplorePosts key={post._id} post={post} />
               ))
             ) : (
               <div>Haven't Posted a Question</div>

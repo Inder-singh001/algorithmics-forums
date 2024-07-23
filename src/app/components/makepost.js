@@ -8,6 +8,7 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import axios from "axios";
 import { validatorMake, foreach, postApi, getApi } from "../../helpers/General";
 import { toast } from "react-toastify";
@@ -15,51 +16,49 @@ import { HelperText } from "./helpertext";
 import { uploadImage } from "../../helpers/Filesystem"
 
 export default function MakeAPost() {
-    let [uploadResponse, setUploadResponse] = useState({})
-    let uploadInput = useRef(null)
-    let handelImageUpload = async (e) => {
-        let file = e.target.files[0];
-        console.log(file)
-        await uploadImage(file,"blog",setUploadResponse)
-    }
+  let [uploadResponse, setUploadResponse] = useState({})
 
-    let handelUploadResponse = (response) => {
-        console.log(response)
-        if(response)
-        {
-            if(response.status)
-            {
-                setFormData((prevData) => {
-                    let data = {
-                        ...prevData,
-                        "image":response.imageUrl ? response.imageUrl : ''
-                    }
-                    return data;
-                })
-                
-                setErrors((prev)=>{
-                    let data = {
-                        ...prev,
-                        "image":''
-                    }
-                    return data;
-                })
-                toast.success(response.message)
-            }
-            else
-            {
-                toast.error(response.message)
-            }
-        }
-        else
-        {
-            toast.error("Something went wrong try again later")
-        }
-    }
+  let uploadInput = useRef(null)
+  
+  let handelImageUpload = async (e) => {
+    let file = e.target.files[0];
+    console.log(file)
+    await uploadImage(file, "blog", setUploadResponse)
+  }
 
-    useEffect(() => {
-        handelUploadResponse(uploadResponse)
-    },[uploadResponse])
+  let handelUploadResponse = (response) => {
+    console.log(response)
+    if (response) {
+      if (response.status) {
+        setFormData((prevData) => {
+          let data = {
+            ...prevData,
+            "image": response.imageUrl ? response.imageUrl : ''
+          }
+          return data;
+        })
+
+        setErrors((prev) => {
+          let data = {
+            ...prev,
+            "image": ''
+          }
+          return data;
+        })
+        toast.success(response.message)
+      }
+      else {
+        toast.error(response.message)
+      }
+    }
+    else {
+      toast.error("Something went wrong try again later")
+    }
+  }
+
+  useEffect(() => {
+    handelUploadResponse(uploadResponse)
+  }, [uploadResponse])
 
   const [profileData, setprofileData] = useState({});
 
@@ -230,7 +229,7 @@ export default function MakeAPost() {
               name="cat_id"
               value={formData.category}
               onChange={handleInputChange}
-              // helperText={errors.type ? errors.type : ""}
+            // helperText={errors.type ? errors.type : ""}
             >
               {categories.map((category) => (
                 <option
@@ -297,22 +296,26 @@ export default function MakeAPost() {
         <div className="file_input_container">
           <div className="file_input_other_container ">
             {
-                !formData.image ?
-                <input
-                type="file"
-                onChange={handelImageUpload}
-                ref={uploadInput}
-                className="file_input" />
+              !formData.image ?
+                <>
+                  <input
+                    type="file"
+                    onChange={handelImageUpload}
+                    ref={uploadInput}
+                    className="file_input" />
+                  <div className="file_input_icon">
+                    <UploadIcon />
+                    <Typography>Click to Upload or drag and drop</Typography>
+                    <Typography variant="body">
+                      SVG, PNG, JPG or GIF (max. 3MB)
+                    </Typography>
+                  </div>
+                </>
                 :
-                <img height="100px" width="100px" src={process.env.NEXT_PUBLIC_HOST+'/'+formData.image}/>
+                <div className="image_section">
+                  <img height={100} width={100} src={process.env.NEXT_PUBLIC_HOST + '/' + formData.image} />
+                </div>
             }
-            <div className="file_input_icon">
-              <UploadIcon />
-              <Typography>Click to Upload or drag and drop</Typography>
-              <Typography variant="body">
-                SVG, PNG, JPG or GIF (max. 3MB)
-              </Typography>
-            </div>
           </div>
         </div>
         <div className="submit_button">

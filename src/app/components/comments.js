@@ -11,13 +11,13 @@ import Voted from "../../../public/images/select.png"
 import "../../../public/sass/dashboard/comment.scss"
 
 const Comments = ({ post }) => {
-    const userComments = post.comments
 
+    const [userComments, setUserComments] = useState(post.comments ? post.comments : []);
     const [upvoteCount, setUpvoteCount] = useState(0);
     const [downvoteCount, setDownvoteCount] = useState(0);
     const [upvoted, setUpvoted] = useState(false);
     const [downvoted, setDownvoted] = useState(false);
-
+    console.log(userComments,"userComments")
     const handleUpvote = () => {
         if (upvoted) {
             setUpvoteCount(upvoteCount - 1);
@@ -48,58 +48,61 @@ const Comments = ({ post }) => {
 
     return (
         <div className="comments_section">
-            <InputComment post={post} />
-            {userComments.map((comment, index) => (
-                <div key={index} className="comment_user">
-                    <div className='user_pic_area'>
-                        <Image src={AvatarImg} alt={`${comment.user.first_name}" "${comment.user.last_name}`}/>
-                    </div>
-                    <div className='user_profile'>
-                        <div className='user_area'>
-                            <div className='user_name'>
-                                <Typography>{`${comment.user.first_name} ${comment.user.last_name}`}</Typography>
-                            </div>
-                            <div className='time_commented' >
-                                <Typography >
-                                    8mo
-                                </Typography>
-                            </div>
+            <InputComment 
+                post={post}
+                setUserComments={setUserComments} />
+            {userComments.map((comment, index) => {
+                let user = comment.user ? comment.user : (comment.user_id && typeof comment.user_id == 'object' ? comment.user_id : {} )
+                return <div key={index} className="comment_user">
+                        <div className='user_pic_area'>
+                            <Image src={AvatarImg} alt={`${user.first_name}" "${user.last_name}`}/>
                         </div>
-                        <div className='subcomment_area'>
-                            <Typography>{comment.description}</Typography>
-                        </div>
-                        <div className='vote_section'>
-                            <div className='vote_icons'>
-                                <div className='vote_area dashed'>
-                                    <div className={`vote_icon ${!upvoted ? "unselected" : ""}`} onClick={handleUpvote}>
-                                        <Image src={upvoted ? Voted : NotVoted} alt='upvote' />
-                                    </div>
-                                    <div className={`vote_num ${upvoted ? "selected" : ""}`} >
-                                        <Typography>{upvoteCount}</Typography>
-                                    </div>
+                        <div className='user_profile'>
+                            <div className='user_area'>
+                                <div className='user_name'>
+                                    <Typography>{`${user.first_name} ${user.last_name}`}</Typography>
                                 </div>
-                                <div className='vote_area'>
-                                    <div className={`vote_icon ${downvoted ? "selected" : ""}`} onClick={handleDownvote}>
-                                        <Image src={downvoted ? Voted : NotVoted} alt='upvote' />
-                                    </div>
-                                    <div className={`vote_num ${downvoted ? "selected" : ""}`}>
-                                        <Typography>{downvoteCount}</Typography>
-                                    </div>
+                                <div className='time_commented' >
+                                    <Typography >
+                                        8mo
+                                    </Typography>
                                 </div>
                             </div>
-                            <div className='reply_btn'>
-                                <Typography>Reply</Typography>
+                            <div className='subcomment_area'>
+                                <Typography>{comment.description}</Typography>
+                            </div>
+                            <div className='vote_section'>
+                                <div className='vote_icons'>
+                                    <div className='vote_area dashed'>
+                                        <div className={`vote_icon ${!upvoted ? "unselected" : ""}`} onClick={handleUpvote}>
+                                            <Image src={upvoted ? Voted : NotVoted} alt='upvote' />
+                                        </div>
+                                        <div className={`vote_num ${upvoted ? "selected" : ""}`} >
+                                            <Typography>{upvoteCount}</Typography>
+                                        </div>
+                                    </div>
+                                    <div className='vote_area'>
+                                        <div className={`vote_icon ${downvoted ? "selected" : ""}`} onClick={handleDownvote}>
+                                            <Image src={downvoted ? Voted : NotVoted} alt='upvote' />
+                                        </div>
+                                        <div className={`vote_num ${downvoted ? "selected" : ""}`}>
+                                            <Typography>{downvoteCount}</Typography>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* <div className='reply_btn'>
+                                    <Typography>Reply</Typography>
+                                </div> */}
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
+            })}
         </div >
     )
 }
 export default Comments
 
-export const InputComment = ({ post }) => {
+export const InputComment = ({ post, setUserComments }) => {
     let postData = {
         post_id: post._id,
         description: ''
@@ -119,6 +122,13 @@ export const InputComment = ({ post }) => {
         if (!validationRules.fails()) {
             let postComment = await postApi('/post-comments/add-comments', commentData)
             if (postComment.status) {
+                setUserComments((oldData) => {
+                    return [
+                        ...oldData,
+                        postComment.data
+                    ]
+                })
+                console.log(postComment.data,"postComment")
                 setCommentData(postData);
             }
             else {

@@ -156,11 +156,19 @@
     width: 100%;
     height: 12rem;
     border-style: dashed;
-    padding: 2rem 1rem 2rem 1rem;
+    padding: 1rem;
     border-width: 2px;
     border-radius: 0.5rem;
     border-color: #aaaaaa;
     margin-bottom: 40px;
+
+    .image_section {
+      width: 240px;
+      height: 160px;
+      img {
+        object-fit: contain;
+      }
+    }
 
     &:hover {
       border-color: #007bff;

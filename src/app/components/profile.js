@@ -68,7 +68,6 @@ export const ProfileView = () => {
   const handleFriend = async () => {
     try {
       const friend = await getApi("/user/profile");
-      console.log(friend, "friend");
       // Map the response data to the frontend
       const { followers, following } = friend;
       setfriendData({
@@ -76,7 +75,6 @@ export const ProfileView = () => {
         following,
       });
     } catch (error) {
-      console.error(error);
       toast.error("Failed to fetch profile data");
     }
   };
@@ -84,7 +82,6 @@ export const ProfileView = () => {
   const handleProfile = async () => {
     try {
       const response = await getApi("/user/profile");
-      console.log(response, "response");
       // Map the response data to the frontend
       const { first_name, last_name, email, about_me } = response.data;
       setProfileData({
@@ -94,7 +91,6 @@ export const ProfileView = () => {
         about_me,
       });
     } catch (error) {
-      console.error(error);
       toast.error("Failed to fetch profile data");
     }
   };
@@ -179,7 +175,7 @@ export const ProfileView = () => {
         <CustomTabPanel value={value} index={0}>
           {postData ? (
             postData.map((post) => (
-              <Posts post={post} />
+              <Posts post={post} key={post._id} />
             ))
           ) : (
             <div>Haven't Posted a Question</div>
@@ -187,7 +183,7 @@ export const ProfileView = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           Answers
-          <AccordionExpand/>
+          <AccordionExpand />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           Questions

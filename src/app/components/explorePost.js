@@ -7,6 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import { validatorMake, postApi } from '@/helpers/General'
 import Typography from '@mui/material/Typography';
 import AvatarImg from "../../../public/images/avatar.png"
 import Badge from '@mui/material/Badge';
@@ -46,40 +47,68 @@ export const ExplorePosts = ({ post }) => {
     // name variable
     let name = post.user.first_name + " " + post.user.last_name;
 
+    const handleVote = async (type) => {
+
+        let voteData = {
+            post_id: post._id,
+            type: type,
+        };
+        
+        let validationRules = await validatorMake(voteData, {
+            post_id: "required",
+            type: "required",
+        });
+
+        if (!validationRules.fails()) {
+            try
+            {
+                let resp = await postApi("/post-vote/insert", voteData);
+                if (resp) 
+                {
+                    console.log(resp.userAction)
+                    // Update local state based on the vote type
+                    setUpvoteCount(resp.count.upCount);
+                    setDownvoteCount(resp.count.downCount);
+                    setUpvoted(resp.userAction.isUserUpVote ? true : false);
+                    setDownvoted(resp.userAction.isUserDownVote ? true : false);
+                } 
+                else
+                {
+                    if (typeof resp.message === "object")
+                    {
+                        handleErrors(resp.message.errors);
+                    }
+                    else
+                    {
+                        toast.error(resp.message || "An unexpected error occurred.");
+                    }
+                }
+            } catch (error)
+            {
+                console.error("Error during API call:", error);
+            }
+        }
+        else
+        {
+            handleErrors(validationRules.errors.errors);
+            console.log(validationRules.errors.errors);
+        }
+    };
+
+    const handleUpvote = () => {
+        handleVote(1);
+    };
+
+    const handleDownvote = () => {
+        handleVote(0);
+    };
+    
     const handleFollowing = () => {
         if (follow) {
             setFollow(false)
         }
         else setFollow(true)
     }
-
-    const handleUpvote = () => {
-        if (upvoted) {
-            setUpvoteCount(upvoteCount - 1);
-            setUpvoted(false);
-        } else {
-            setUpvoteCount(upvoteCount + 1);
-            setUpvoted(true);
-            if (downvoted) {
-                setDownvoteCount(downvoteCount - 1);
-                setDownvoted(false);
-            }
-        }
-    };
-
-    const handleDownvote = () => {
-        if (downvoted) {
-            setDownvoteCount(downvoteCount - 1);
-            setDownvoted(false); //true for continuous voting
-        } else {
-            setDownvoteCount(downvoteCount + 1);
-            setDownvoted(true);
-            if (upvoted) {
-                setUpvoteCount(upvoteCount - 1);
-                setUpvoted(false);
-            }
-        }
-    };
 
     const handleExpandClick = () => {
         setExpanded(!expanded);

@@ -57,10 +57,10 @@ let getApi = async (url) => {
     }
 }
 
-let checkLogin = async () => {
-    let resp = await getApi('/check-login')
-    console.log(resp)
-}
+// let checkLogin = async () => {
+//     let resp = await getApi('/check-login')
+//     console.log(resp)
+// }
 
 const getHash = (length = 32) => {
     var result = "";
@@ -80,5 +80,6 @@ module.exports = {
     foreach,
     postApi,
     getApi,
-    getHash
+    getHash,
+    // checkLogin
 }
