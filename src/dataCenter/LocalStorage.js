@@ -1,6 +1,7 @@
 const tokenName = {
     LOGIN_TOKEN: "_token",
-    OTP_TOKEN: "token"
+    OTP_TOKEN: "token",
+    PROP:"myProp"
 }
 
 let getToken = (key) => {
@@ -17,7 +18,7 @@ const setValue = (key, value) => {
 
 const getValue = (key) => {
     const modalToken = localStorage.getItem(key);
-    localStorage.removeItem(key)
+    // localStorage.removeItem(key)
     return modalToken
 }
 
