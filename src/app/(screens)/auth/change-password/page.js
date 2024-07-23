@@ -2,7 +2,7 @@
 
 import { Container, Grid, Typography, TextField } from "@mui/material"; // Importing necessary components from Material-UI
 import Image from "next/image"; // Importing Image component from Next.js
-import { useState } from "react"; // Importing useState hook from React
+import { useEffect, useState } from "react"; // Importing useState hook from React
 import "../../../../../public/sass/pages/auth.scss"; // Importing custom Sass styles
 import Logo from "../../../../../public/images/logo.png"; // Importing the logo image
 import Graphic from "../../../../../public/graphic.svg"; // Importing a graphic image
@@ -13,28 +13,27 @@ import { toast } from "react-toastify"; // Importing toast for notifications
 import { setToken, tokenName } from "@/dataCenter/LocalStorage"; // Importing functions for local storage operations
 
 const ChangePassword = () => {
-  const router = useRouter(); // Initializing the router
 
-  // Default form values
+  const router = useRouter();
+
+  useEffect(() => {
+    localStorage.setItem('myProp', 'someValue');
+  }, [router]);
+
   let defaultValue = {
     email: "",
   };
 
-  // State for form data
   let [formData, setFormData] = useState(defaultValue);
 
-  // State for form errors
   let [errors, setErrors] = useState(defaultValue);
 
-  // Handle input change event
   let handleInputChange = (e) => {
     let { name, value } = e.target;
-    // Update formData state
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    // Clear errors for the current field
     setErrors((prevData) => ({
       ...prevData,
       [name]: null,
@@ -51,36 +50,31 @@ const ChangePassword = () => {
     });
   };
 
-  // Handle form submit event
   let handleSubmit = async (e) => {
     e.preventDefault();
-    // Validate form data
     let validationRules = await validatorMake(formData, {
       email: "required|email",
     });
 
     if (!validationRules.fails()) {
       try {
-        // Submit form data to the server
         let resp = await postApi("/user/change-password", formData);
-        if (resp.status) {
-          toast.success(resp.message); // Show success message
-          setFormData(defaultValue); // Reset form data
-          if (resp.data.email_verified != null) {
-            setToken(tokenName.OTP_TOKEN, resp.data.token); // Save token to local storage
-            router.push("/auth/otp-verification"); // Redirect to dashboard if email is verified
-          } else {
-            setToken(tokenName.OTP_TOKEN, resp.data.token); // Save token to local storage
-            router.push("/auth/login"); // Redirect to verify email page if email is not verified
-          }
-        } else {
+        if (resp.status) 
+        {
+          toast.success(resp.message);
+          setFormData(defaultValue); 
+          setToken(tokenName.OTP_TOKEN, resp.data.token); 
+          router.push("/auth/otp-verification");   
+        } 
+        else {
+          handleErrors(resp.errors); 
         }
       } catch (error) {
         console.error(error);
-        toast.error("An unexpected error occurred. Please try again later.");
+        toast.error("Account Not Found");
       }
     } else {
-      handleErrors(validationRules.errors.errors); // Handle validation errors
+      handleErrors(validationRules.errors.errors);
       console.log(validationRules.errors.errors);
     }
   };
@@ -138,4 +132,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword; // Exporting the ChangePassword component
+export default ChangePassword; 
