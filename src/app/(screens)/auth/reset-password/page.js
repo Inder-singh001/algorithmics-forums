@@ -10,10 +10,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useRouter } from "next/navigation"; // Importing router for navigation from Next.js
-import { validatorMake, foreach, postApi } from "../../../../helpers/General"; // Importing custom helper functions
-import { toast } from "react-toastify"; // Importing toast for notifications
-import { getToken, tokenName } from "@/dataCenter/LocalStorage"; // Importing functions for local storage operations
+import { useRouter } from "next/navigation"; 
+import { validatorMake, foreach, postApi } from "../../../../helpers/General"; 
+import { toast } from "react-toastify"; 
+import { getToken, tokenName } from "@/dataCenter/LocalStorage"; 
 
 const ResetPassword = () => {
   const router = useRouter();
@@ -53,52 +53,35 @@ const ResetPassword = () => {
     });
   };
 
-  let handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let validationRules = await validatorMake(formData, {
-      password: "required|confirmed",
+    let token = getToken(tokenName.OTP_TOKEN);
+
+    const formPayload = {
+      token,
+      password: formData.password,
+      password_confirmation: formData.password_confirmation,
+    };
+
+    const validationRules = await validatorMake(formPayload, {
+      token: "required",
+      password: "required",
       password_confirmation: "required",
     });
 
     if (!validationRules.fails()) {
-      try {
-        let resp = await postApi("/user/reset-password", formData);
-        if (resp.status) {
-          console.log(resp, "resp");
-          toast.success(resp.message);
-          setFormData(defaultValue);
-          getToken(tokenName.LOGIN_TOKEN, resp.data._token);
-          router.push("/auth/login");
-        } else {
-          if (typeof resp.message === "object") {
-            handleErrors(resp.message.errors);
-          } else {
-            toast.error(resp.message || "An unexpected error occurred.");
-          }
-        }
-      } catch (error) {
-        console.error("Error during API call:", error);
-
-        if (error.response) {
-          // Server responded with a status other than 200 range
-          toast.error(
-            `Server Error: ${error.response.status} - ${
-              error.response.data.message || error.response.statusText
-            }`
-          );
-        } else if (error.request) {
-          // No response was received
-          toast.error(
-            "Network Error: No response received from the server. Please check your internet connection."
-          );
-        } else {
-          // Something happened in setting up the request
-          toast.error(`Error: ${error.message}`);
-        }
+      let resp = await postApi('/user/reset-password', formPayload);
+      if (resp.status) 
+      {
+        toast.success(resp.message);
+        router.push('/auth/login');
+      } 
+      else {
+        toast.error(resp.message);
+        handleErrors(resp.errors);
       }
     } else {
       handleErrors(validationRules.errors.errors);
-      console.log(validationRules.errors.errors);
     }
   };
 
@@ -151,9 +134,9 @@ const ResetPassword = () => {
                                 edge="end"
                               >
                                 {showPassword ? (
-                                  <VisibilityOff />
-                                ) : (
                                   <Visibility />
+                                ) : (
+                                  <VisibilityOff />
                                 )}
                               </IconButton>
                             </InputAdornment>
@@ -185,9 +168,9 @@ const ResetPassword = () => {
                                 edge="end"
                               >
                                 {showConfirmPassword ? (
-                                  <VisibilityOff />
-                                ) : (
                                   <Visibility />
+                                ) : (
+                                  <VisibilityOff />
                                 )}
                               </IconButton>
                             </InputAdornment>
