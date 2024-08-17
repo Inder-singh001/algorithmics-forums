@@ -9,17 +9,17 @@ import Diversity3Icon from "@mui/icons-material/Diversity3";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import axios from "axios";
 import { validatorMake, foreach, postApi, getApi } from "../../helpers/General";
 import { toast } from "react-toastify";
 import { HelperText } from "./helpertext";
 import { uploadImage } from "../../helpers/Filesystem"
+import { getToken, tokenName } from "@/dataCenter/LocalStorage";
 
 export default function MakeAPost() {
   let [uploadResponse, setUploadResponse] = useState({})
 
   let uploadInput = useRef(null)
-  
+
   let handelImageUpload = async (e) => {
     let file = e.target.files[0];
     console.log(file)
@@ -143,34 +143,39 @@ export default function MakeAPost() {
 
   let handleSubmit = async (e) => {
     e.preventDefault();
-    let validationRules = await validatorMake(formData, {
-      title: "required",
-      description: "required",
-      user_id: "required",
-      cat_id: "required",
-    });
+    let token = getToken(tokenName.LOGIN_TOKEN)
+    if (token) {
+      let validationRules = await validatorMake(formData, {
+        title: "required",
+        description: "required",
+        user_id: "required",
+        cat_id: "required",
+      });
 
-    if (!validationRules.fails()) {
-      console.log(formData, "formData");
-      let resp = await postApi("/post/add", formData);
-      console.log(resp, "resp");
-      if (resp.status) {
-        // otp screen
-        toast.success(resp.message);
-        setFormData(defaultValue);
-
-        router.push("/dashboard/explore");
-      } else {
-        if (typeof resp.message == "object") {
-          handleErrors(resp.message.errors);
+      if (!validationRules.fails()) {
+        console.log(formData, "formData");
+        let resp = await postApi("/post/add", formData);
+        console.log(resp, "resp");
+        if (resp.status) {
+          // otp screen
+          toast.success(resp.message);
+          setFormData(defaultValue);
+          router.push("/dashboard/explore");
         } else {
-          toast.error(resp.message);
+          if (typeof resp.message == "object") {
+            handleErrors(resp.message.errors);
+          } else {
+            toast.error(resp.message);
+          }
         }
+        console.log(resp, "resp");
+      } else {
+        handleErrors(validationRules.errors.errors);
+        console.log(validationRules.errors.errors);
       }
-      console.log(resp, "resp");
-    } else {
-      handleErrors(validationRules.errors.errors);
-      console.log(validationRules.errors.errors);
+    }
+    else {
+      router.push('/auth/login')
     }
   };
 
@@ -246,20 +251,6 @@ export default function MakeAPost() {
         </div>
 
         <div className="ques_section">
-          {/* <TextField
-            required
-            id="standard-required"
-            label="Title"
-            placeholder="Start your question with “What”, “How”, “Why”, etc."
-            variant="standard"
-          />
-          <TextField
-            required
-            id="standard-required"
-            label="Description"
-            variant="standard"
-            multiline
-          /> */}
           <div className="ques_area">
             <InputLabel htmlFor="standard-description" required>
               Title
@@ -283,7 +274,6 @@ export default function MakeAPost() {
               name="description"
               value={formData.description}
               onChange={handleInputChange}
-              // rows={6}
               multiline
             />
             <HelperText error={errors.description ? errors.description : ""} />
@@ -313,7 +303,7 @@ export default function MakeAPost() {
                 </>
                 :
                 <div className="image_section">
-                  <img height={100} width={100} src={process.env.NEXT_PUBLIC_HOST + '/' + formData.image} />
+                  <Image height={100} width={100} src={process.env.NEXT_PUBLIC_HOST + '/' + formData.image} alt="post" />
                 </div>
             }
           </div>

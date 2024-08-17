@@ -1,10 +1,11 @@
 'use client'
-import { Grid, Container, Card, CardContent, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Close from '@mui/icons-material/Close';
 import '../../../public/sass/pages/card.scss';
 import { KeyboardArrowRight, Pages } from '@mui/icons-material';
 import { useState, useEffect} from "react";
 import {getApi} from '@/helpers/General'
+import { toast } from "react-toastify";
 
 
 const RightCard = () => {
@@ -18,27 +19,11 @@ const RightCard = () => {
         try {
             let res = await getApi('/post/answer-post')
             const users = res.data;
-            console.log(users, "answer");
             setCardContent(users);
         } catch (error) {
-            console.error("Failed to fetch featured posts", error);
+            toast.error("Failed to fetch featured posts", error);
         }
     };
-
-    // const cardContent = [
-    //     {
-    //         title: "Lorem ipsum dolor sit amet",
-    //         icon: <Pages />,
-    //         content: "Your answers and posts",
-    //         description: "Lorem ipsum dolor sit amet consectetur. Turpis tortor"
-    //     },
-    //     {
-    //         title: "Lorem ipsum dolor sit amet",
-    //         icon: <Pages />,
-    //         content: "Your answers and posts",
-    //         description: "Lorem ipsum dolor sit amet consectetur. Turpis tortor"
-    //     },
-    // ]
 
     return (
 

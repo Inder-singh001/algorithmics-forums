@@ -20,7 +20,6 @@ const FeatuerdPosts = () => {
     try {
       const res = await getApi("/post/featured-post");
       const users = res.data;
-      console.log(users);
       setFeaturedPosts(users);
     } catch (error) {
       console.error("Failed to fetch featured posts", error);

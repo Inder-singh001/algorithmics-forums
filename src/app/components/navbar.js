@@ -112,7 +112,7 @@ export default function Navbar() {
     {
       setIsLogin(false);
     }
-  })
+  },[])
 
   return (
     <>
@@ -199,36 +199,7 @@ export default function Navbar() {
         </div>
 
 
-        //   <div className="hello">
-        //     <div className="hello_contents">
-        //       <div className="navbar_logo_resposive">
-        //         <Image
-        //           src="/images/brand_logo.png"
-        //           alt="brand_logo"
-        //           height={30}
-        //           width={114}
-        //           priority
-        //         />
-        //       </div>
-        //       <ul>
-        //         <li>
-        //           <Link href="/Dashboard">Search</Link>
-        //         </li>
-        //         <li>
-        //           <Link href="/Dashboard">Home</Link>
-        //         </li>
-        //         <li>
-        //           <Link href="/Dashboard">Make a Post</Link>
-        //         </li>
-        //         <li>
-        //           <Link href="/Dashboard">My Profile</Link>
-        //         </li>
-        //       </ul>
-        //     </div>
-        //     <div className="close_icon" onClick={() => setShow(false)}>
-        //       <CloseIcon />
-        //     </div>
-        //   </div>
+       
       ) : null}
       {/* Responsive-Header-section----start */}
     </>

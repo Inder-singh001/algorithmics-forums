@@ -1,4 +1,5 @@
 import { postApi } from "./General"
+import Image from "next/image";
 
 let uploadImage = async (file, folderName, setReturnResponse) => {
     if(file)
@@ -67,10 +68,11 @@ let showImage = (file, imageRemover = () => {}) => {
                 'X'
                 :""
             }
-            <img 
+            <Image 
                 style={style}
                 width={"250px"}
                 src={ file ? mediaUrl+file : mediaUrl+'uploads/icons/no_image.jpg'}
+                alt="image"
                 />        
             </div>
         </>

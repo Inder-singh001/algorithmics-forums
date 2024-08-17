@@ -17,7 +17,10 @@ import { getToken, tokenName } from "@/dataCenter/LocalStorage"; // Importing fu
 
 const ResetPassword = () => {
   const router = useRouter();
+  let token = getToken(tokenName.OTP_TOKEN)
+
   let defaultValue = {
+    token: token,
     password: "",
     password_confirmation: "",
   };
@@ -56,6 +59,7 @@ const ResetPassword = () => {
   let handleSubmit = async (e) => {
     e.preventDefault();
     let validationRules = await validatorMake(formData, {
+      token: "required",
       password: "required|confirmed",
       password_confirmation: "required",
     });
@@ -64,10 +68,8 @@ const ResetPassword = () => {
       try {
         let resp = await postApi("/user/reset-password", formData);
         if (resp.status) {
-          console.log(resp, "resp");
           toast.success(resp.message);
           setFormData(defaultValue);
-          getToken(tokenName.LOGIN_TOKEN, resp.data._token);
           router.push("/auth/login");
         } else {
           if (typeof resp.message === "object") {
@@ -77,22 +79,18 @@ const ResetPassword = () => {
           }
         }
       } catch (error) {
-        console.error("Error during API call:", error);
+        // console.error("Error during API call:", error);
 
         if (error.response) {
-          // Server responded with a status other than 200 range
           toast.error(
-            `Server Error: ${error.response.status} - ${
-              error.response.data.message || error.response.statusText
+            `Server Error: ${error.response.status} - ${error.response.data.message || error.response.statusText
             }`
           );
         } else if (error.request) {
-          // No response was received
           toast.error(
-            "Network Error: No response received from the server. Please check your internet connection."
+            "Network Error: Please check your internet connection."
           );
         } else {
-          // Something happened in setting up the request
           toast.error(`Error: ${error.message}`);
         }
       }
@@ -150,7 +148,7 @@ const ResetPassword = () => {
                                 onMouseDown={handleMouseDownPassword}
                                 edge="end"
                               >
-                                {showPassword ? (
+                                {!showPassword ? (
                                   <VisibilityOff />
                                 ) : (
                                   <Visibility />
@@ -184,7 +182,7 @@ const ResetPassword = () => {
                                 onMouseDown={handleMouseDownPassword}
                                 edge="end"
                               >
-                                {showConfirmPassword ? (
+                                {!showConfirmPassword ? (
                                   <VisibilityOff />
                                 ) : (
                                   <Visibility />

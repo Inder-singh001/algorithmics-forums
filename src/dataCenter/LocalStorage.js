@@ -1,7 +1,6 @@
 const tokenName = {
     LOGIN_TOKEN: "_token",
     OTP_TOKEN: "token",
-    PROP:"myProp"
 }
 
 let getToken = (key) => {

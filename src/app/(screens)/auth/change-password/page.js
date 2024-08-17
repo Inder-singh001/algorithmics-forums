@@ -7,7 +7,7 @@ import "../../../../../public/sass/pages/auth.scss"; // Importing custom Sass st
 import Logo from "../../../../../public/images/logo.png"; // Importing the logo image
 import Graphic from "../../../../../public/graphic.svg"; // Importing a graphic image
 import Button from "@mui/material/Button"; // Importing Button component from Material-UI
-import { useRouter } from "next/navigation"; // Importing router for navigation from Next.js
+import { usePathname, useRouter } from "next/navigation"; // Importing router for navigation from Next.js
 import { validatorMake, foreach, postApi } from "../../../../helpers/General"; // Importing custom helper functions
 import { toast } from "react-toastify"; // Importing toast for notifications
 import { setToken, tokenName } from "@/dataCenter/LocalStorage"; // Importing functions for local storage operations
@@ -15,11 +15,6 @@ import { setToken, tokenName } from "@/dataCenter/LocalStorage"; // Importing fu
 const ChangePassword = () => {
 
   const router = useRouter();
-
-  useEffect(() => {
-    localStorage.setItem('myProp', 'someValue');
-  }, [router]);
-
   let defaultValue = {
     email: "",
   };
@@ -64,13 +59,12 @@ const ChangePassword = () => {
           toast.success(resp.message);
           setFormData(defaultValue); 
           setToken(tokenName.OTP_TOKEN, resp.data.token); 
-          router.push("/auth/otp-verification");   
+          router.push("/auth/otp-verification?redirectTo=/auth/reset-password");   
         } 
         else {
           handleErrors(resp.errors); 
         }
       } catch (error) {
-        console.error(error);
         toast.error("Account Not Found");
       }
     } else {
@@ -94,7 +88,7 @@ const ChangePassword = () => {
                     <Typography variant="h4">Change Password</Typography>
                     <Typography variant="h6">
                       Please enter the email address you use when creating your
-                      account, We'll send you the instructions to reset your
+                      account, We will send you the instructions to reset your
                       password
                     </Typography>
                   </div>

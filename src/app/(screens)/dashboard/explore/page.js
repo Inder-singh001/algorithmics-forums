@@ -96,7 +96,7 @@ const Dashboard = () => {
                 <ExplorePosts key={post._id} post={post} />
               ))
             ) : (
-              <div>Haven't Posted a Question</div>
+              <div>No Post to display</div>
             )}
           </div>
           <div className="suggestion_area">

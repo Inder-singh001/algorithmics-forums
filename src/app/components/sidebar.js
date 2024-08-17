@@ -22,7 +22,7 @@ const Sidebar = () => {
     {
       setIsLogin(false);
     }
-  })
+  },[])
   const SideList = [
     {
       icon: <DashboardIcon />,

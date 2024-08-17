@@ -10,9 +10,8 @@ import "../../../public/sass/pages/profile.scss";
 import "../../../public/sass/pages/profile.scss";
 import { Posts } from "./post";
 import { useRouter } from "next/navigation";
-import { validatorMake, foreach, getApi, getHash } from "../../helpers/General";
+import {  getApi } from "../../helpers/General";
 import { toast } from "react-toastify";
-import { setToken, setValue, tokenName } from "@/dataCenter/LocalStorage";
 import AccordionExpand from "./user_comments";
 
 const CustomTabPanel = ({ children, value, index, ...other }) => (
@@ -178,7 +177,7 @@ export const ProfileView = () => {
               <Posts post={post} key={post._id} />
             ))
           ) : (
-            <div>Haven't Posted a Question</div>
+            <div>Not Posted a Question yet!</div>
           )}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>

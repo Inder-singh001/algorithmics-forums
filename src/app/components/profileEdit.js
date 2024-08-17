@@ -131,6 +131,52 @@ const ProfileEdit = () => {
     }
   }
 
+  let [uploadResponse, setUploadResponse] = useState({})
+
+  let uploadInput = useRef(null)
+
+  let handelImageUpload = async (e) => {
+    let file = e.target.files[0];
+    console.log(file)
+    await uploadImage(file, "Profile_pics", setUploadResponse)
+  }
+
+  let handelUploadResponse = (response) => {
+    console.log(response)
+    if (response) {
+      if (response.status) {
+        setFormData((prevData) => {
+          let data = {
+            ...prevData,
+            "image": response.imageUrl ? response.imageUrl : ''
+          }
+          return data;
+        })
+
+        setErrors((prev) => {
+          let data = {
+            ...prev,
+            "image": ''
+          }
+          return data;
+        })
+        toast.success(response.message)
+      }
+      else {
+        toast.error(response.message)
+      }
+    }
+    else {
+      toast.error("Something went wrong try again later")
+    }
+  }
+
+  useEffect(() => {
+    handelUploadResponse(uploadResponse)
+  }, [uploadResponse])
+
+
+
   const router = useRouter();
   return (
     <div className="edit_section">

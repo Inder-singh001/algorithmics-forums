@@ -141,7 +141,7 @@ const SignUp = () => {
                                                     InputProps={{
                                                         startAdornment: (
                                                             <InputAdornment position="start">
-                                                                <Image src={User} />
+                                                                <Image src={User} alt="image"/>
                                                             </InputAdornment>
                                                         ),
                                                     }}
@@ -160,7 +160,7 @@ const SignUp = () => {
                                                     InputProps={{
                                                         startAdornment: (
                                                             <InputAdornment position="start">
-                                                                <Image src={User} />
+                                                                <Image src={User} alt="image"/>
                                                             </InputAdornment>
                                                         ),
                                                     }}

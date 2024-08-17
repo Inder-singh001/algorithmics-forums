@@ -4,7 +4,6 @@ import Validator from 'validatorjs';
 
 let validatorMake = async (data, rules, message) => {
     let validation = new Validator(data, rules, message);
-
     return validation;
 }
 
@@ -57,10 +56,10 @@ let getApi = async (url) => {
     }
 }
 
-// let checkLogin = async () => {
-//     let resp = await getApi('/check-login')
-//     console.log(resp)
-// }
+let checkLogin = async () => {
+    let resp = await getApi('/check-login')
+    return resp
+}
 
 const getHash = (length = 32) => {
     var result = "";
@@ -81,5 +80,5 @@ module.exports = {
     postApi,
     getApi,
     getHash,
-    // checkLogin
+    checkLogin
 }

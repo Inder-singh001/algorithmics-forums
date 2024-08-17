@@ -1,30 +1,25 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import "../../../../../public/sass/pages/auth.scss";
 import Logo from "../../../../../public/images/logo.png";
 import Graphic from "../../../../../public/graphic.svg";
 import Button from '@mui/material/Button';
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import OtpInput from 'react-otp-input';
 import { validatorMake, postApi } from '../../../../helpers/General';
 import { toast } from "react-toastify";
-import { getToken, setToken, tokenName } from "@/dataCenter/LocalStorage";
+import { getToken, tokenName } from "@/dataCenter/LocalStorage";
 
 const OTPverify = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirectTo') || '/auth/login';
   const [otp, setOtp] = useState('');
   const [errors, setErrors] = useState({ otp: "", token: "" });
   const [resendCount, setResendCount] = useState(0);
   const MAX_RESEND_ATTEMPTS = 5;
-
-  useEffect(() => {
-    const prop = getToken("myProp");
-    if (prop==null) {
-      router.push('/auth/login');
-    }
-  }, [router]);
 
   const handleOTPRequest = async (e) => {
     e.preventDefault();
@@ -34,7 +29,6 @@ const OTPverify = () => {
       otp,
       token
     };
-    console.log(formData, "formData");
     let validationRules = await validatorMake(formData, {
       "token": "required",
       "otp": "required",
@@ -45,8 +39,7 @@ const OTPverify = () => {
       if (resp.status) {
         toast.success(resp.message);
         setOtp("");
-        setToken(tokenName.PROP, null);
-        router.push('/auth/reset-password');
+        router.push(redirectTo)
       } else {
         toast.error(resp.message);
         handleErrors(resp.errors);
@@ -122,7 +115,7 @@ const OTPverify = () => {
                     </div>
                   </form>
                   <div className="resend_otp_section">
-                    <Typography variant="h6">Didn't get an OTP?
+                    <Typography variant="h6">Did not get an OTP?
                       <span onClick={handleResendOTP}>Resend OTP</span>
                     </Typography>
                   </div>

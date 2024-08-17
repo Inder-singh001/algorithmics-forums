@@ -136,7 +136,7 @@ const Login = () => {
                     <Typography variant="h4">Login</Typography>{" "}
                     {/* Login title */}
                     <Typography variant="h6">
-                      If you don't have a registered account, you can{" "}
+                      If you do not have a registered account, you can{" "}
                       <Link href="/auth/sign-up">Register here!</Link>{" "}
                       {/* Link to sign-up page */}
                     </Typography>
