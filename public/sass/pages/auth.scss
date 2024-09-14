@@ -212,7 +212,37 @@
           text-decoration: none;
           @extend %bottom-Line_animation;
         }
+        .or_text{
+          text-align: center;
+          position: relative;
+          margin-bottom: 12px;
+          &::before{
+              content: "";
+              position: absolute;
+              width: 200px;
+              height: 1px;
+              left: 10px;
+              top: 12px;
+              background-color: black;
+            
+          }
+          &::after{
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 1px;
+            right: 10px;
+            top: 12px;
+            background-color: black;
+          }
+        } 
         .btn_area {
+          margin-bottom: 12px;
+          &.guest_btn{
+            .css-sghohy-MuiButtonBase-root-MuiButton-root {
+              background-color: $primarySubtext;
+            }
+          }
           &.otp_btn {
             margin-bottom: 12px;
           }

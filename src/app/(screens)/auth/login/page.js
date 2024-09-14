@@ -212,6 +212,16 @@ const Login = () => {
                       </Button>
                     </div>
                   </form>
+                  <div className="guest_section">
+                    <div className="or_text">
+                      <Typography>or</Typography>
+                    </div>
+                    <div className="btn_area guest_btn">  
+                        <Button variant="contained" type="submit">
+                          LOG IN as a GUEST {/* Guset Login */}
+                        </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="right_Frame">
