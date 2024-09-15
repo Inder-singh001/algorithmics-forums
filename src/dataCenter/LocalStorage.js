@@ -4,7 +4,10 @@ const tokenName = {
 }
 
 let getToken = (key) => {
-    return localStorage.getItem(key);
+    if (typeof window !== 'undefined') {
+        return localStorage.getItem(key);
+      }
+      return null; // Return a fallback or handle this appropriately
 }
 
 let setToken = (key, token) => {

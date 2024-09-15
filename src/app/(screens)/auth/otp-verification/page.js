@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import "../../../../../public/sass/pages/auth.scss";
@@ -20,7 +20,7 @@ const OTPverify = () => {
   const [errors, setErrors] = useState({ otp: "", token: "" });
   const [resendCount, setResendCount] = useState(0);
   const MAX_RESEND_ATTEMPTS = 5;
-
+ 
   const handleOTPRequest = async (e) => {
     e.preventDefault();
     let token = getToken(tokenName.OTP_TOKEN);
@@ -131,7 +131,18 @@ const OTPverify = () => {
         </Grid>
       </Container>
     </div>
+
   );
 };
 
-export default OTPverify;
+const OTPverification = () => {
+  return (
+    <Suspense fallback={
+      <div>Loading...</div>
+    }>
+      <OTPverify />
+    </Suspense>
+  )
+};
+
+export default OTPverification;

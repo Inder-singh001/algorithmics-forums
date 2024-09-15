@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
 import EditIcon from "@mui/icons-material/Edit";
 import { InputLabel, Input, InputAdornment, IconButton, Button ,FormHelperText} from "@mui/material";
@@ -133,7 +132,7 @@ const ProfileEdit = () => {
 
   let [uploadResponse, setUploadResponse] = useState({})
 
-  let uploadInput = useRef(null)
+  // let uploadInput = useRef(null)
 
   let handelImageUpload = async (e) => {
     let file = e.target.files[0];
