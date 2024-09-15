@@ -58,6 +58,42 @@ const Login = () => {
     });
   };
 
+  let guestLogin = async (e) =>{
+    e.preventDefault();
+    console.log(process.env.NEXT_PUBLIC_EMAIL)
+    formData = {
+      email : process.env.NEXT_PUBLIC_EMAIL,
+      password: process.env.NEXT_PUBLIC_PASSWORD
+    };
+
+    let validationRules = await validatorMake(formData, {
+      email: "required|email",
+      password: "required",
+    });
+    
+
+    if(!validationRules.fails()){
+      try {
+        // Submit form data to the server
+        let resp = await postApi("/user/login", formData);
+        if (resp.status)
+        {
+          setFormData(defaultValue); // Reset form data
+          toast.success(resp.message); // Show success message
+          setToken(tokenName.LOGIN_TOKEN, resp.data.login_token); // Save token to local storage
+          router.push("/dashboard/explore"); // Redirect to dashboard if email is verified
+        }
+      }
+      catch(error){
+        toast.error("Guest Login is restricted!")
+      }
+    }
+    else{
+      toast.error("Guest Login is restricted!")
+      console.log(validationRules.errors.errors);
+    }
+  }
+  
   // Handle form submit event
   let handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,13 +124,12 @@ const Login = () => {
           }
           else
           {
-            toast.error(resp.message); // Show success message
+            toast.error(resp.message); // Show error message
           }
         } else {
           handleApiErrors(resp);
         }
       } catch (error) {
-        console.error(error);
         toast.error("Check Your credentials and try again.");
       }
     } else {
@@ -217,7 +252,7 @@ const Login = () => {
                       <Typography>or</Typography>
                     </div>
                     <div className="btn_area guest_btn">  
-                        <Button variant="contained" type="submit">
+                        <Button variant="contained" type="submit" onClick={guestLogin}>
                           LOG IN as a GUEST {/* Guset Login */}
                         </Button>
                     </div>

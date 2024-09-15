@@ -7,7 +7,7 @@ import "../../../../../public/sass/pages/auth.scss"; // Importing custom Sass st
 import Logo from "../../../../../public/images/logo.png"; // Importing the logo image
 import Graphic from "../../../../../public/graphic.svg"; // Importing a graphic image
 import Button from "@mui/material/Button"; // Importing Button component from Material-UI
-import { usePathname, useRouter } from "next/navigation"; // Importing router for navigation from Next.js
+import { useRouter } from "next/navigation"; // Importing router for navigation from Next.js
 import { validatorMake, foreach, postApi } from "../../../../helpers/General"; // Importing custom helper functions
 import { toast } from "react-toastify"; // Importing toast for notifications
 import { setToken, tokenName } from "@/dataCenter/LocalStorage"; // Importing functions for local storage operations

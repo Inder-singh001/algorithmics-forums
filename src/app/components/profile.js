@@ -112,7 +112,7 @@ export const ProfileView = () => {
           <div className="name_section">
             <div className="name_area">
               <Typography>
-                {profileData.first_name + " " + profileData.last_name}
+                {profileData.first_name + " " + `${profileData.last_name ? profileData.last_name : ""}`}
               </Typography>
             </div>
             <div className="email_area">
