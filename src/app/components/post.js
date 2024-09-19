@@ -103,8 +103,7 @@ export const Posts = ({ post }) => {
                 //     }
             }
         }
-        else
-        {
+        else{
             handleErrors(validationRules.errors.errors);
             console.log(validationRules.errors.errors);
         }
