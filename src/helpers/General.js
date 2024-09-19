@@ -80,5 +80,5 @@ module.exports = {
     postApi,
     getApi,
     getHash,
-    checkLogin
+    checkLogin,
 }
